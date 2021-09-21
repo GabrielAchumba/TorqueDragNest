@@ -16,6 +16,7 @@ export class DeviationSurveyModel {
   export class DeviationSurvey {
     surveyName: string;
     designId: string;
+    userId: string;
     deviationSurveys: DeviationSurveyModel[];
   }
 

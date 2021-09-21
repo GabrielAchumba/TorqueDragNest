@@ -11,7 +11,8 @@ export class DatumsService {
 
     async create(datum: Datum): Promise<DatumDocument> {
         
-        const foundDatum = await this.datumModel.findOne ({ "datumName" : datum.datumName });
+        const foundDatum = await this.datumModel.findOne ({ "datumName" : datum.datumName,
+        "designId" : datum.designId });
         
         if(foundDatum == null || foundDatum == undefined){
             const newDatum = new this.datumModel(datum);

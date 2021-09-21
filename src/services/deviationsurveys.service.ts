@@ -11,7 +11,7 @@ export class DeviationSurveysService {
 
     async create(deviationSurvey: DeviationSurvey): Promise<DeviationSurveyDocument> {
         
-        const foundDeviationSurvey = await this.deviationSurveyModel.findOne({ "surveyName" : deviationSurvey.surveyName });
+        const foundDeviationSurvey = await this.deviationSurveyModel.findOne({ "designId" : deviationSurvey.designId });
         
         if(foundDeviationSurvey == null || foundDeviationSurvey == undefined){
             const newDeviationSurvey = new this.deviationSurveyModel(deviationSurvey);
