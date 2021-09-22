@@ -11,7 +11,8 @@ export class FluidsService {
 
     async create(fluid: Fluid): Promise<FluidDocument> {
         
-        const foundFluid = await this.fluidModel.findOne({ "designId" : fluid.designId });
+        const foundFluid = await this.fluidModel.findOne(
+            { "userId" : fluid.userId, "designId" : fluid.designId });
         
         if(foundFluid == null || foundFluid == undefined){
             const newFluid = new this.fluidModel(fluid);

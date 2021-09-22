@@ -14,7 +14,6 @@ export class TorqueDragDesign  {
     siteName: string;
     externalcompanyName: string;
     uniqueId: string;
-    designId: string;
     userId: string;
 }
 
@@ -35,7 +34,6 @@ export const TorqueDragDesignSchema = new mongoose.Schema({
     siteName: {type: String, required: true },
     externalcompanyName: {type: String, required: true },
     uniqueId: {type: String, required: true },
-    designId: {type: String, required: true },
     userId: {type: String, required: true },
   
   });

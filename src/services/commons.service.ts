@@ -11,7 +11,8 @@ export class CommonsService {
 
     async create(common: Common): Promise<CommonDocument> {
         
-        const foundCommon = await this.commonModel.findOne ({ "companyName" : common.commonName });
+        const foundCommon = await this.commonModel.findOne (
+            { "userId" : common.userId, "designId" : common.designId });
         
         if(foundCommon == null || foundCommon == undefined){
             const newCommon = new this.commonModel(common);

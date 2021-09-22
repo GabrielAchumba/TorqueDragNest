@@ -11,7 +11,8 @@ export class BaseHoleSectionsService {
 
     async create(baseHoleSection: BaseHoleSection): Promise<BaseHoleSectionDocument> {
         
-        const foundBaseHoleSection = await this.baseHoleSectionModel.findOne ({ "userId" : baseHoleSection.userId });
+        const foundBaseHoleSection = await this.baseHoleSectionModel.findOne (
+            { "userId" : baseHoleSection.userId, "designId" : baseHoleSection.designId });
         
         if(foundBaseHoleSection == null || foundBaseHoleSection == undefined){
             const newBaseHoleSection = new this.baseHoleSectionModel(baseHoleSection);

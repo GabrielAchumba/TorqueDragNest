@@ -8,11 +8,11 @@ export class DatumsService {
     constructor(@InjectModel('Datum') private readonly datumModel: Model<DatumDocument>,) {
 
     }
-
+    
     async create(datum: Datum): Promise<DatumDocument> {
         
         const foundDatum = await this.datumModel.findOne ({ "datumName" : datum.datumName,
-        "designId" : datum.designId });
+        "designId" : datum.designId, "userId" : datum.userId });
         
         if(foundDatum == null || foundDatum == undefined){
             const newDatum = new this.datumModel(datum);

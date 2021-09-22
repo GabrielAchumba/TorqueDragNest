@@ -11,7 +11,8 @@ export class DrillBitsService {
 
     async create(drillBit: DrillBit): Promise<DrillBitDocument> {
         
-        const foundDrillBit = await this.drillBitModel.findOne({ "designId" : drillBit.designId });
+        const foundDrillBit = await this.drillBitModel.findOne(
+            { "userId" : drillBit.userId, "designId" : drillBit.designId });
         
         if(foundDrillBit == null || foundDrillBit == undefined){
             const newDrillBit = new this.drillBitModel(drillBit);

@@ -19,7 +19,7 @@ export class BaseHoleSectionModel {
 
 export interface BaseHoleSectionDocument extends mongoose.Document, BaseHoleSection { }
 
-export const BaseHoleSectionchema = new mongoose.Schema({
+export const BaseHoleSectionSchema = new mongoose.Schema({
   designId: {type: String, required: true },
   userId: {type: String, required: true },
   mudPVTs: [{
