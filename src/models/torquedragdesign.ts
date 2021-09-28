@@ -17,6 +17,13 @@ export class TorqueDragDesign  {
     userId: string;
 }
 
+export class TorqueDragDesignWithGuid extends TorqueDragDesign {
+    wellCaseId:string;
+    createdAt:string;
+    isSelected:string;
+    designDate:Date;
+}
+
 
 export interface TorqueDragDesignDocument extends mongoose.Document, TorqueDragDesign  { }
 

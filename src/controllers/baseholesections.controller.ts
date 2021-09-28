@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { BaseHoleSection, BaseHoleSectionDocument } from 'src/models/baseholesection';
 import { BaseHoleSectionsService } from 'src/services/baseholesections.service';
 
-@Controller('baseHoleSection')
+@Controller('baseHoleSections')
 export class BaseHoleSectionsController {
 
     constructor(private readonly baseHoleSectionsService: BaseHoleSectionsService) {
