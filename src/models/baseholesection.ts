@@ -6,7 +6,7 @@ export class BaseHoleSectionModel {
     outerDiameter: number;
     innerDiameter: number;
     weight: number;
-    topOfHole: string;
+    topOfHole: number;
     bottomOfHole: number;
     frictionFactor: number;
   }

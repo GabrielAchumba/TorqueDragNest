@@ -19,6 +19,28 @@ export class BasePipeModel {
   }
 
 
+  export class Pipe extends BasePipeModel
+  {
+       topTrueVerticalDepth :number
+       bottomTrueVerticalDepth :number
+       topInclination :number
+       bottomInclination :number
+       topAzimuth :number
+       bottomAzimuth :number
+       dogleg :number
+       topDisplacement :number
+       bottomDisplacement :number
+       topOuterDaimeter :number
+       averageInclination :number
+       averageAzimuth :number
+       startMeasuredDepth :number
+
+     /*  public override string ToString()
+      {
+          return measuredDepth.ToString();
+      } */
+  }
+
   export class BasePipe {
     designId: string;
     userId: string;

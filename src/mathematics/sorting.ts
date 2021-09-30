@@ -1,5 +1,5 @@
 import { BaseHoleSectionModel } from "src/models/baseholesection";
-import { BasePipeModel } from "src/models/basepipe";
+import { BasePipeModel, Pipe } from "src/models/basepipe";
 import { DeviationSurveyModel } from "src/models/deviationSurvey";
 import { MudPVTModel } from "src/models/mudpvt";
 import { TorqueDragDesignWithGuid } from "src/models/torquedragdesign";
@@ -72,9 +72,9 @@ export class Sorting {
         return sortArray;
     }
 
-    public static SortListofPipe(pipes: BasePipeModel[]): BasePipeModel[]
+    public static SortListofPipe(pipes: Pipe[]): Pipe[]
     {
-        const sortArray:BasePipeModel[] = pipes.map((row) => {
+        const sortArray:Pipe[] = pipes.map((row) => {
             return row;
         });
 
@@ -87,10 +87,12 @@ export class Sorting {
         return sortArray;
     }
 
-    public static SortListofPipeReversed(pipes:BasePipeModel[]): BasePipeModel[]
+    public static SortListofPipeReversed(pipes:BasePipeModel[]): Pipe[]
     {
-        const sortArray:BasePipeModel[] = pipes.map((row) => {
-            return row;
+        const sortArray:Pipe[] = pipes.map((row) => {
+            let newRow:Pipe = new Pipe();
+            newRow = Object.assign(newRow, row);
+            return newRow;
         });
 
         sortArray.sort((a, b) => {

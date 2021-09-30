@@ -1,0 +1,215 @@
+import { BaseHoleSectionModel } from "./baseholesection";
+
+export class BaseOperationResult
+{
+    constructor(){
+        this.dp = 4;
+    }
+
+    dp:number
+    typeOfSection:string;
+    topMeasuredDepth:number;
+    bottomMeasuredDepth:number;
+    topTrueVerticalDepth:number;
+    bottomTrueVerticalDepth:number;
+    length:number;
+    pipeOuterArea:number;
+    holeInnerArea:number;
+    annularArea:number;
+    pipeInnerArea:number;
+    pipeOuterDiameter:number;
+    crossSectionalArea:number;
+    pipeInnerDiameter:number;
+    pipeUnitWeight:number;
+    pipeTotalWeight:number;
+    buoyancyFactor:number;
+    buoyancyWeight:number;
+    yeildStrength:number;
+    percentOfYield:number;
+    tensileStrength:number;
+    overPullMargin:number;
+    topInclination:number;
+    bottomInclination:number;
+    topAzimuth:number;
+    bottomAzimuth:number;
+    dogLegSeverity:number;
+    sideForce:number;
+    momentOfInertia:number;
+    polarMomentOfInertia:number;
+    youngsModulus:number;
+    radialClearance:number;
+    holeSection :BaseHoleSectionModel;
+     averageInclination :number;
+     averageAzimuth:number; 
+     criticalInclinationAngle:number; 
+    section2D :string;
+     criticalSinusoidalBuckling:number;
+     criticalHelicalBuckling:number; 
+     changeInInclination:number;
+     changeInAzimuth:number; 
+     mudDensityAnnulus :number;
+     mudDensityInsidePipe :number;
+     annulusHydrostaticPressure :number;
+     insidePipeHydrostaticPressure :number;
+     annulusHydrostaticPressureTop :number;
+     insidePipeHydrostaticPressureTop :number;
+     insidePipeHydrostaticChange :number;
+     annulusHydrostaticChange :number;
+     pipeBottomPressureForce :number;
+     annulusBottomPressureForce :number;
+     bucklingStabilityForce :number;
+     effectiveTension :number;
+     pressureLoss :number;
+     fluidDragForce :number;
+     shearRateInAnnulus :number;
+     shearStress :number;
+     torqueFromShearStress :number;
+    annularFlowRegime :string;
+    pipeFlowRegime :string;
+     pipeReynoldsNumber :number;
+     fluidViscosity :number;
+     effectivePipeFluidViscosity :number;
+     effectiveAnnulusFluidViscosity :number;
+     pipeFluidVelocity :number;
+     nozzleVelocity :number;
+     pipeEffectiveFluidVelocity :number;
+     clingingConstant :number;
+     annulusReynoldsNumber :number;
+     annulusFluidVelocity :number;
+     annulusEffectiveFluidVelocity :number;
+     pipeFrictionFactor:number;
+     annulusFrictionFactor :number;
+     pipePressureLoss :number;
+     bitPowerOverArea :number;
+     bitPressureLoss :number;
+     bitPressureLoss2 :number;
+     nozzleFlowArea :number;
+     bitHydraulicPower :number;
+     percentagebitHydraulicPower :number;
+     parasticPressureLoss :number;
+     bitImpactForce :number;
+     annulusPressureLoss :number;
+     surfacePressureLoss :number;
+     equivalentCirculatingDensity :number;
+     tripPerStand :number;
+     eCDPipeSurge :number;
+     eCDAnnulusSurge :number;
+     eCDPipeSwab :number;
+     eCDAnnulusSwab :number;
+     equivalentCirculatingDensitySwab :number;
+     totalPipePressureLoss :number;
+     surgePipePressureLoss :number;
+     swabPipePressureLoss :number;
+     totalAnnulusPressureLoss :number;
+     systemPressureLoss :number;
+     maximumPumpPressure :number;
+     surgeAnnulusPressureLoss :number;
+     swabAnnulusPressureLoss :number;
+     absoluteRoughness :number;
+     yeildStress :number;
+     InsidePipeFlowRate :number;
+     OutsidePipeFlowRate :number;
+     annularFlowRate :number;
+     pipeCrticalFluidVelocity :number;
+     pipeCriticalFlowRate :number;
+     annularCrticalFluidVelocity :number;
+     annularCriticalFlowRate :number;
+     yeildPoint:number;
+
+
+}
+
+export class OperationResult extends BaseOperationResult
+{
+     maxDoglegSeverity :number;
+     maxBendingStress :number;
+     maxAxialStress :number;
+     pipeRotationAngle :number;
+     torqueAngle :number;
+     torqueChange :number;
+     normalForce :number;
+     totalDrag :number;
+     TensionIncrement :number;
+     tensionTopOfPipe :number;
+     tensionBottomOfPipe :number;
+     ChangeIntension :number;
+    HookeLoadAtJoint :number;
+    HookeLoadAtJointTop :number;
+     torqueBottom :number;
+     torqueTop :number;
+    isSinusoidalBuckling :boolean;
+    isHelicalBuckling :boolean;
+     angleSinusoidalBuckling :number;
+     angleHelicalBuckling :number;
+     pitchHelical :number;
+     dogLegFromHelical :number;
+     torequeFromHelical :number;
+     shearStressFromHelical :number;
+     bucklingStressInner :number;
+     bucklingStressOuter :number;
+     strainSinusoidal :number;
+     strainHelical :number;
+     sideForeceFromHelical :number;
+     trueTensionHelical :number;
+     axialLoadStrech :number;
+     balloningStrech :number;
+     radialStressInner :number;
+     radialStressOuter :number;
+     hoopStressInner :number;
+     hoopStressOuter :number;
+     vonMisesStressInner :number;
+     vonMisesStressOuter :number;
+     torsionStressInner :number;
+     torsionStressOuter :number;
+     helicalStrech :number;
+     sinusoidalStrech :number;
+     temparatureStrech :number;
+     bendingStressInner :number;
+     bendingStressOuter :number;
+     axilStressInner :number;
+     axilStressOuter :number;
+     transverseStressInner :number;
+     transverseStressOuter :number;
+     stressRatio :number;
+     effectiveStressInner :number;
+     effectiveStressOuter :number;
+     fatiqueLimit :number;
+     fatiqueRatioInner :number;
+     fatiqueRatioOuter :number;
+
+    FormatResult():void
+    {
+        this.pipeOuterArea = Number(this.pipeOuterArea.toFixed(this.dp));
+        this.pipeInnerArea = Number(this.pipeInnerArea.toFixed(this.dp));
+        this.pipeUnitWeight = Number(this.pipeUnitWeight.toFixed(this.dp));
+        this.pipeTotalWeight = Number(this.pipeTotalWeight.toFixed(this.dp));
+        this.buoyancyFactor = Number(this.buoyancyFactor.toFixed(this.dp));
+        this.buoyancyWeight = Number(this.buoyancyWeight.toFixed(this.dp));
+        this.tensileStrength = Number(this.tensileStrength.toFixed(this.dp));
+        this.topMeasuredDepth = Number(this.topMeasuredDepth.toFixed(this.dp));
+        this.bottomMeasuredDepth = Number(this.bottomMeasuredDepth.toFixed(this.dp));
+        this.topInclination = Number(this.topInclination.toFixed(this.dp));
+        this.bottomInclination = Number(this.bottomInclination.toFixed(this.dp));
+        this.averageInclination = Number(this.averageInclination.toFixed(this.dp));
+        this.topAzimuth = Number(this.topAzimuth.toFixed(this.dp));
+        this.bottomAzimuth = Number(this.bottomAzimuth.toFixed(this.dp));
+        this.averageAzimuth = Number(this.averageAzimuth.toFixed(this.dp));
+        this.dogLegSeverity = Number(this.dogLegSeverity.toFixed(this.dp));
+        this.momentOfInertia = Number(this.momentOfInertia.toFixed(this.dp));
+        this.polarMomentOfInertia = Number(this.polarMomentOfInertia.toFixed(this.dp));
+        this.length = Number(this.length.toFixed(this.dp));
+        this.normalForce = Number(this.normalForce.toFixed(this.dp));
+        this.totalDrag = Number(this.totalDrag.toFixed(this.dp));
+        this.HookeLoadAtJoint = Number(this.HookeLoadAtJoint.toFixed(this.dp));
+        this.tensionTopOfPipe = Number(this.tensionTopOfPipe.toFixed(this.dp));
+        this.tensionBottomOfPipe = Number(this.tensionBottomOfPipe.toFixed(this.dp));
+        this.torqueBottom = Number(this.torqueBottom.toFixed(this.dp));
+        this.torqueChange = Number(this.torqueChange.toFixed(this.dp));
+        this.torqueTop = Number(this.torqueTop.toFixed(this.dp));
+        this.criticalInclinationAngle = Number(this.criticalInclinationAngle.toFixed(this.dp));
+        this.criticalSinusoidalBuckling = Number(this.criticalSinusoidalBuckling.toFixed(this.dp));
+        this.criticalHelicalBuckling = Number(this.criticalHelicalBuckling.toFixed(this.dp));
+
+    }
+
+}
