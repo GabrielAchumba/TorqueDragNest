@@ -87,6 +87,21 @@ export class Sorting {
         return sortArray;
     }
 
+    public static SortListofPipe2(pipes: BasePipeModel[]): BasePipeModel[]
+    {
+        const sortArray:BasePipeModel[] = pipes.map((row) => {
+            return row;
+        });
+
+        sortArray.sort((a, b) => {
+            if (a.measuredDepth > b.measuredDepth)
+              return -1;
+            return 0;
+          });
+
+        return sortArray;
+    }
+
     public static SortListofPipeReversed(pipes:BasePipeModel[]): Pipe[]
     {
         const sortArray:Pipe[] = pipes.map((row) => {
