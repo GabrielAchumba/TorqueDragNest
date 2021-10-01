@@ -12,7 +12,7 @@ import { Inertia_Clearance } from "./drillingengineering/inertia_Clearance";
 
 export class TorqueDragBaseOperation {
 
-    private static RunBaseOperation(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
+    public static RunBaseOperation(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
         doglegSeverityMethod:string, mudPVTs:MudPVTModel[], common:Common):any
     {
         const pi:number = Math.PI;
