@@ -1,4 +1,5 @@
 import { ParseUUIDPipe } from "@nestjs/common";
+import { Guid } from "src/models/guid";
 import { CommonDTO } from "./commonDTO";
 
 export class SchematicDTO extends CommonDTO
@@ -30,7 +31,7 @@ export class CustomPath
         this.typeOfPipe = typeOfPipe;
     }
 
-    id:uuid;
+    id:string;
     typeOfPipe:string;
     strokeWidth:number;
     stroke:string;
