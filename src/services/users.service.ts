@@ -9,6 +9,17 @@ export class UsersService {
 
     }
 
+    async login(user: User): Promise<UserDocument> {
+        
+        console.log("user:", user);
+
+        const foundUser= await this.userModel.findOne(
+        { "userName" : user.userName, "password" : user.password }).exec();
+        
+        console.log("foundUser:", foundUser);
+        return  foundUser;
+    }
+
     async create(user: User): Promise<UserDocument> {
         
         const foundUser = await this.userModel.findOne ({ "userName" : user.userName });

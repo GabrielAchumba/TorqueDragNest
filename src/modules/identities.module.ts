@@ -6,7 +6,8 @@ import { IdentitiesService } from 'src/services/identities.service';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Identity', schema: IdentitySchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Identity', schema: IdentitySchema }],
+  'torquedragmasterdb')],
   controllers: [IdentitiesController],
   providers: [IdentitiesService]
 })

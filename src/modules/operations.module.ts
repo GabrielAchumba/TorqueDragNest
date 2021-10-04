@@ -6,7 +6,8 @@ import { OperationsService } from 'src/services/operations.service';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Operation', schema: OperationSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Operation', schema: OperationSchema }],
+  'torquedragclientdb')],
   controllers: [OperationsController],
   providers: [OperationsService]
 })

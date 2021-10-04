@@ -7,7 +7,8 @@ import { UsersService } from 'src/services/users.service';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'User', schema: UserSchema }],
+  'torquedragclientdb')],
   controllers: [UsersController],
   providers: [UsersService]
 })

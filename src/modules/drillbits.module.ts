@@ -5,7 +5,8 @@ import { DrillBitsService } from '../services/drillbits.service';
 import { DrillBitSchema } from '../models/drillbit'
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'DrillBit', schema: DrillBitSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'DrillBit', schema: DrillBitSchema }],
+  'torquedragclientdb')],
   controllers: [DrillBitsController],
   providers: [DrillBitsService]
 })

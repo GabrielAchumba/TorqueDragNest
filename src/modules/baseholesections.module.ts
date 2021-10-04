@@ -6,7 +6,8 @@ import { BaseHoleSectionsService } from 'src/services/baseholesections.service';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'BaseHoleSection', schema: BaseHoleSectionSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'BaseHoleSection', schema: BaseHoleSectionSchema }],
+  'torquedragclientdb')],
   controllers: [BaseHoleSectionsController],
   providers: [BaseHoleSectionsService]
 })

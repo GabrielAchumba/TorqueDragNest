@@ -7,7 +7,8 @@ import { TorqueDragDesignsService } from 'src/services/torquedragdesigns.service
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'TorqueDragDesign', schema: TorqueDragDesignSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'TorqueDragDesign', schema: TorqueDragDesignSchema }],
+  'torquedragclientdb')],
   controllers: [TorqueDragDesignsController],
   providers: [TorqueDragDesignsService]
 })

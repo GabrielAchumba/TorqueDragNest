@@ -5,7 +5,8 @@ import { CommonsService } from '../services/commons.service';
 import {CommonSchema } from '../models/common'
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Common', schema: CommonSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Common', schema: CommonSchema }],
+  'torquedragclientdb')],
   controllers: [CommonsController],
   providers: [CommonsService]
 })

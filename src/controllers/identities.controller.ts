@@ -10,9 +10,20 @@ export class IdentitiesController {
 
     }
 
+    @Post('Login')
+    async login(@Body() identity: Identity) {
+        return await this.identitiesService.login(identity);
+    }
+
+    @Post('Logout')
+    async logout(@Body() identity: Identity) {
+        return await this.identitiesService.logout(identity);
+    }
+
+
     @Post('PostIdentity')
     async create(@Body() identity: Identity) {
-        await this.identitiesService.create(identity);
+        return await this.identitiesService.create(identity);
     }
 
     @Get('GetIdentities/:id')

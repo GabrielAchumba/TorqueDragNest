@@ -7,7 +7,8 @@ import { RigsService } from 'src/services/rigs.service';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Rig', schema: RigSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Rig', schema: RigSchema }],
+  'torquedragclientdb')],
   controllers: [RigsController],
   providers: [RigsService]
 })

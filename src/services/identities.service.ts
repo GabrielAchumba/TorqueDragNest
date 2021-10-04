@@ -9,6 +9,24 @@ export class IdentitiesService {
 
     }
 
+    async login(identity: Identity): Promise<IdentityDocument> {
+        
+        const foundIdentity = await this.identityModel.findOne(
+        { "userName" : identity.userName, "password" : identity.password }).exec();
+        
+        console.log("foundIdentity:", foundIdentity);
+        return  foundIdentity;
+    }
+
+    
+    async logout(identity: Identity): Promise<IdentityDocument> {
+        
+        const foundIdentity = await this.identityModel.findOne(
+        { "userName" : identity.userName, "password" : identity.password }).exec();
+        
+        return  foundIdentity;
+    }
+
     async create(identity: Identity): Promise<IdentityDocument> {
         
         const foundIdentity = await this.identityModel.findOne ({ "userName" : identity.userName });

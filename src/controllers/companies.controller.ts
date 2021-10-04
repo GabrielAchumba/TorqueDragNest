@@ -26,7 +26,9 @@ export class CompaniesController {
   
     @Get('GetCompanies')
     async findAll(): Promise<CompanyDocument[]> {
-        return this.companiesService.findAll();
+        const companies = await this.companiesService.findAll();
+        console.log(companies)
+        return companies;
     }
 
     @Delete('DeleteCompany/:id')

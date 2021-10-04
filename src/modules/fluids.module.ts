@@ -5,7 +5,8 @@ import { FluidSchema } from 'src/models/fluid';
 import { FluidsService } from 'src/services/fluilds.service';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Fluid', schema: FluidSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Fluid', schema: FluidSchema }],
+  'torquedragclientdb')],
   controllers: [FluidsController],
   providers: [FluidsService]
 })

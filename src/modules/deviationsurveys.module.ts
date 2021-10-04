@@ -5,7 +5,8 @@ import { DeviationSurveysService } from '../services/deviationsurveys.service';
 import { DeviationSurveySchema } from '../models/deviationSurvey'
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'DeviationSurvey', schema: DeviationSurveySchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'DeviationSurvey', schema: DeviationSurveySchema }],
+  'torquedragclientdb')],
   controllers: [DeviationSurveysController],
   providers: [DeviationSurveysService]
 })

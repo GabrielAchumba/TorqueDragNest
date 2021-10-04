@@ -10,9 +10,14 @@ export class UsersController {
 
     }
 
+    @Post('Login')
+    async login(@Body() user: User) {
+        return await this.usersService.login(user);
+    }
+
     @Post('PostUser')
-    async create(@Body() rig: User) {
-        await this.usersService.create(rig);
+    async create(@Body() user: User) {
+        await this.usersService.create(user);
     }
 
     @Get('GetUsers/:id')

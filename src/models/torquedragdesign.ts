@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose';
 
 export class TorqueDragDesign  {
     companyId: string;
-    designName: number;
+    designName: string;
     designDay: number;
     designMonth: number;
     designYear: number;
@@ -15,12 +15,27 @@ export class TorqueDragDesign  {
     externalcompanyName: string;
     uniqueId: string;
     userId: string;
+
+    public createUniqueId():void
+    {
+        const delimeter:string = '@#@';
+        this.uniqueId = this.externalcompanyName.toLowerCase() + delimeter +
+        this.projectName.toLowerCase() + delimeter +
+        this.siteName.toLowerCase() + delimeter +
+        this.wellName.toLowerCase() + delimeter +
+        this.wellboreName.toLowerCase() + delimeter +
+        this.wellDesignName.toLowerCase() + delimeter +
+        this.designName.toLowerCase() + delimeter +
+        this.userId.toLowerCase();
+
+    }
 }
 
 export class TorqueDragDesignWithGuid extends TorqueDragDesign {
+    id:string;
     wellCaseId:string;
     createdAt:string;
-    isSelected:string;
+    isSelected:boolean;
     designDate:Date;
 }
 
@@ -29,7 +44,7 @@ export interface TorqueDragDesignDocument extends mongoose.Document, TorqueDragD
 
 export const TorqueDragDesignSchema = new mongoose.Schema({
     companyId: {type: String, required: true },
-    designName: {type: Number, required: true },
+    designName: {type: String, required: true },
     designDay: {type: Number, required: true },
     designMonth: {type: Number, required: true },
     designYear: {type: Number, required: true },

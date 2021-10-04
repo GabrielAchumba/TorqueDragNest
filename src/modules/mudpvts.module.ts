@@ -6,7 +6,8 @@ import { MudPVTsService } from 'src/services/mudpvts.service';
 
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'MudPVT', schema: MudPVTSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'MudPVT', schema: MudPVTSchema }],
+  'torquedragclientdb')],
   controllers: [MudPVTsController],
   providers: [MudPVTsService]
 })

@@ -5,7 +5,8 @@ import { DatumsService } from '../services/datums.service';
 import { DatumSchema } from '../models/datum'
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'Datum', schema: DatumSchema }])],
+  imports: [MongooseModule.forFeature([{ name: 'Datum', schema: DatumSchema }],
+  'torquedragclientdb')],
   controllers: [DatumsController],
   providers: [DatumsService]
 })
