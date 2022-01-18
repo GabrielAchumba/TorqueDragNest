@@ -10,7 +10,7 @@ export class BaseHoleSectionsService {
     }
 
     async create(baseHoleSection: BaseHoleSection): Promise<BaseHoleSectionDocument> {
-        
+        console.log('baseHoleSection: ', baseHoleSection);
         const foundBaseHoleSection = await this.baseHoleSectionModel.findOne (
             { "userId" : baseHoleSection.userId, "designId" : baseHoleSection.designId });
         
@@ -28,14 +28,15 @@ export class BaseHoleSectionsService {
         return this.baseHoleSectionModel.find().exec();
     }
 
-    async findOne(id: string): Promise<BaseHoleSectionDocument> {
-        const baseHoleSection = await this.baseHoleSectionModel.findById(id);
+    async findOne(designId: string): Promise<any> {
+        console.log('designId: ', designId);
+        const baseHoleSection = await this.baseHoleSectionModel.findOne({designId:designId});
 
         if(!baseHoleSection){
             throw new NotFoundException("could not find baseHoleSection.")
         }
 
-        return baseHoleSection;
+        return baseHoleSection.holeSections;
     }
 
     async update(id: string, baseHoleSection: BaseHoleSection): Promise<BaseHoleSectionDocument> {

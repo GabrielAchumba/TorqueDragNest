@@ -2,34 +2,34 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { BasePipe, BasePipeDocument } from 'src/models/basepipe';
 import { BasePipesService } from 'src/services/basepipes.service';
 
-@Controller('basePipes')
+@Controller('Pipes')
 export class BasePipesController {
 
     constructor(private readonly basePipesService: BasePipesService) {
 
     }
 
-    @Post('PostBasePipe')
-    async create(@Body() basePipe: BasePipeDocument) {
-        await this.basePipesService.create(basePipe);
+    @Post('PostPipes')
+    async create(@Body() basePipe: BasePipe) {
+        return await this.basePipesService.create(basePipe);
     }
 
-    @Get('GetBasePipes/:id')
-    findOne(@Param('id') id: string): Promise<BasePipeDocument> {
-        return this.basePipesService.findOne(id);
+    @Get('GetPipes/:designId')
+    findOne(@Param('designId') designId: string): Promise<any> {
+        return this.basePipesService.findOne(designId);
     }
 
-    @Patch('PutBasePipe/:id')
-    update(@Param('id') id: string, @Body() basePipe: BasePipe) {
-      return this.basePipesService.update(id, basePipe);
+    @Patch('PutPipe/:designId')
+    update(@Param('designId') designId: string, @Body() basePipe: BasePipe) {
+      return this.basePipesService.update(designId, basePipe);
     }
   
-    @Get('GetBasePipes')
+    @Get('GetPipes')
     async findAll(): Promise<BasePipeDocument[]> {
         return this.basePipesService.findAll();
     }
 
-    @Delete('DeleteBasePipe/:id')
+    @Delete('DeletePipe/:id')
     remove(@Param('id') id: string): Promise<void> {
         return this.basePipesService.remove(id);
     } 

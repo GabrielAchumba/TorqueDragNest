@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
 export class DeviationSurveyModel {
     measuredDepth: number;
@@ -13,17 +14,13 @@ export class DeviationSurveyModel {
     tol: string;
   }
 
-  export class DeviationSurvey {
-    surveyName: string;
-    designId: string;
-    userId: string;
+  export class DeviationSurvey extends BaseModel {
     deviationSurveys: DeviationSurveyModel[];
   }
 
 export interface DeviationSurveyDocument extends mongoose.Document, DeviationSurvey { }
 
 export const DeviationSurveySchema = new mongoose.Schema({
-    surveyName: {type: String, required: true },
     designId: {type: String, required: true },
     userId: {type: String, required: true },
     deviationSurveys: [{

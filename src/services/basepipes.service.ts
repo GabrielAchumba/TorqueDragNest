@@ -10,14 +10,17 @@ export class BasePipesService {
     }
 
     async create(basePipe: BasePipe): Promise<BasePipeDocument> {
-        
+
         const foundBasePipe = await this.basePipeModel.findOne (
             { "userId" : basePipe.userId, "designId" : basePipe.designId });
         
         if(foundBasePipe == null || foundBasePipe == undefined){
+            console.log('basePipe: ', basePipe);
             const newBasePipe = new this.basePipeModel(basePipe);
+            console.log('newBasePipe: ', newBasePipe);
             return  newBasePipe.save();
         }
+        
         
         return  foundBasePipe;
     }
@@ -28,14 +31,14 @@ export class BasePipesService {
         return this.basePipeModel.find().exec();
     }
 
-    async findOne(id: string): Promise<BasePipeDocument> {
-        const basePipe = await this.basePipeModel.findById(id);
+    async findOne(designId: string): Promise<any> {
+        const basePipe = await this.basePipeModel.findOne({designId:designId});
 
         if(!basePipe){
             throw new NotFoundException("could not find basePipe.")
         }
 
-        return basePipe;
+        return basePipe.pipes;
     }
 
     async update(id: string, basePipe: BasePipe): Promise<BasePipeDocument> {

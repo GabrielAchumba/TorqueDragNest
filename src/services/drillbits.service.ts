@@ -11,11 +11,13 @@ export class DrillBitsService {
 
     async create(drillBit: DrillBit): Promise<DrillBitDocument> {
         
+        console.log('drillBit: ', drillBit);
         const foundDrillBit = await this.drillBitModel.findOne(
             { "userId" : drillBit.userId, "designId" : drillBit.designId });
         
         if(foundDrillBit == null || foundDrillBit == undefined){
             const newDrillBit = new this.drillBitModel(drillBit);
+            console.log('newDrillBit: ', newDrillBit);
             return  newDrillBit.save();
         }
         
@@ -28,8 +30,8 @@ export class DrillBitsService {
         return this.drillBitModel.find().exec();
     }
 
-    async findOne(id: string): Promise<DrillBitDocument> {
-        const drillBit = await this.drillBitModel.findById(id);
+    async findOne(designId: string): Promise<DrillBitDocument> {
+        const drillBit = await this.drillBitModel.findOne({designId:designId});
 
         if(!drillBit){
             throw new NotFoundException("could not find drillBit.")

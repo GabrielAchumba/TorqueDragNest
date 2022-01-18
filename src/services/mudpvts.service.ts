@@ -10,7 +10,7 @@ export class MudPVTsService {
     }
 
     async create(mudPVT: MudPVT): Promise<MudPVTDocument> {
-        
+        console.log('mudPVT: ', mudPVT);
         const foundMudPVT = await this.mudPVTModel.findOne (
             { "userId" : mudPVT.userId, "designId" : mudPVT.designId });
         
@@ -28,14 +28,14 @@ export class MudPVTsService {
         return this.mudPVTModel.find().exec();
     }
 
-    async findOne(id: string): Promise<MudPVTDocument> {
-        const mudPVT = await this.mudPVTModel.findById(id);
+    async findOne(designId: string): Promise<any> {
+        const mudPVT = await this.mudPVTModel.findOne({designId: designId});
 
         if(!mudPVT){
             throw new NotFoundException("could not find mudPVT.")
         }
 
-        return mudPVT;
+        return mudPVT.mudPVTs;
     }
 
     async update(id: string, mudPVT: MudPVT): Promise<MudPVTDocument> {

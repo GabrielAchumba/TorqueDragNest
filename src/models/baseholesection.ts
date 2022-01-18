@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
 export class BaseHoleSectionModel {
     _isSelected: boolean;
@@ -11,9 +12,7 @@ export class BaseHoleSectionModel {
     frictionFactor: number;
   }
 
-  export class BaseHoleSection {
-    designId: string;
-    userId: string;
+  export class BaseHoleSection extends BaseModel {
     holeSections: BaseHoleSectionModel[];
   }
 
@@ -22,15 +21,13 @@ export interface BaseHoleSectionDocument extends mongoose.Document, BaseHoleSect
 export const BaseHoleSectionSchema = new mongoose.Schema({
   designId: {type: String, required: true },
   userId: {type: String, required: true },
-  mudPVTs: [{
+  holeSections: [{
     isSelected: {type: Boolean, required: true },
     typeOfHole: {type: String, required: false },
     outerDiameter: {type: Number, required: true },
     innerDiameter: {type: Number, required: true },
     weight: {type: Number, required: true },
     topOfHole: {type: String, required: true },
-    designId: {type: String, required: true },
-    userId: {type: String, required: true },
     bottomOfHole: {type: Number, required: true },
     frictionFactor: {type: Number, required: true },
   }]

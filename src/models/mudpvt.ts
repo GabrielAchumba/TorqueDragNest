@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
 export class MudPVTModel {
     temperature: number;
@@ -9,9 +10,7 @@ export class MudPVTModel {
     yieldPoint: number;
   }
 
-  export class MudPVT {
-    designId: string;
-    userId: string;
+  export class MudPVT extends BaseModel {
     mudPVTs: MudPVTModel[];
   }
 

@@ -2,34 +2,34 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { BaseHoleSection, BaseHoleSectionDocument } from 'src/models/baseholesection';
 import { BaseHoleSectionsService } from 'src/services/baseholesections.service';
 
-@Controller('baseHoleSections')
+@Controller('HoleSections')
 export class BaseHoleSectionsController {
 
     constructor(private readonly baseHoleSectionsService: BaseHoleSectionsService) {
 
     }
 
-    @Post('PostBaseHoleSection')
+    @Post('PostHoleSections')
     async create(@Body() baseHoleSection: BaseHoleSection) {
         await this.baseHoleSectionsService.create(baseHoleSection);
     }
 
-    @Get('GetBaseHoleSections/:id')
-    findOne(@Param('id') id: string): Promise<BaseHoleSectionDocument> {
-        return this.baseHoleSectionsService.findOne(id);
+    @Get('GetHoleSections/:designId')
+    findOne(@Param('designId') designId: string): Promise<any> {
+        return this.baseHoleSectionsService.findOne(designId);
     }
 
-    @Patch('PutBaseHoleSection/:id')
-    update(@Param('id') id: string, @Body() baseHoleSection: BaseHoleSection) {
-      return this.baseHoleSectionsService.update(id, baseHoleSection);
+    @Patch('PutHoleSection/:designId')
+    update(@Param('designId') designId: string, @Body() baseHoleSection: BaseHoleSection) {
+      return this.baseHoleSectionsService.update(designId, baseHoleSection);
     }
   
-    @Get('GetBaseHoleSections')
+    @Get('GetHoleSections')
     async findAll(): Promise<BaseHoleSectionDocument[]> {
         return this.baseHoleSectionsService.findAll();
     }
 
-    @Delete('DeleteBaseHoleSection/:id')
+    @Delete('DeleteHoleSection/:id')
     remove(@Param('id') id: string): Promise<void> {
         return this.baseHoleSectionsService.remove(id);
     } 

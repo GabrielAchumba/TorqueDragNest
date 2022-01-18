@@ -12,13 +12,15 @@ export class Sorting {
             return row;
         });
 
+        //console.log('(1) sortArray: ', sortArray);
+
         sortArray.sort((a, b) => {
             if (a.designDate > b.designDate)
               return -1;
             return 0;
           });
 
-
+        //console.log('(2) sortArray: ', sortArray);
         return sortArray;
     }
 

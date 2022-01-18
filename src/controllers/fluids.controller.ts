@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { FluidsService } from 'src/services/fluilds.service';
 import { Fluid, FluidDocument } from 'src/models/fluid';
 
-@Controller('fluids')
+@Controller('Fluids')
 export class FluidsController {
 
     constructor(private readonly fluidsService: FluidsService) {
@@ -14,14 +14,14 @@ export class FluidsController {
         await this.fluidsService.create(fluid);
     }
 
-    @Get('GetFluids/:id')
-    findOne(@Param('id') id: string): Promise<FluidDocument> {
-        return this.fluidsService.findOne(id);
+    @Get('GetFluid/:designId')
+    findOne(@Param('designId') designId: string): Promise<FluidDocument> {
+        return this.fluidsService.findOne(designId);
     }
 
-    @Patch('PutFluid/:id')
-    update(@Param('id') id: string, @Body() fluid: Fluid) {
-      return this.fluidsService.update(id, fluid);
+    @Patch('PutFluid/:designId')
+    update(@Param('designId') designId: string, @Body() fluid: Fluid) {
+      return this.fluidsService.update(designId, fluid);
     }
   
     @Get('GetFluids')

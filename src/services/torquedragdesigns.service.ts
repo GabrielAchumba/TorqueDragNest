@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { TorqueDragDesignDTO, WellDesignDTO } from 'src/dtos/torqueDragDesignDTO';
+import { IWellDesignDTO, TorqueDragDesignDTO, WellDesignDTO } from 'src/dtos/torqueDragDesignDTO';
 import { Sorting } from 'src/mathematics/sorting';
-import { TorqueDragDesign, TorqueDragDesignDocument, TorqueDragDesignWithGuid } from 'src/models/torquedragdesign';
-import { WellExplorer } from 'src/utilities/wellExplorer';
+import { TorqueDragDesign, TorqueDragDesignDocument, TorqueDragDesignWithGuid,
+    createUniqueId } from 'src/models/torquedragdesign';
+import { IWellExplorer, WellExplorer } from 'src/utilities/wellExplorer';
 
 @Injectable()
 export class TorqueDragDesignsService {
@@ -12,26 +13,31 @@ export class TorqueDragDesignsService {
 
     }
 
-    async getTorqueDragDesigns(): Promise<WellDesignDTO> {
+    async getTorqueDragDesigns(): Promise<IWellDesignDTO> {
         const items = await this.torqueDragDesignModel.find().exec();
-        let wellExplorer:WellExplorer = new WellExplorer(items);
+        let wellExplorer = {...WellExplorer} as IWellExplorer;
+        wellExplorer.GetTorqueDragDesigns(items);
         wellExplorer.CreateWellExplorer();
         return wellExplorer.wellDesignDTO;
     }
 
-    async postSelectedWellDesign(wellDesignDTO:WellDesignDTO): Promise<TorqueDragDesignWithGuid> {
+    async postSelectedWellDesign(wellDesignDTO:any): Promise<TorqueDragDesignWithGuid> {
         
         const items:TorqueDragDesignDocument[] = [];
-        let wellExplorer:WellExplorer = new WellExplorer(items);
-        const torqueDragDesignWithGuid:TorqueDragDesignWithGuid 
+        let wellExplorer = {...WellExplorer} as IWellExplorer;
+        wellExplorer.GetTorqueDragDesigns(items);
+        const torqueDragDesignWithGuid 
         = wellExplorer.GetWellCase(wellDesignDTO.wellCaseId, wellDesignDTO.torqueDragDesigns);
         return  torqueDragDesignWithGuid;
     }
 
-    async getWellDesignsByUserId(userId:string): Promise<WellDesignDTO> {
+    async getWellDesignsByUserId(userId:string): Promise<IWellDesignDTO> {
         const items  = await this.torqueDragDesignModel.find({"userId":userId}).exec();
-        let wellExplorer:WellExplorer = new WellExplorer(items);
+        if(items.length == 0) return null;
+        let wellExplorer = {...WellExplorer} as IWellExplorer;
+        wellExplorer.GetTorqueDragDesigns(items);
         wellExplorer.CreateWellExplorer();
+        //console.log("wellExplorer.wellDesignDTO: ", wellExplorer.wellDesignDTO);
         var sortedCases = Sorting.SortListofTorqueDragDesign(wellExplorer.wellDesignDTO.torqueDragDesigns);
         wellExplorer.wellDesignDTO.GetMostRecntWellCases(sortedCases);
         return wellExplorer.wellDesignDTO;
@@ -40,28 +46,30 @@ export class TorqueDragDesignsService {
     async postTorqueDragDesign(torqueDragDesignDTO:TorqueDragDesignDTO): Promise<TorqueDragDesignDTO> {
         
         let torqueDragDesignDTOX:TorqueDragDesignDTO = new TorqueDragDesignDTO();
+        let torqueDragDesign = torqueDragDesignDTO.torqueDragDesign as TorqueDragDesign;
+        const companyName = torqueDragDesignDTO.companyName;
 
-        if (torqueDragDesignDTO.torqueDragDesign.designName == undefined 
-            || torqueDragDesignDTO.torqueDragDesign.designName == null
-            || torqueDragDesignDTO.torqueDragDesign.designName == ""
-            || torqueDragDesignDTO.torqueDragDesign.wellDesignName == undefined  
-            || torqueDragDesignDTO.torqueDragDesign.wellDesignName == null
-            || torqueDragDesignDTO.torqueDragDesign.wellDesignName == ""
-            || torqueDragDesignDTO.torqueDragDesign.wellboreName == undefined
-            || torqueDragDesignDTO.torqueDragDesign.wellboreName == null
-            || torqueDragDesignDTO.torqueDragDesign.wellboreName == ""
-            || torqueDragDesignDTO.torqueDragDesign.wellName == undefined
-            || torqueDragDesignDTO.torqueDragDesign.wellName == null
-            || torqueDragDesignDTO.torqueDragDesign.wellName == ""
-            || torqueDragDesignDTO.torqueDragDesign.siteName == undefined
-            || torqueDragDesignDTO.torqueDragDesign.siteName == null
-            || torqueDragDesignDTO.torqueDragDesign.siteName == ""
-            || torqueDragDesignDTO.torqueDragDesign.projectName == undefined
-            || torqueDragDesignDTO.torqueDragDesign.projectName == null
-            || torqueDragDesignDTO.torqueDragDesign.projectName == ""
-            || torqueDragDesignDTO.torqueDragDesign.externalcompanyName == undefined
-            || torqueDragDesignDTO.torqueDragDesign.externalcompanyName == null
-            || torqueDragDesignDTO.torqueDragDesign.externalcompanyName == "")
+        if (torqueDragDesign.designName == undefined 
+            || torqueDragDesign.designName == null
+            || torqueDragDesign.designName == ""
+            || torqueDragDesign.wellDesignName == undefined  
+            || torqueDragDesign.wellDesignName == null
+            || torqueDragDesign.wellDesignName == ""
+            || torqueDragDesign.wellboreName == undefined
+            || torqueDragDesign.wellboreName == null
+            || torqueDragDesign.wellboreName == ""
+            || torqueDragDesign.wellName == undefined
+            || torqueDragDesign.wellName == null
+            || torqueDragDesign.wellName == ""
+            || torqueDragDesign.siteName == undefined
+            || torqueDragDesign.siteName == null
+            || torqueDragDesign.siteName == ""
+            || torqueDragDesign.projectName == undefined
+            || torqueDragDesign.projectName == null
+            || torqueDragDesign.projectName == ""
+            || torqueDragDesign.externalcompanyName == undefined
+            || torqueDragDesign.externalcompanyName == null
+            || torqueDragDesign.externalcompanyName == "")
         {
             torqueDragDesignDTOX.torqueDragDesign = null;
             torqueDragDesignDTOX.info = "No well data";
@@ -69,23 +77,22 @@ export class TorqueDragDesignsService {
             return torqueDragDesignDTOX;
         }
 
-
-        torqueDragDesignDTO.torqueDragDesign.createUniqueId();
+        torqueDragDesign = createUniqueId(torqueDragDesign);
         const updatedTorqueDragDesign = await this.torqueDragDesignModel.findOne (
             { "userId" : torqueDragDesignDTO.torqueDragDesign.userId,
             "uniqueId" : torqueDragDesignDTO.torqueDragDesign.uniqueId });
 
         if (updatedTorqueDragDesign != null || updatedTorqueDragDesign != undefined) 
         {
-            torqueDragDesignDTO.torqueDragDesign.id = updatedTorqueDragDesign.id;
             updatedTorqueDragDesign.save();
 
-            torqueDragDesignDTOX.torqueDragDesign = updatedTorqueDragDesign;
+            torqueDragDesignDTOX.torqueDragDesign = {...updatedTorqueDragDesign } as TorqueDragDesign;
             torqueDragDesignDTOX.info = "Well case already exists so the well case was updated successfully";
             return torqueDragDesignDTOX;
         }
 
-        const newItem = new this.torqueDragDesignModel(torqueDragDesignDTO.torqueDragDesign);
+        console.log('torqueDragDesign: ', torqueDragDesign);
+        const newItem = new this.torqueDragDesignModel(torqueDragDesign);
         newItem.save();
         torqueDragDesignDTOX.torqueDragDesign = newItem;
         torqueDragDesignDTOX.info = "Well case created successfully";

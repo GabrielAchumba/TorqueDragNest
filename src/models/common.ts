@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
-export class Common {
+export class Common extends BaseModel {
     commonName: string;
     activeFluid: string;
     startMeasuredDepth: number;
@@ -9,11 +10,9 @@ export class Common {
     seaWaterDensity: number;
     courseLength: number;
     youngsModulus: number;
-    designId: string;
     blockWeight: number;
     percentOfYield: number;
     bucklingLimitFactor: number;
-    userId: string;
 
 
   }
@@ -21,13 +20,13 @@ export class Common {
 export interface CommonDocument extends mongoose.Document, Common { }
 
 export const CommonSchema = new mongoose.Schema({
-    commonName: {type: String, required: true },
+    commonName: {type: String, required: false },
     activeFluid: {type: String, required: false },
     startMeasuredDepth: {type: Number, required: true },
     endMeasuredDepth: {type: Number, required: true },
     stepSize: {type: Number, required: true },
     seaWaterDensity: {type: Number, required: true },
-    courseLength: {type: Number, required: true },
+    courseLength: {type: Number, required: false },
     youngsModulus: {type: Number, required: true },
     designId: {type: String, required: true },
     blockWeight: {type: Number, required: true },

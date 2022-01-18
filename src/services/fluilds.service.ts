@@ -10,7 +10,7 @@ export class FluidsService {
     }
 
     async create(fluid: Fluid): Promise<FluidDocument> {
-        
+        console.log('fluid: ', fluid);
         const foundFluid = await this.fluidModel.findOne(
             { "userId" : fluid.userId, "designId" : fluid.designId });
         
@@ -28,8 +28,8 @@ export class FluidsService {
         return this.fluidModel.find().exec();
     }
 
-    async findOne(id: string): Promise<FluidDocument> {
-        const drillFluid = await this.fluidModel.findById(id);
+    async findOne(designId: string): Promise<FluidDocument> {
+        const drillFluid = await this.fluidModel.findOne({designId: designId});
 
         if(!drillFluid){
             throw new NotFoundException("could not find drillFluid.")

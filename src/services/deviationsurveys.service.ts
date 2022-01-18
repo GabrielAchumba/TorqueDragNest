@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { DeviationSurvey, DeviationSurveyDocument } from '../models/deviationSurvey';
+import { DeviationSurvey, DeviationSurveyDocument, DeviationSurveyModel } from '../models/deviationSurvey';
 
 @Injectable()
 export class DeviationSurveysService {
@@ -10,7 +10,7 @@ export class DeviationSurveysService {
     }
 
     async create(deviationSurvey: DeviationSurvey): Promise<DeviationSurveyDocument> {
-        
+        console.log('deviationSurvey: ', deviationSurvey);
         const foundDeviationSurvey = await this.deviationSurveyModel.findOne(
             { "userId" : deviationSurvey.userId, "designId" : deviationSurvey.designId });
         
@@ -28,14 +28,14 @@ export class DeviationSurveysService {
         return this.deviationSurveyModel.find().exec();
     }
 
-    async findOne(id: string): Promise<DeviationSurveyDocument> {
-        const deviationSurvey = await this.deviationSurveyModel.findById(id);
-
+    async findOne(designId: string): Promise<any> {
+        const deviationSurvey = await this.deviationSurveyModel.findOne({designId:designId});
+        //console.log('deviationSurvey: ', deviationSurvey)
         if(!deviationSurvey){
             throw new NotFoundException("could not find deviationSurvey.")
         }
 
-        return deviationSurvey;
+        return deviationSurvey.deviationSurveys;
     }
 
     async update(id: string, deviationSurvey: DeviationSurvey): Promise<DeviationSurveyDocument> {

@@ -28,8 +28,9 @@ export class RigsService {
         return this.rigModel.find().exec();
     }
 
-    async findOne(id: string): Promise<RigDocument> {
-        const rig = await this.rigModel.findById(id);
+    async findOne(designId: string): Promise<RigDocument> {
+        const rig = await this.rigModel.findOne({designId:designId});
+        console.log('rig: ', rig);
 
         if(!rig){
             throw new NotFoundException("could not find rig.")

@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
 export class BasePipeModel {
     typeOfSection: string;
@@ -13,7 +14,7 @@ export class BasePipeModel {
     itemDescription: string;
     makeUpTorque: number;
     overPullMargin: number;
-    _isSelected: boolean;
+    selected: boolean;
     youngsModulus: number;
     absoluteRoughness: number;
   }
@@ -41,9 +42,7 @@ export class BasePipeModel {
       } */
   }
 
-  export class BasePipe {
-    designId: string;
-    userId: string;
+  export class BasePipe extends BaseModel {
     pipes: BasePipeModel[];
   }
 
@@ -52,22 +51,22 @@ export interface BasePipeDocument extends mongoose.Document, BasePipe { }
 export const BasePipeSchema = new mongoose.Schema({
   designId: {type: String, required: true },
   userId: {type: String, required: true },
-  mudPVTs: [{
+  pipes: [{
     typeOfSection: {type: String, required: true },
     length: {type: Number, required: true },
     measuredDepth: {type: Number, required: true },
-    size: {type: Number, required: true },
+    size: {type: Number, required: false },
     weight: {type: Number, required: true },
     grade: {type: String, required: true },
     outerDiameter: {type: Number, required: true },
     innerDiameter: {type: Number, required: true },
-    minimumYieldStrength: {type: Number, required: true },
-    itemDescription: {type: String, required: true },
-    makeUpTorque: {type: Number, required: true },
-    overPullMargin: {type: Number, required: true },
-    _isSelected: {type: Boolean, required: true },
-    youngsModulus: {type: Number, required: true },
-    absoluteRoughness: {type: Number, required: true },
+    minimumYieldStrength: {type: Number, required: false },
+    itemDescription: {type: String, required: false },
+    makeUpTorque: {type: Number, required: false },
+    overPullMargin: {type: Number, required: false },
+    selected: {type: Boolean, required: false },
+    youngsModulus: {type: Number, required: false },
+    absoluteRoughness: {type: Number, required: false },
   }]
   
   });

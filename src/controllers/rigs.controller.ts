@@ -3,7 +3,7 @@ import { Rig, RigDocument } from 'src/models/rig';
 import { RigsService } from 'src/services/rigs.service';
 
 
-@Controller('rigs')
+@Controller('Rigs')
 export class RigsController {
 
     constructor(private readonly rigsService: RigsService) {
@@ -15,14 +15,15 @@ export class RigsController {
         await this.rigsService.create(rig);
     }
 
-    @Get('GetRigs/:id')
-    findOne(@Param('id') id: string): Promise<RigDocument> {
-        return this.rigsService.findOne(id);
+    @Get('GetRig/:designId')
+    findOne(@Param('designId') designId: string): Promise<RigDocument> {
+        console.log("GetRig Called");
+        return this.rigsService.findOne(designId);
     }
 
-    @Patch('PutRig/:id')
-    update(@Param('id') id: string, @Body() rig: Rig) {
-      return this.rigsService.update(id, rig);
+    @Patch('PutRig/:designId')
+    update(@Param('designId') designId: string, @Body() rig: Rig) {
+      return this.rigsService.update(designId, rig);
     }
   
     @Get('GetRigs')
@@ -30,8 +31,8 @@ export class RigsController {
         return this.rigsService.findAll();
     }
 
-    @Delete('DeleteRig/:id')
-    remove(@Param('id') id: string): Promise<void> {
-        return this.rigsService.remove(id);
+    @Delete('DeleteRig/:designId')
+    remove(@Param('designId') designId: string): Promise<void> {
+        return this.rigsService.remove(designId);
     } 
 }

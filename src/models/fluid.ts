@@ -1,14 +1,13 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
-export class Fluid {
+export class Fluid extends BaseModel{
     mudName: string;
     description: string;
     mudBaseType: string;
     baseFluid: string;
     rheologyModel: string;
     rheologyModelType: string;
-    designId: string;
-    userId: string;
     fannDialReading: number;
     fannRPM: number;
     baseFannDialReading: number;
@@ -24,7 +23,7 @@ export const FluidSchema = new mongoose.Schema({
     mudBaseType: {type: String, required: true },
     baseFluid: {type: String, required: true },
     rheologyModel: {type: String, required: true },
-    rheologyModelType: {type: String, required: true },
+    rheologyModelType: {type: String, required: false },
     designId: {type: String, required: true },
     userId: {type: String, required: true },
     fannDialReading: {type: Number, required: true },

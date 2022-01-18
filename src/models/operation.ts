@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
-export class Operation {
+export class Operation extends BaseModel {
     isTrippingInChecked: boolean;
     trippingInSpeed: number;
     trippingInRPM: number;
@@ -24,8 +25,6 @@ export class Operation {
     hookLoadIDHM: number;
     isIDHMTrippingOutChecked: boolean;
     isIDHMRotatingChecked: boolean;
-    designId: string;
-    userId: string;
     trippingInSpeedSlideDrlg: number;
     trippingInRPMSlideDrlg: number;
     trippingInSpeedBackReam: number;
@@ -41,38 +40,38 @@ export class Operation {
 export interface OperationDocument extends mongoose.Document, Operation { }
 
 export const OperationSchema = new mongoose.Schema({
-    isTrippingInChecked:{type: Boolean, required: true },
-    trippingInSpeed: {type: Number, required: true },
-    trippingInRPM: {type: Number, required: true },
-    isTrippingOutChecked: {type: Boolean, required: true },
-    trippingOutSpeed: {type: Number, required: true },
-    trippingOutRPM: {type: Number, required: true },
-    isRotatingOnBottomChecked: {type: Boolean, required: true },
-    isSlideDrillingChecked: {type: Boolean, required: true },
-    weightOnBit: {type: Number, required: true },
-    torqueAtBit: {type: Number, required: true },
-    torqueAtBitDrillingOperation: {type: Number, required: true },
-    torqueAtBitBackReaming: {type: Number, required: true },
-    overpullBackReaming: {type: Number, required: true },
-    isBackReamingChecked: {type: Boolean, required: true },
-    isRotatingOffBottomChecked: {type: Boolean, required: true },
-    isUserDefinedOperationsChecked: {type: Boolean, required: true },
-    isHookLoad: {type: Boolean, required: true },
-    isWeightOnBit: {type: Boolean, required: true },
-    isIDHMTrippingInChecked: {type: Boolean, required: true },
-    weightOnBitIDHM:{type: Number, required: true },
-    hookLoadIDHM: {type: Number, required: true },
-    isIDHMTrippingOutChecked: {type: Boolean, required: true },
-    isIDHMRotatingChecked: {type: Boolean, required: true },
+    isTrippingInChecked:{type: Boolean, required: false },
+    trippingInSpeed: {type: Number, required: false },
+    trippingInRPM: {type: Number, required: false },
+    isTrippingOutChecked: {type: Boolean, required: false },
+    trippingOutSpeed: {type: Number, required: false },
+    trippingOutRPM: {type: Number, required: false },
+    isRotatingOnBottomChecked: {type: Boolean, required: false },
+    isSlideDrillingChecked: {type: Boolean, required: false },
+    weightOnBit: {type: Number, required: false },
+    torqueAtBit: {type: Number, required: false },
+    torqueAtBitDrillingOperation: {type: Number, required: false },
+    torqueAtBitBackReaming: {type: Number, required: false },
+    overpullBackReaming: {type: Number, required: false },
+    isBackReamingChecked: {type: Boolean, required: false },
+    isRotatingOffBottomChecked: {type: Boolean, required: false },
+    isUserDefinedOperationsChecked: {type: Boolean, required: false },
+    isHookLoad: {type: Boolean, required: false },
+    isWeightOnBit: {type: Boolean, required: false },
+    isIDHMTrippingInChecked: {type: Boolean, required: false },
+    weightOnBitIDHM:{type: Number, required: false },
+    hookLoadIDHM: {type: Number, required: false },
+    isIDHMTrippingOutChecked: {type: Boolean, required: false },
+    isIDHMRotatingChecked: {type: Boolean, required: false },
     designId: {type: String, required: true },
     userId: {type: String, required: true },
-    trippingInSpeedSlideDrlg: {type: Number, required: true },
-    trippingInRPMSlideDrlg:{type: Number, required: true },
-    trippingInSpeedBackReam: {type: Number, required: true },
-    trippingInRPMBackReam: {type: Number, required: true },
-    tripSpeedSlideDrlg: {type: Number, required: true },
-    tripRPMSlideDrlg: {type: Number, required: true },
-    tripSpeedBackReam: {type: Number, required: true },
-    tripRPMBackReam: {type: Number, required: true },
+    trippingInSpeedSlideDrlg: {type: Number, required: false },
+    trippingInRPMSlideDrlg:{type: Number, required: false },
+    trippingInSpeedBackReam: {type: Number, required: false },
+    trippingInRPMBackReam: {type: Number, required: false },
+    tripSpeedSlideDrlg: {type: Number, required: false },
+    tripRPMSlideDrlg: {type: Number, required: false },
+    tripSpeedBackReam: {type: Number, required: false },
+    tripRPMBackReam: {type: Number, required: false },
   
   });

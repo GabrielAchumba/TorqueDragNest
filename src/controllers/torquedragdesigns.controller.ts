@@ -12,19 +12,20 @@ export class TorqueDragDesignsController {
     }
 
     @Get('GetTorqueDragDesigns')
-    async findAll(): Promise<WellDesignDTO> {
+    async findAll(): Promise<any> {
         return this.torqueDragDesignsService.getTorqueDragDesigns();
     }
 
 
     @Post('PostSelectedWellDesign')
-    async postSelectedWellDesign(@Body() wellDesignDTO: WellDesignDTO) {
+    async postSelectedWellDesign(@Body() wellDesignDTO: any) {
         const item = await this.torqueDragDesignsService.postSelectedWellDesign(wellDesignDTO);
         return item;
     }
 
     @Get('GetWellDesignsByUserId/:id')
-    async findAllByUserId(@Param('id') id: string): Promise<WellDesignDTO> {
+    async findAllByUserId(@Param('id') id: string): Promise<any> {
+        console.log("userId: ", id);
         return this.torqueDragDesignsService.getWellDesignsByUserId(id);
     }
 

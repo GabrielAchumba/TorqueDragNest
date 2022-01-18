@@ -1,11 +1,10 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
-export class DrillBit {
+export class DrillBit extends BaseModel {
     bitSize: number;
     numberOfBitNozzles: number;
     dischargeCoefficient: number;
-    designId: string;
-    userId: string;
   }
 
 export interface DrillBitDocument extends mongoose.Document, DrillBit { }

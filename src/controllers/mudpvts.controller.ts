@@ -3,26 +3,26 @@ import { MudPVT, MudPVTDocument } from 'src/models/mudpvt';
 import { MudPVTsService } from 'src/services/mudpvts.service';
 
 
-@Controller('mudPVTs')
+@Controller('MudPVTs')
 export class MudPVTsController {
 
     constructor(private readonly mudPVTsService: MudPVTsService) {
 
     }
 
-    @Post('PostMudPVT')
+    @Post('PostMudPVTs')
     async create(@Body() mudPVT: MudPVT) {
         await this.mudPVTsService.create(mudPVT);
     }
 
-    @Get('GetMudPVTs/:id')
-    findOne(@Param('id') id: string): Promise<MudPVTDocument> {
-        return this.mudPVTsService.findOne(id);
+    @Get('GetMudPVTs/:designId')
+    findOne(@Param('designId') designId: string): Promise<any> {
+        return this.mudPVTsService.findOne(designId);
     }
 
-    @Patch('PutMudPVT/:id')
-    update(@Param('id') id: string, @Body() mudPVT: MudPVT) {
-      return this.mudPVTsService.update(id, mudPVT);
+    @Patch('PutMudPVT/:designId')
+    update(@Param('designId') designId: string, @Body() mudPVT: MudPVT) {
+      return this.mudPVTsService.update(designId, mudPVT);
     }
   
     @Get('GetMudPVTs')
@@ -30,8 +30,8 @@ export class MudPVTsController {
         return this.mudPVTsService.findAll();
     }
 
-    @Delete('DeleteMudPVT/:id')
-    remove(@Param('id') id: string): Promise<void> {
-        return this.mudPVTsService.remove(id);
+    @Delete('DeleteMudPVT/:designId')
+    remove(@Param('designId') designId: string): Promise<void> {
+        return this.mudPVTsService.remove(designId);
     } 
 }

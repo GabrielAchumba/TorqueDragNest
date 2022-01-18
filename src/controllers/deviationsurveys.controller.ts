@@ -1,8 +1,9 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { DeviationSurveysService } from '../services/deviationsurveys.service';
-import { DeviationSurvey, DeviationSurveyDocument } from '../models/deviationSurvey';
+import { DeviationSurvey, DeviationSurveyDocument, DeviationSurveyModel } from '../models/deviationSurvey';
+import { AnyARecord } from 'dns';
 
-@Controller('deviationSurveys')
+@Controller('DeviationSurveys')
 export class DeviationSurveysController {
 
     constructor(private readonly deviationSurveysService: DeviationSurveysService) {
@@ -10,18 +11,18 @@ export class DeviationSurveysController {
     }
 
     @Post('PostDeviationSurvey')
-    async create(@Body() deviationSurvey: DeviationSurvey) {
-        await this.deviationSurveysService.create(deviationSurvey);
+    async create(@Body() body: any) {
+        return await this.deviationSurveysService.create(body);
     }
 
-    @Get('GetDeviationSurveys/:id')
-    findOne(@Param('id') id: string): Promise<DeviationSurveyDocument> {
-        return this.deviationSurveysService.findOne(id);
+    @Get('GetDeviationSurveys/:designId')
+    findOne(@Param('designId') designId: string): Promise<any> {
+        return this.deviationSurveysService.findOne(designId);
     }
 
-    @Patch('PutDeviationSurvey/:id')
-    update(@Param('id') id: string, @Body() deviationSurvey: DeviationSurvey) {
-      return this.deviationSurveysService.update(id, deviationSurvey);
+    @Patch('PutDeviationSurvey/:designId')
+    update(@Param('designId') designId: string, @Body() deviationSurvey: DeviationSurvey) {
+      return this.deviationSurveysService.update(designId, deviationSurvey);
     }
   
     @Get('GetDeviationSurveys')

@@ -35,13 +35,14 @@ export class CommonsService {
         return this.commonModel.find().exec();
     }
 
-    async findOne(id: string): Promise<CommonDocument> {
-        const common = await this.commonModel.findById(id);
+    async findOne(designId: string): Promise<CommonDocument> {
+        const common = await this.commonModel.findOne({designId: designId});
 
         if(!common){
             throw new NotFoundException("could not find common.")
         }
 
+        console.log('common: ', common);
         return common;
     }
 

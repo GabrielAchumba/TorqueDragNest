@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { DatumsService } from '../services/datums.service';
 import { Datum, DatumDocument } from '../models/datum';
 
-@Controller('daums')
+@Controller('Datums')
 export class DatumsController {
 
     constructor(private readonly datumsService: DatumsService) {
@@ -10,13 +10,13 @@ export class DatumsController {
     }
 
     @Post('PostDatum')
-    async create(@Body() datum: Datum) {
-        await this.datumsService.create(datum);
+    async create(@Body() body: any) {
+        return await this.datumsService.create(body);
     }
 
-    @Get('GetDatums/:id')
-    findOne(@Param('id') id: string): Promise<DatumDocument> {
-        return this.datumsService.findOne(id);
+    @Get('GetDatums/:designId')
+    GetDatumsDesignId(@Param('designId') designId: string): Promise<any> {
+        return this.datumsService.GetDatumsDesignId(designId);
     }
 
     @Patch('PutDatum/:id')

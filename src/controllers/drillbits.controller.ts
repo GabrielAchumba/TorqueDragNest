@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { DrillBitsService } from '../services/drillbits.service';
 import { DrillBit, DrillBitDocument } from '../models/drillbit';
 
-@Controller('drillBits')
+@Controller('DrillBits')
 export class DrillBitsController {
 
     constructor(private readonly drillBitsService: DrillBitsService) {
@@ -14,14 +14,14 @@ export class DrillBitsController {
         await this.drillBitsService.create(drillBit);
     }
 
-    @Get('GetDrillBits/:id')
-    findOne(@Param('id') id: string): Promise<DrillBitDocument> {
-        return this.drillBitsService.findOne(id);
+    @Get('GetDrillBit/:designId')
+    findOne(@Param('designId') designId: string): Promise<DrillBitDocument> {
+        return this.drillBitsService.findOne(designId);
     }
 
-    @Patch('PutDrillBit/:id')
-    update(@Param('id') id: string, @Body() drillBit: DrillBit) {
-      return this.drillBitsService.update(id, drillBit);
+    @Patch('PutDrillBit/:designId')
+    update(@Param('designId') designId: string, @Body() drillBit: DrillBit) {
+      return this.drillBitsService.update(designId, drillBit);
     }
   
     @Get('GetDrillBits')

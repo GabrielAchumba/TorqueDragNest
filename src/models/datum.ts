@@ -1,14 +1,13 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
-export class Datum {
+export class Datum extends BaseModel {
     typeOfShore: string;
     datumElevation: number;
     groundElevation: number;
     airGap: number;
     wellHeadElevation: number;
     datumName: string;
-    designId: string;
-    userId: string;
   }
 
 export interface DatumDocument extends mongoose.Document, Datum { }

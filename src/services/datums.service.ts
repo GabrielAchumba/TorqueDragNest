@@ -9,9 +9,11 @@ export class DatumsService {
 
     }
     
-    async create(datum: Datum): Promise<DatumDocument> {
+    async create(body: any): Promise<any> {
         
-        const foundDatum = await this.datumModel.findOne ({ "datumName" : datum.datumName,
+        const datum = body.datum as Datum;
+        console.log('datum: ', datum);
+        const foundDatum = await this.datumModel.findOne({ "datumName" : datum.datumName,
         "designId" : datum.designId, "userId" : datum.userId });
         
         if(foundDatum == null || foundDatum == undefined){
@@ -28,8 +30,8 @@ export class DatumsService {
         return this.datumModel.find().exec();
     }
 
-    async findOne(id: string): Promise<DatumDocument> {
-        const datum = await this.datumModel.findById(id);
+    async GetDatumsDesignId(designId: string): Promise<any> {
+        const datum = await this.datumModel.find({designId:designId});
 
         if(!datum){
             throw new NotFoundException("could not find datum.")

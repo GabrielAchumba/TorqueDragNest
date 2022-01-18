@@ -28,14 +28,14 @@ export class OperationsService {
         return this.operationModel.find().exec();
     }
 
-    async findOne(id: string): Promise<OperationDocument> {
-        const mudPVT = await this.operationModel.findById(id);
+    async findOne(designId: string): Promise<OperationDocument> {
+        const operation = await this.operationModel.findOne({designId:designId});
 
-        if(!mudPVT){
+        if(!operation){
             throw new NotFoundException("could not find operation.")
         }
 
-        return mudPVT;
+        return operation;
     }
 
     async update(id: string, operation: Operation): Promise<OperationDocument> {

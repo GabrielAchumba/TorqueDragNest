@@ -3,7 +3,7 @@ import { Operation, OperationDocument } from 'src/models/operation';
 import { OperationsService } from 'src/services/operations.service';
 
 
-@Controller('operations')
+@Controller('Operations')
 export class OperationsController {
 
     constructor(private readonly operationsService: OperationsService) {
@@ -15,14 +15,14 @@ export class OperationsController {
         await this.operationsService.create(operation);
     }
 
-    @Get('GetOperations/:id')
-    findOne(@Param('id') id: string): Promise<OperationDocument> {
-        return this.operationsService.findOne(id);
+    @Get('GetOperation/:designId')
+    findOne(@Param('designId') designId: string): Promise<OperationDocument> {
+        return this.operationsService.findOne(designId);
     }
 
-    @Patch('PutOperation/:id')
-    update(@Param('id') id: string, @Body() operation: Operation) {
-      return this.operationsService.update(id, operation);
+    @Patch('PutOperation/:designId')
+    update(@Param('designId') designId: string, @Body() operation: Operation) {
+      return this.operationsService.update(designId, operation);
     }
   
     @Get('GetOperations')
@@ -30,8 +30,8 @@ export class OperationsController {
         return this.operationsService.findAll();
     }
 
-    @Delete('DeleteOperation/:id')
-    remove(@Param('id') id: string): Promise<void> {
-        return this.operationsService.remove(id);
+    @Delete('DeleteOperation/:designId')
+    remove(@Param('designId') designId: string): Promise<void> {
+        return this.operationsService.remove(designId);
     } 
 }

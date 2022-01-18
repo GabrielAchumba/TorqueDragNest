@@ -1,8 +1,7 @@
 import * as mongoose from 'mongoose';
+import { BaseModel } from './baseModel';
 
-export class Rig {
-    designId: string;
-    userId: string;
+export class Rig extends BaseModel {
     highPumpPressure: number;
     lowPumpPressure: number;
     flowRateHighPumpPressure: number;
@@ -26,7 +25,7 @@ export const RigSchema = new mongoose.Schema({
     lowPumpPressure: {type: Number, required: true },
     flowRateHighPumpPressure: {type: Number, required: true },
     flowRateLowPumpPressure: {type: Number, required: true },
-    flowExponent: {type: Number, required: true },
+    flowExponent: {type: Number, required: false },
     pumpEfficiency: {type: Number, required: true },
     maxAllowableSurfacePressure: {type: Number, required: true },
     maxHorsePower: {type: Number, required: true },

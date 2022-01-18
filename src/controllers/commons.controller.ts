@@ -4,7 +4,7 @@ import { Common, CommonDocument } from '../models/common';
 import { AllInputsDTO } from 'src/dtos/allInputsDTO';
 import { SimulationDTO } from 'src/dtos/simulationDTO';
 
-@Controller('commons')
+@Controller('Commons')
 export class CommonsController {
 
     constructor(private readonly commonsService: CommonsService) {
@@ -42,14 +42,14 @@ export class CommonsController {
     }
 
 
-    @Get('GetCommons/:id')
-    findOne(@Param('id') id: string): Promise<CommonDocument> {
-        return this.commonsService.findOne(id);
+    @Get('GetCommon/:designId')
+    findOne(@Param('designId') designId: string): Promise<CommonDocument> {
+        return this.commonsService.findOne(designId);
     }
 
-    @Patch('PutCommon/:id')
-    update(@Param('id') id: string, @Body() common: Common) {
-      return this.commonsService.update(id, common);
+    @Patch('PutCommon/:designId')
+    update(@Param('designId') designId: string, @Body() common: Common) {
+      return this.commonsService.update(designId, common);
     }
   
     @Get('GetCommons')
@@ -57,8 +57,8 @@ export class CommonsController {
         return this.commonsService.findAll();
     }
 
-    @Delete('DeleteCommon/:id')
-    remove(@Param('id') id: string): Promise<void> {
-        return this.commonsService.remove(id);
+    @Delete('DeleteCommon/:designId')
+    remove(@Param('designId') designId: string): Promise<void> {
+        return this.commonsService.remove(designId);
     } 
 }
