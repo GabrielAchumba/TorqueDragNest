@@ -1,4 +1,4 @@
-import { Common } from "src/models/common";
+import { Common } from "../models/common";
 import { CommonDTO } from "./commonDTO";
 
 export class CommonsDTO extends CommonDTO

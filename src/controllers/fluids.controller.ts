@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { FluidsService } from 'src/services/fluilds.service';
-import { Fluid, FluidDocument } from 'src/models/fluid';
+import { FluidsService } from '../services/fluilds.service';
+import { Fluid, FluidDocument } from '../models/fluid';
 
 @Controller('Fluids')
 export class FluidsController {

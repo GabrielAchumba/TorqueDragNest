@@ -1,5 +1,5 @@
-import { Guid } from "src/models/guid";
-import { TorqueDragDesignWithGuid } from "src/models/torquedragdesign";
+import { Guid } from "../models/guid";
+import { TorqueDragDesignWithGuid } from "../models/torquedragdesign";
 import { IWellbore, Wellbore } from "./IWellbore";
 
 export interface IWell

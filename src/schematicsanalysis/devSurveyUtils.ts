@@ -1,4 +1,4 @@
-import { DeviationSurveyModel } from "src/models/deviationSurvey";
+import { DeviationSurveyModel } from "../models/deviationSurvey";
 import { DoglegSeverity } from "./doglegSeverity";
 
 export class DevSurveyUtils

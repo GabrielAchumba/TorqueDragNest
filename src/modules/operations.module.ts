@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { OperationsController } from 'src/controllers/operations.controller';
-import { OperationSchema } from 'src/models/operation';
-import { OperationsService } from 'src/services/operations.service';
+import { OperationsController } from '../controllers/operations.controller';
+import { OperationSchema } from '../models/operation';
+import { OperationsService } from '../services/operations.service';
 
 
 @Module({

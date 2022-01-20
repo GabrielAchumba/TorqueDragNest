@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Operation, OperationDocument } from 'src/models/operation';
-import { OperationsService } from 'src/services/operations.service';
+import { Operation, OperationDocument } from '../models/operation';
+import { OperationsService } from '../services/operations.service';
 
 
 @Controller('Operations')
@@ -12,7 +12,7 @@ export class OperationsController {
 
     @Post('PostOperation')
     async create(@Body() operation: Operation) {
-        await this.operationsService.create(operation);
+        return await this.operationsService.create(operation);
     }
 
     @Get('GetOperation/:designId')

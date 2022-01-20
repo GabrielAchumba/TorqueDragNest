@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { BasePipe, BasePipeDocument } from 'src/models/basepipe';
-import { BasePipesService } from 'src/services/basepipes.service';
+import { BasePipe, BasePipeDocument } from '../models/basepipe';
+import { BasePipesService } from '../services/basepipes.service';
 
 @Controller('Pipes')
 export class BasePipesController {

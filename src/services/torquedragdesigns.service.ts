@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { IWellDesignDTO, TorqueDragDesignDTO, WellDesignDTO } from 'src/dtos/torqueDragDesignDTO';
-import { Sorting } from 'src/mathematics/sorting';
+import { IWellDesignDTO, TorqueDragDesignDTO, WellDesignDTO } from '../dtos/torqueDragDesignDTO';
+import { Sorting } from '../mathematics/sorting';
 import { TorqueDragDesign, TorqueDragDesignDocument, TorqueDragDesignWithGuid,
-    createUniqueId } from 'src/models/torquedragdesign';
-import { IWellExplorer, WellExplorer } from 'src/utilities/wellExplorer';
+    createUniqueId } from '../models/torquedragdesign';
+import { IWellExplorer, WellExplorer } from '../utilities/wellExplorer';
 
 @Injectable()
 export class TorqueDragDesignsService {

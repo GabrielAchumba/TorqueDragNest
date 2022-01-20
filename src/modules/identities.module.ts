@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { IdentitiesController } from 'src/controllers/identities.controller';
-import { IdentitySchema } from 'src/models/identity';
-import { IdentitiesService } from 'src/services/identities.service';
+import { IdentitiesController } from '../controllers/identities.controller';
+import { IdentitySchema } from '../models/identity';
+import { IdentitiesService } from '../services/identities.service';
 
 
 @Module({

@@ -1,9 +1,9 @@
-import { Pipe } from "src/models/basepipe";
-import { Common } from "src/models/common";
-import { AreaType } from "src/models/enums";
-import { MudPVTModel } from "src/models/mudpvt";
-import { Operation } from "src/models/operation";
-import { BaseOperationResult, OperationResult } from "src/models/operationResult";
+import { Pipe } from "../models/basepipe";
+import { Common } from "../models/common";
+import { AreaType } from "../models/enums";
+import { MudPVTModel } from "../models/mudpvt";
+import { Operation } from "../models/operation";
+import { BaseOperationResult, OperationResult, OperationResultObj } from "../models/operationResult";
 import { Drag } from "./drillingengineering/drag";
 import { Stress } from "./drillingengineering/stress";
 import { Torque } from "./drillingengineering/torque";
@@ -27,7 +27,7 @@ export class TrippingOut {
         for (ii = 0; ii < pipesLength; ii++)
         {
             const pipe:Pipe = pipes[ii];
-            let operationResult:OperationResult = new OperationResult();
+            let operationResult = {...OperationResultObj} as OperationResult;
             let baseOperationResult:BaseOperationResult = baseOperationResults[ii];
             operationResult.length = baseOperationResult.length;
             operationResult.pipeInnerDiameter = baseOperationResult.pipeInnerDiameter;

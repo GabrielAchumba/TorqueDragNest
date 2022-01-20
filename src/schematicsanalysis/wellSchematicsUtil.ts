@@ -1,25 +1,60 @@
-import { AllInputsDTO } from "src/dtos/allInputsDTO";
-import { CustomPath, SchematicDTO } from "src/dtos/schematicDTO ";
-import { Interpolation } from "src/mathematics/interpolation";
-import { Sorting } from "src/mathematics/sorting";
-import { Spacing } from "src/mathematics/spacing";
-import { BaseHoleSectionModel } from "src/models/baseholesection";
-import { BasePipeModel } from "src/models/basepipe";
+import { AllInputsDTO } from "../dtos/allInputsDTO";
+import { CustomPath, ICustomPath } from "../dtos/CustomPath";
+import {SchematicDTO } from "../dtos/schematicDTO ";
+import { Interpolation } from "../mathematics/interpolation";
+import { Sorting } from "../mathematics/sorting";
+import { Spacing } from "../mathematics/spacing";
+import { BaseHoleSectionModel } from "../models/baseholesection";
+import { BasePipeModel } from "../models/basepipe";
 import { DevSurveyUtils } from "./devSurveyUtils";
 
-class Piping {
-    constructor(_x:number[]){
-        this.x = _x;
-    }
-    x:number[] = [];
+export interface IPiping {
+    x:number[];
 }
-export class WellSchematicsUtil
-{
-    public static allInputs:AllInputsDTO
 
-    public static DrawSchematics():SchematicDTO
+export const Piping = {
+    x: []
+} as IPiping;
+
+export interface IWellSchematicsUtil {
+
+    allInputs:AllInputsDTO;
+    DrawSchematics():SchematicDTO;
+
+    GetPipesMDs(pipes:BasePipeModel[]):number[];
+
+    GetHolesMDs(holeSections:BaseHoleSectionModel[]):number[];
+
+    Draw_Tubing(topMD:number, bottomMD:number, pipeSize:number,
+    VSecs:number[], MDs:number[], holeSize:number):IPiping[];
+
+    Draw_A_Perpendicular_Line(X:number, Y:number,
+    pipeSize:number, dx:number, dy:number):number[];
+
+    Get_DX1(x1:number, x2:number):number;
+
+    Get_DY1(y1:number, y2:number):number;
+
+    Get_Distance(dx:number, dy:number):number;
+
+    Get_DX2(dx:number, distance:number):number;
+
+    Get_DY2(dy:number, distance:number):number;
+
+    ReScaleDimension(minValue:number, maxValue:number, knownValues:number[]):number[];
+
+    ReScaleDimension2(xMin:number, xMax:number, knownMin:number,
+        knownMax:number, knownValue:number):number;
+}
+
+export const WellSchematicsUtil =
+{
+    allInputs: {},
+
+    DrawSchematics():SchematicDTO
     {
         this.allInputs.pipes = Sorting.SortListofPipe2(this.allInputs.pipes);
+
         this.allInputs.holeSections = Sorting.SortListofHoleSection(this.allInputs.holeSections);
 
         const MDs:number[] = DevSurveyUtils.GetDevSurveyMDs(this.allInputs.deviationSurveys);
@@ -40,15 +75,15 @@ export class WellSchematicsUtil
         this.allInputs.holeSize = size;
         this.allInputs.pipeSize = this.allInputs.holeSize * clearance;
 
-        let pipes:CustomPath[] = [];
-        let pipe:Piping[] = [];
+        let pipes = [] as ICustomPath[];
+        let pipe = []  as IPiping[];
         const PipeTypes:string[] = [];
         PipeTypes.push("Hole");
         PipeTypes.push("Tubing");
 
         let j:number = 0, nRows:number = PipeTypes.length;
         let i:number = 0;
-        let schematicDTO:SchematicDTO = new SchematicDTO();
+        let schematicDTO = {} as SchematicDTO;
         let xMaxList:number[] = [];
         let yMaxList:number[] = [];
         let xMinList:number[] = [];
@@ -69,7 +104,9 @@ export class WellSchematicsUtil
                     yMaxList.push(Math.max(...pipe[1].x));
                     xMinList.push(Math.min(...pipe[0].x));
                     yMinList.push(Math.min(...pipe[1].x));
-                    pipes.push(new CustomPath(pipe[0].x, pipe[1].x, PipeTypes[j]));
+                    const customPath = {...CustomPath } as ICustomPath;
+                    customPath.initializeData(pipe[0].x, pipe[1].x, PipeTypes[j]);
+                    pipes.push(customPath);
                 }
                 
             }
@@ -82,17 +119,23 @@ export class WellSchematicsUtil
                     yMaxList.push(Math.max(...pipe[1].x));
                     xMinList.push(Math.min(...pipe[0].x));
                     yMinList.push(Math.min(...pipe[1].x));
-                    pipes.push(new CustomPath(pipe[0].x, pipe[1].x, PipeTypes[j]));
+                    const customPath1 = {...CustomPath } as ICustomPath;
+                    customPath1.initializeData(pipe[0].x, pipe[1].x, PipeTypes[j]);
+                    pipes.push(customPath1);
                     xMaxList.push(Math.max(...pipe[2].x));
                     yMaxList.push(Math.max(...pipe[3].x));
                     xMinList.push(Math.min(...pipe[2].x));
                     yMinList.push(Math.min(...pipe[3].x));
-                    pipes.push(new CustomPath(pipe[2].x, pipe[3].x, PipeTypes[j]));
+                    const customPath2 = {...CustomPath } as ICustomPath;
+                    customPath2.initializeData(pipe[2].x, pipe[3].x, PipeTypes[j]);
+                    pipes.push(customPath2);
                     xMaxList.push(Math.max(...pipe[4].x));
                     yMaxList.push(Math.max(...pipe[5].x));
                     xMinList.push(Math.min(...pipe[4].x));
                     yMinList.push(Math.min(...pipe[5].x));
-                    pipes.push(new CustomPath(pipe[4].x, pipe[5].x, PipeTypes[j]));
+                    const customPath3 = {...CustomPath } as ICustomPath;
+                    customPath3.initializeData(pipe[4].x, pipe[5].x, PipeTypes[j]);
+                    pipes.push(customPath3);
                 }
                     
             }
@@ -112,7 +155,9 @@ export class WellSchematicsUtil
                         yMaxList.push(Math.max(...pipe[1].x));
                         xMinList.push(Math.min(...pipe[0].x));
                         yMinList.push(Math.min(...pipe[1].x));
-                        pipes.push(new CustomPath(pipe[0].x, pipe[1].x, PipeTypes[j]));
+                        const customPath = {...CustomPath } as ICustomPath;
+                        customPath.initializeData(pipe[0].x, pipe[1].x, PipeTypes[j]);
+                        pipes.push(customPath);
                     }
                 }
             }
@@ -127,7 +172,9 @@ export class WellSchematicsUtil
                         yMaxList.push(Math.max(...pipe[7].x));
                         xMinList.push(Math.min(...pipe[6].x));
                         yMinList.push(Math.min(...pipe[7].x));
-                        pipes.push(new CustomPath(pipe[6].x, pipe[7].x, PipeTypes[j]));
+                        const customPath = {...CustomPath } as ICustomPath;
+                        customPath.initializeData(pipe[6].x, pipe[7].x, PipeTypes[j]);
+                        pipes.push(customPath);
                     }
                 }
             }
@@ -163,9 +210,9 @@ export class WellSchematicsUtil
         schematicDTO.pipes = pipes;
 
         return schematicDTO;
-    }
+    },
 
-    public static  GetPipesMDs(pipes:BasePipeModel[]):number[]
+    GetPipesMDs(pipes:BasePipeModel[]):number[]
     {
         let i:number = 0; const nCount:number = pipes.length;
         let MDs:number[] = [];
@@ -175,9 +222,9 @@ export class WellSchematicsUtil
         }
 
         return MDs;
-    }
+    },
 
-    public static GetHolesMDs(holeSections:BaseHoleSectionModel[]):number[]
+    GetHolesMDs(holeSections:BaseHoleSectionModel[]):number[]
     {
         let i:number = 0; const nCount:number = holeSections.length;
         let MDs:number[] = [];
@@ -187,20 +234,19 @@ export class WellSchematicsUtil
         }
 
         return MDs;
-    }
+    },
 
-    //List<List<double>>
-    private static  Draw_Tubing(topMD:number, bottomMD:number, pipeSize:number,
-        VSecs:number[], MDs:number[], holeSize:number):Piping[]
+    Draw_Tubing(topMD:number, bottomMD:number, pipeSize:number,
+        VSecs:number[], MDs:number[], holeSize:number):IPiping[]
     {
 
         let leftPerpendicularLine:number[], rightPerpendicularLine:number[];
         let leftParallelLine:number[], rightParallelLine:number[];
-        let leftPerpendicularLines:Piping[], rightPerpendicularLines:Piping[];
-        let leftParallelLines:Piping[], rightParallelLines:Piping[];
-        let pipe:Piping[];
+        let leftPerpendicularLines:IPiping[], rightPerpendicularLines:IPiping[];
+        let leftParallelLines:IPiping[], rightParallelLines:IPiping[];
+        let pipe:IPiping[];
         let midPerpendicularLine:number[], shoePerpendicularLine:number[];
-        let midPerpendicularLines:Piping[];
+        let midPerpendicularLines:IPiping[];
         let xCasigShoeLeftPath:number[], yCasigShoeLeftPath:number[];
         let xCasigShoeRightPath:number[], yCasigShoeRightPath:number[];
         let xOpenHolePath:number[], yOpenHolePath:number[];
@@ -214,7 +260,7 @@ export class WellSchematicsUtil
         let xPath:number[], yPath:number[];
         nSegments = 20;
         const shoeSize:number = (2 * (pipeSize / 5)) + pipeSize;
-        pipeMDs = Spacing.LineSpace(topMD, bottomMD, nSegments);
+        pipeMDs = Spacing.LineSpace2(topMD, bottomMD, nSegments);
         pipeVSecs = [];
         xPath = [];
         yPath = [];
@@ -278,11 +324,11 @@ export class WellSchematicsUtil
             rightParallelLine.push(rightPerpendicularLine[2]);
             rightParallelLine.push(rightPerpendicularLine[3]);
 
-            leftPerpendicularLines.push(new Piping(leftPerpendicularLine));
-            rightPerpendicularLines.push(new Piping(rightPerpendicularLine));
-            leftParallelLines.push(new Piping(leftParallelLine));
-            rightParallelLines.push(new Piping(rightParallelLine));
-            midPerpendicularLines.push(new Piping(midPerpendicularLine));
+            leftPerpendicularLines.push({x:leftPerpendicularLine} as IPiping);
+            rightPerpendicularLines.push({x:rightPerpendicularLine} as IPiping);
+            leftParallelLines.push({x:leftParallelLine} as IPiping);
+            rightParallelLines.push({x:rightParallelLine} as IPiping);
+            midPerpendicularLines.push({x:midPerpendicularLine} as IPiping);
 
             //Get Casing Shoe Perpendicular Line
             if (i == nSegments - 1) {
@@ -374,23 +420,23 @@ export class WellSchematicsUtil
             yOpenHolePath.push(rightParallelLine[1]);
         }
 
-        pipe.push(new Piping(xPath));
-        pipe.push(new Piping(yPath));
-        pipe.push(new Piping(xCasigShoeLeftPath));
-        pipe.push(new Piping(yCasigShoeLeftPath));
-        pipe.push(new Piping(xCasigShoeRightPath));
-        pipe.push(new Piping(yCasigShoeRightPath));
-        pipe.push(new Piping(xOpenHolePath));
-        pipe.push(new Piping(yOpenHolePath));
+        pipe.push({x:xPath} as IPiping);
+        pipe.push({x:yPath} as IPiping);
+        pipe.push({x:xCasigShoeLeftPath} as IPiping);
+        pipe.push({x:yCasigShoeLeftPath} as IPiping);
+        pipe.push({x:xCasigShoeRightPath} as IPiping);
+        pipe.push({x:yCasigShoeRightPath} as IPiping);
+        pipe.push({x:xOpenHolePath} as IPiping);
+        pipe.push({x:yOpenHolePath} as IPiping);
 
 
         return pipe;
 
 
-    }
+    },
 
 
-    private static  Draw_A_Perpendicular_Line(X:number, Y:number,
+    Draw_A_Perpendicular_Line(X:number, Y:number,
         pipeSize:number, dx:number, dy:number):number[]
     {
         let x1:number, x2:number, y1:number, y2:number;
@@ -408,41 +454,41 @@ export class WellSchematicsUtil
 
         return collect;
 
-    }
+    },
 
 
-    private static Get_DX1(x1:number, x2:number):number
+    Get_DX1(x1:number, x2:number):number
     {
         const dx:number = x1 - x2;
         return dx;
-    }
+    },
 
-    private static Get_DY1(y1:number, y2:number):number
+    Get_DY1(y1:number, y2:number):number
     {
         const dy:number = y1 - y2;
         return dy;
-    }
+    },
 
-    private static Get_Distance(dx:number, dy:number):number
+    Get_Distance(dx:number, dy:number):number
     {
         const distance:number = Math.pow((Math.pow(dx, 2) + Math.pow(dy, 2)), 0.5);
         return distance;
-    }
+    },
 
-    private static Get_DX2(dx:number, distance:number):number
+    Get_DX2(dx:number, distance:number):number
     {
         const dx_:number = dx / distance;
         return dx_;
-    }
+    },
 
-    private static Get_DY2(dy:number, distance:number):number
+    Get_DY2(dy:number, distance:number):number
     {
         const dy_:number = dy / distance;
         return dy_;
-    }
+    },
 
 
-    private static ReScaleDimension(minValue:number, maxValue:number, knownValues:number[]):number[]
+    ReScaleDimension(minValue:number, maxValue:number, knownValues:number[]):number[]
     {
         const knownMax:number = Math.max(...knownValues);
         const knownMin:number = 0;// knownValues.Min();
@@ -455,8 +501,9 @@ export class WellSchematicsUtil
         }
 
         return xValues;
-    }
-    private static ReScaleDimension2(xMin:number, xMax:number, knownMin:number,
+    },
+
+    ReScaleDimension2(xMin:number, xMax:number, knownMin:number,
         knownMax:number, knownValue:number):number
     {
         let x:number = 0;
@@ -468,4 +515,4 @@ export class WellSchematicsUtil
         return x;
     }
 
-}
+} as IWellSchematicsUtil;

@@ -1,5 +1,5 @@
 import { syncBuiltinESMExports } from "node:module";
-import { Simulation } from "src/models/simulation";
+import { Simulation } from "../models/simulation";
 import { AllInputsDTO } from "./allInputsDTO";
 import { CommonDTO } from "./commonDTO";
 

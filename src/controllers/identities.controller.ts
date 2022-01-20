@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Identity, IdentityDocument } from 'src/models/identity';
-import { IdentitiesService } from 'src/services/identities.service';
+import { Identity, IdentityDocument } from '../models/identity';
+import { IdentitiesService } from '../services/identities.service';
 
 
 @Controller('identities')

@@ -1,4 +1,4 @@
-import { Rig } from "src/models/rig";
+import { Rig } from "../models/rig";
 import { CommonDTO } from "./commonDTO";
 
 export class RigDTO extends CommonDTO

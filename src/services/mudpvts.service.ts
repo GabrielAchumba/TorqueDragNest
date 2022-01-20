@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { MudPVT, MudPVTDocument } from 'src/models/mudpvt';
+import { MudPVT, MudPVTDocument } from '../models/mudpvt';
 
 @Injectable()
 export class MudPVTsService {

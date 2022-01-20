@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { BaseHoleSection, BaseHoleSectionDocument } from 'src/models/baseholesection';
-import { BaseHoleSectionsService } from 'src/services/baseholesections.service';
+import { BaseHoleSection, BaseHoleSectionDocument } from '../models/baseholesection';
+import { BaseHoleSectionsService } from '../services/baseholesections.service';
 
 @Controller('HoleSections')
 export class BaseHoleSectionsController {

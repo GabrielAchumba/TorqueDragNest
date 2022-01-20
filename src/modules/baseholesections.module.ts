@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BaseHoleSectionsController } from 'src/controllers/baseholesections.controller';
-import { BaseHoleSectionSchema } from 'src/models/baseholesection';
-import { BaseHoleSectionsService } from 'src/services/baseholesections.service';
+import { BaseHoleSectionsController } from '../controllers/baseholesections.controller';
+import { BaseHoleSectionSchema } from '../models/baseholesection';
+import { BaseHoleSectionsService } from '../services/baseholesections.service';
 
 
 @Module({

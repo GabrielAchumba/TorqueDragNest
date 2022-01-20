@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { TorqueDragDesignsController } from 'src/controllers/torquedragdesigns.controller';
-import { TorqueDragDesignSchema } from 'src/models/torquedragdesign';
-import { TorqueDragDesignsService } from 'src/services/torquedragdesigns.service';
+import { TorqueDragDesignsController } from '../controllers/torquedragdesigns.controller';
+import { TorqueDragDesignSchema } from '../models/torquedragdesign';
+import { TorqueDragDesignsService } from '../services/torquedragdesigns.service';
 
 
 

@@ -20,7 +20,7 @@ export class BasePipeModel {
   }
 
 
-  export class Pipe extends BasePipeModel
+  export interface Pipe extends BasePipeModel
   {
        topTrueVerticalDepth :number
        bottomTrueVerticalDepth :number

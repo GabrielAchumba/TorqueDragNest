@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Rig, RigDocument } from 'src/models/rig';
-import { RigsService } from 'src/services/rigs.service';
+import { Rig, RigDocument } from '../models/rig';
+import { RigsService } from '../services/rigs.service';
 
 
 @Controller('Rigs')

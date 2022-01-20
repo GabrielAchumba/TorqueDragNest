@@ -1,14 +1,22 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+const bodyParser =  require('body-parser')
 import { AppModule } from './app.module';
 
+
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  /* const app = await NestFactory.create(AppModule);
   app.enableCors({
     origin: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
-});
+}); */
+
+  const app = await NestFactory.create(AppModule, { cors: true });
+
+
+  app.use(bodyParser.json({limit: '100mb'}));
+  app.use(bodyParser.urlencoded({ limit: '100mb', extended: true }));
 
   const config = new DocumentBuilder()
     .setTitle('Torque & Drag API')

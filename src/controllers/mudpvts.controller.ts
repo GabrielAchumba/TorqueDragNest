@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { MudPVT, MudPVTDocument } from 'src/models/mudpvt';
-import { MudPVTsService } from 'src/services/mudpvts.service';
+import { MudPVT, MudPVTDocument } from '../models/mudpvt';
+import { MudPVTsService } from '../services/mudpvts.service';
 
 
 @Controller('MudPVTs')

@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CommonsService } from '../services/commons.service';
 import { Common, CommonDocument } from '../models/common';
-import { AllInputsDTO } from 'src/dtos/allInputsDTO';
-import { SimulationDTO } from 'src/dtos/simulationDTO';
+import { AllInputsDTO } from '../dtos/allInputsDTO';
+import { SimulationDTO } from '../dtos/simulationDTO';
 
 @Controller('Commons')
 export class CommonsController {
@@ -13,7 +13,7 @@ export class CommonsController {
 
     @Post('PostCommon')
     async create(@Body() common: Common) {
-        await this.commonsService.create(common);
+        return await this.commonsService.create(common);
     }
 
     @Post('RunSimulation')
@@ -33,12 +33,14 @@ export class CommonsController {
 
     @Post('RunSensitivities')
     async runSensitivities(@Body() simulationDTO:SimulationDTO) {
-        await this.commonsService.runSensitivities(simulationDTO);
+        const response = await this.commonsService.runSensitivities(simulationDTO);
+        return response;
     }
 
     @Post('DrawSchematic')
     async drawSchematic(@Body() allInputsDTO:AllInputsDTO) {
-        await this.commonsService.drawSchematic(allInputsDTO);
+        const response = await this.commonsService.drawSchematic(allInputsDTO);
+        return response;
     }
 
 

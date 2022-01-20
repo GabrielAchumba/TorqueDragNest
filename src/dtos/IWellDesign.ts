@@ -1,4 +1,4 @@
-import { TorqueDragDesignWithGuid } from "src/models/torquedragdesign";
+import { TorqueDragDesignWithGuid } from "../models/torquedragdesign";
 import { IWellCase, WellCase } from "./IWellCase";
 
 export interface IWellDesign

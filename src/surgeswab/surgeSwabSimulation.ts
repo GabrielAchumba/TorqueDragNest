@@ -1,34 +1,34 @@
 import { type } from "os";
-import { AllInputsDTO } from "src/dtos/allInputsDTO";
-import { RigDTO } from "src/dtos/rigDTO";
-import { SensitivityResultsDTO } from "src/dtos/sensitivityResultsDTO";
-import { SimulationResultsDTO } from "src/dtos/simulationResultsDTO";
-import { BinghamReNumber } from "src/hydraulics/binghamReNumber";
-import { BinghamVelocity } from "src/hydraulics/binghamVelocity";
-import { BinghamViscosity } from "src/hydraulics/binghamViscosity";
-import { newtonianFrictionFactor } from "src/hydraulics/newtonianFrictionFactor";
-import { NewtonianReNumber } from "src/hydraulics/newtonianReNumber";
-import { Optimization } from "src/hydraulics/optimization";
-import { PressureLoss } from "src/hydraulics/pressureLoss";
-import { Interpolation } from "src/mathematics/interpolation";
-import { NonLinearEquations } from "src/mathematics/nonLinearEquations";
-import { Regression } from "src/mathematics/regression";
-import { Sorting } from "src/mathematics/sorting";
-import { Spacing } from "src/mathematics/spacing";
-import { BaseHoleSectionModel } from "src/models/baseholesection";
-import { Pipe } from "src/models/basepipe";
-import { Common } from "src/models/common";
-import { DeviationSurveyModel } from "src/models/deviationSurvey";
-import { DrillBit } from "src/models/drillbit";
-import { RheologyModel } from "src/models/enums";
-import { Fluid } from "src/models/fluid";
-import { MudPVTModel } from "src/models/mudpvt";
-import { Operation } from "src/models/operation";
-import { BaseOperationResult, OperationResult } from "src/models/operationResult";
-import { DevSurveyUtils } from "src/schematicsanalysis/devSurveyUtils";
-import { HoleUtils } from "src/schematicsanalysis/holeUtils";
-import { PipeUtils } from "src/schematicsanalysis/pipeUtils";
-import { DrillingStrings } from "src/torquedrag/drillingengineering/drillingStrings";
+import { AllInputsDTO } from "../dtos/allInputsDTO";
+import { RigDTO } from "../dtos/rigDTO";
+import { SensitivityResultsDTO } from "../dtos/sensitivityResultsDTO";
+import { SimulationResultsDTO } from "../dtos/simulationResultsDTO";
+import { BinghamReNumber } from "../hydraulics/binghamReNumber";
+import { BinghamVelocity } from "../hydraulics/binghamVelocity";
+import { BinghamViscosity } from "../hydraulics/binghamViscosity";
+import { newtonianFrictionFactor } from "../hydraulics/newtonianFrictionFactor";
+import { NewtonianReNumber } from "../hydraulics/newtonianReNumber";
+import { Optimization } from "../hydraulics/optimization";
+import { PressureLoss } from "../hydraulics/pressureLoss";
+import { Interpolation } from "../mathematics/interpolation";
+import { NonLinearEquations } from "../mathematics/nonLinearEquations";
+import { Regression } from "../mathematics/regression";
+import { Sorting } from "../mathematics/sorting";
+import { Spacing } from "../mathematics/spacing";
+import { BaseHoleSectionModel } from "../models/baseholesection";
+import { Pipe } from "../models/basepipe";
+import { Common } from "../models/common";
+import { DeviationSurveyModel } from "../models/deviationSurvey";
+import { DrillBit } from "../models/drillbit";
+import { RheologyModel } from "../models/enums";
+import { Fluid } from "../models/fluid";
+import { MudPVTModel } from "../models/mudpvt";
+import { Operation } from "../models/operation";
+import { BaseOperationResult, OperationResult, OperationResultObj } from "../models/operationResult";
+import { DevSurveyUtils } from "../schematicsanalysis/devSurveyUtils";
+import { HoleUtils } from "../schematicsanalysis/holeUtils";
+import { PipeUtils } from "../schematicsanalysis/pipeUtils";
+import { DrillingStrings } from "../torquedrag/drillingengineering/drillingStrings";
 import { FrictionalPressureBingham } from "./nonuniformpipes/frictionalPressureBingham";
 import { FrictionalPressureNewton } from "./nonuniformpipes/frictionalPressureNewton";
 import { Rate } from "./nonuniformpipes/rate";
@@ -363,13 +363,13 @@ export class SurgeSwabSimulation {
     const BitArea:number = Optimization.bitArea(bitSize, NumberOfBitNozzles);
     const lastPipeOD:number = pipes[0].outerDiameter;
     const totalFlowRate:number = mudPumpRate;
-    const LastDepthResult:BaseOperationResult = new BaseOperationResult();
+    const LastDepthResult = {} as BaseOperationResult;
     const pipesLength:number = pipes.length;
 
     for (ii = 0; ii < pipesLength;  ii++)
     {
         const pipe:Pipe = pipes[ii];
-        const baseOperationResult:OperationResult = new OperationResult();
+        const baseOperationResult = {...OperationResultObj} as OperationResult;
         baseOperationResult.length = pipe.length;
         baseOperationResult.typeOfSection = pipe.typeOfSection;
         baseOperationResult.pipeOuterDiameter = pipe.outerDiameter;
@@ -774,13 +774,13 @@ export class SurgeSwabSimulation {
         const BitArea:number = Optimization.bitArea(bitSize, NumberOfBitNozzles);
         const lastPipeOD:number = pipes[0].outerDiameter;
         const totalFlowRate:number = mudPumpRate;// Rate.flowRateBitOpenEnded(Vp, BitArea, lastPipeOD);
-        let LastDepthResult:BaseOperationResult = new BaseOperationResult();
+        let LastDepthResult = {} as BaseOperationResult;
         const pipesLength = pipes.length;
 
         for (ii = 0; ii < pipesLength; ii++)
         {
             const pipe = pipes[ii];
-            let baseOperationResult:OperationResult = new OperationResult();
+            let baseOperationResult = {...OperationResultObj} as OperationResult;
             baseOperationResult.length = pipe.length;
             baseOperationResult.typeOfSection = pipe.typeOfSection;
             baseOperationResult.pipeOuterDiameter = pipe.outerDiameter;
@@ -1141,12 +1141,12 @@ export class SurgeSwabSimulation {
         const BitArea:number = Optimization.bitArea(bitSize,NumberOfBitNozzles);
         const lastPipeOD:number = pipes[0].outerDiameter;
         const totalFlowRate:number = mudPumpRate;// Rate.flowRateBitOpenEnded(Vp, BitArea, lastPipeOD);
-        let LastDepthResult:BaseOperationResult = new BaseOperationResult();
+        let LastDepthResult = {} as BaseOperationResult;
         const pipesLength = pipes.length;
         for (ii = 0; ii < pipesLength; ii++)
         {
             const pipe:Pipe = pipes[ii]
-            let baseOperationResult:OperationResult = new OperationResult();
+            let baseOperationResult = {...OperationResultObj} as OperationResult;
             baseOperationResult.length = pipe.length;
             baseOperationResult.typeOfSection = pipe.typeOfSection;
             baseOperationResult.pipeOuterDiameter = pipe.outerDiameter;

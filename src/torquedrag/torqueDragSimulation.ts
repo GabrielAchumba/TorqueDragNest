@@ -1,11 +1,11 @@
-import { AllInputsDTO } from "src/dtos/allInputsDTO";
-import { SensitivityResultsDTO } from "src/dtos/sensitivityResultsDTO";
-import { SimulationDTO } from "src/dtos/simulationDTO";
-import { SimulationResultsDTO } from "src/dtos/simulationResultsDTO";
-import { Sorting } from "src/mathematics/sorting";
-import { Pipe } from "src/models/basepipe";
-import { DevSurveyUtils } from "src/schematicsanalysis/devSurveyUtils";
-import { PipeUtils } from "src/schematicsanalysis/pipeUtils";
+import { AllInputsDTO } from "../dtos/allInputsDTO";
+import { SensitivityResultsDTO } from "../dtos/sensitivityResultsDTO";
+import { SimulationDTO } from "../dtos/simulationDTO";
+import { SimulationResultsDTO } from "../dtos/simulationResultsDTO";
+import { Sorting } from "../mathematics/sorting";
+import { Pipe } from "../models/basepipe";
+import { DevSurveyUtils } from "../schematicsanalysis/devSurveyUtils";
+import { PipeUtils } from "../schematicsanalysis/pipeUtils";
 import { BackReaming } from "./backReaming";
 import { RotatingOffBottom } from "./rotatingOffBottom";
 import { RotatingOnBottom } from "./rotatingOnBottom";
@@ -69,7 +69,7 @@ export class TorqueDragSimulation {
                                                 this.allInputs.holeSections, doglegSeverityMethod,
                                                 this.allInputs.mudPVTs, this.allInputs.common);
 
-        let simulationResultsDTO:SimulationResultsDTO = new SimulationResultsDTO();
+        let simulationResultsDTO = {} as SimulationResultsDTO;
         simulationResultsDTO.isTrippingInChecked = this.allInputs.operation.isTrippingInChecked;
         simulationResultsDTO.isTrippingOutChecked = this.allInputs.operation.isTrippingOutChecked;
         simulationResultsDTO.isRotatingOnBottomChecked = this.allInputs.operation.isRotatingOnBottomChecked;
@@ -89,7 +89,7 @@ export class TorqueDragSimulation {
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults, weakeastTensileStrenth);
 
         if (this.allInputs.operation.isRotatingOnBottomChecked)
-            simulationResultsDTO.DrillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+            simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults, weakeastTensileStrenth);
 
         if (this.allInputs.operation.isRotatingOffBottomChecked)
@@ -97,16 +97,16 @@ export class TorqueDragSimulation {
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults, weakeastTensileStrenth);
 
         if (this.allInputs.operation.isSlideDrillingChecked)
-            simulationResultsDTO.SlideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
+            simulationResultsDTO.slideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults, weakeastTensileStrenth);
 
         if (this.allInputs.operation.isBackReamingChecked)
-            simulationResultsDTO.BackReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
+            simulationResultsDTO.backReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults, weakeastTensileStrenth);
 
 
 
-        let sensitivityResultsDTO:SensitivityResultsDTO = new SensitivityResultsDTO();
+        let sensitivityResultsDTO = {} as SensitivityResultsDTO;
         let simulationResultDTOs:SimulationResultsDTO[] = [];
         simulationResultDTOs.push(simulationResultsDTO);
         sensitivityResultsDTO.simulationResultsDTOs
@@ -168,16 +168,16 @@ export class TorqueDragSimulation {
             this.allInputs.holeSections, doglegSeverityMethod,
             this.allInputs.mudPVTs, this.allInputs.common);
 
-        let sensitivityResultsDTO:SensitivityResultsDTO = new SensitivityResultsDTO();
+        let sensitivityResultsDTO = {} as SensitivityResultsDTO;
         let simulationResultDTOs:SimulationResultsDTO[] = [];
-        let simulationResultsDTO:SimulationResultsDTO = new SimulationResultsDTO();
+        let simulationResultsDTO = {} as SimulationResultsDTO;
         const noOfSensitivities:number = this.simulationDTO.noOfSensitivities;
         simulationResultDTOs = [];
         let i = 0;
 
         for (i = 1; i <= noOfSensitivities; i++)
         {
-            simulationResultsDTO = new SimulationResultsDTO();
+            simulationResultsDTO = {} as SimulationResultsDTO;
             simulationResultsDTO.isTrippingInChecked = this.allInputs.operation.isTrippingInChecked;
             simulationResultsDTO.isTrippingOutChecked = this.allInputs.operation.isTrippingOutChecked;
             simulationResultsDTO.isRotatingOnBottomChecked = this.allInputs.operation.isRotatingOnBottomChecked;
@@ -201,7 +201,7 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.trippingOut_2);
 
                     if (this.allInputs.operation.isRotatingOnBottomChecked)
-                        simulationResultsDTO.DrillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.drilling_1,
                             this.simulationDTO.sensitivityParameters.drilling_2);
@@ -214,18 +214,18 @@ export class TorqueDragSimulation {
 
 
                     if (this.allInputs.operation.isSlideDrillingChecked)
-                        simulationResultsDTO.SlideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.slideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.slideDrilling_1,
                             this.simulationDTO.sensitivityParameters.slideDrilling_2);
 
                     if (this.allInputs.operation.isBackReamingChecked)
-                        simulationResultsDTO.BackReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.backReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.backReaming_1,
                             this.simulationDTO.sensitivityParameters.backReaming_2);
 
-                    simulationResultDTOs.push(simulationResultsDTO);
+                    simulationResultDTOs.push({...simulationResultsDTO});
                     break;
                 case 2:
                     if (this.allInputs.operation.isTrippingInChecked)
@@ -241,7 +241,7 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.trippingOut_4);
 
                     if (this.allInputs.operation.isRotatingOnBottomChecked)
-                        simulationResultsDTO.DrillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.drilling_3,
                             this.simulationDTO.sensitivityParameters.drilling_4);
@@ -253,18 +253,18 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.rotatingOffBottom_4);
 
                     if (this.allInputs.operation.isSlideDrillingChecked)
-                        simulationResultsDTO.SlideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.slideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.slideDrilling_3,
                             this.simulationDTO.sensitivityParameters.slideDrilling_4);
 
                     if (this.allInputs.operation.isBackReamingChecked)
-                        simulationResultsDTO.BackReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.backReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.backReaming_3,
                             this.simulationDTO.sensitivityParameters.backReaming_4);
 
-                    simulationResultDTOs.push(simulationResultsDTO);
+                    simulationResultDTOs.push({...simulationResultsDTO});
                     break;
                 case 3:
                     if (this.allInputs.operation.isTrippingInChecked)
@@ -280,7 +280,7 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.trippingOut_6);
 
                     if (this.allInputs.operation.isRotatingOnBottomChecked)
-                        simulationResultsDTO.DrillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.drilling_5,
                             this.simulationDTO.sensitivityParameters.drilling_6);
@@ -292,18 +292,18 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.rotatingOffBottom_6);
 
                     if (this.allInputs.operation.isSlideDrillingChecked)
-                        simulationResultsDTO.SlideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.slideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.slideDrilling_5,
                             this.simulationDTO.sensitivityParameters.slideDrilling_6);
 
                     if (this.allInputs.operation.isBackReamingChecked)
-                        simulationResultsDTO.BackReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.backReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.backReaming_5,
                             this.simulationDTO.sensitivityParameters.backReaming_6);
 
-                    simulationResultDTOs.push(simulationResultsDTO);
+                    simulationResultDTOs.push({...simulationResultsDTO});
                     break;
                 case 4:
                     if (this.allInputs.operation.isTrippingInChecked)
@@ -319,7 +319,7 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.trippingOut_8);
 
                     if (this.allInputs.operation.isRotatingOnBottomChecked)
-                        simulationResultsDTO.DrillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.drilling_7,
                             this.simulationDTO.sensitivityParameters.drilling_8);
@@ -331,18 +331,18 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.rotatingOffBottom_8);
 
                     if (this.allInputs.operation.isSlideDrillingChecked)
-                        simulationResultsDTO.SlideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.slideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.slideDrilling_7,
                             this.simulationDTO.sensitivityParameters.slideDrilling_8);
 
                     if (this.allInputs.operation.isBackReamingChecked)
-                        simulationResultsDTO.BackReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.backReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.backReaming_7,
                             this.simulationDTO.sensitivityParameters.backReaming_8);
 
-                    simulationResultDTOs.push(simulationResultsDTO);
+                    simulationResultDTOs.push({...simulationResultsDTO});
                     break;
                 case 5:
                     if (this.allInputs.operation.isTrippingInChecked)
@@ -358,7 +358,7 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.trippingOut_10);
 
                     if (this.allInputs.operation.isRotatingOnBottomChecked)
-                        simulationResultsDTO.DrillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.drilling_9,
                             this.simulationDTO.sensitivityParameters.drilling_10);
@@ -370,18 +370,18 @@ export class TorqueDragSimulation {
                             this.simulationDTO.sensitivityParameters.rotatingOffBottom_10);
 
                     if (this.allInputs.operation.isSlideDrillingChecked)
-                        simulationResultsDTO.SlideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.slideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.slideDrilling_9,
                             this.simulationDTO.sensitivityParameters.slideDrilling_10);
 
                     if (this.allInputs.operation.isBackReamingChecked)
-                        simulationResultsDTO.BackReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
+                        simulationResultsDTO.backReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
                             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
                             this.simulationDTO.sensitivityParameters.backReaming_9,
                             this.simulationDTO.sensitivityParameters.backReaming_10);
 
-                    simulationResultDTOs.push(simulationResultsDTO);
+                    simulationResultDTOs.push({...simulationResultsDTO});
                     break;
             }
 

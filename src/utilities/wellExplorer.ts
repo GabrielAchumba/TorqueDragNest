@@ -1,7 +1,7 @@
-import { IWellDesignDTO, WellDesignDTO } from "src/dtos/torqueDragDesignDTO";
-import { Guid } from "src/models/guid";
+import { IWellDesignDTO, WellDesignDTO } from "../dtos/torqueDragDesignDTO";
+import { Guid } from "../models/guid";
 import { TorqueDragDesignDocument, TorqueDragDesignWithGuid,
-    TorqueDragDesignWithGuidObj } from "src/models/torquedragdesign";
+    TorqueDragDesignWithGuidObj } from "../models/torquedragdesign";
 
 export interface IWellExplorer {
 

@@ -1,4 +1,4 @@
-import { Constants } from "src/utilities/constants";
+import { Constants } from "../../utilities/constants";
 
 export class DrillingStrings
 {

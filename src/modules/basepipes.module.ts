@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { BasePipesController } from 'src/controllers/basepipes.controller';
-import { BasePipeSchema } from 'src/models/basepipe';
-import { BasePipesService } from 'src/services/basepipes.service';
+import { BasePipesController } from '../controllers/basepipes.controller';
+import { BasePipeSchema } from '../models/basepipe';
+import { BasePipesService } from '../services/basepipes.service';
 
 
 @Module({

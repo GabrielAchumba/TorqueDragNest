@@ -1,13 +1,13 @@
-import { BaseHoleSectionModel } from "src/models/baseholesection";
-import { BasePipeModel } from "src/models/basepipe";
-import { Common } from "src/models/common";
-import { Datum } from "src/models/datum";
-import { DeviationSurveyModel } from "src/models/deviationSurvey";
-import { DrillBit } from "src/models/drillbit";
-import { Fluid } from "src/models/fluid";
-import {MudPVTModel } from "src/models/mudpvt";
-import { Operation } from "src/models/operation";
-import { Rig } from "src/models/rig";
+import { BaseHoleSectionModel } from "../models/baseholesection";
+import { BasePipeModel } from "../models/basepipe";
+import { Common } from "../models/common";
+import { Datum } from "../models/datum";
+import { DeviationSurveyModel } from "../models/deviationSurvey";
+import { DrillBit } from "../models/drillbit";
+import { Fluid } from "../models/fluid";
+import {MudPVTModel } from "../models/mudpvt";
+import { Operation } from "../models/operation";
+import { Rig } from "../models/rig";
 import { CommonDTO } from "./commonDTO";
 
 export class AllInputsDTO extends CommonDTO

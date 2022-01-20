@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { BaseHoleSection, BaseHoleSectionDocument } from 'src/models/baseholesection';
+import { BaseHoleSection, BaseHoleSectionDocument } from '../models/baseholesection';
 
 @Injectable()
 export class BaseHoleSectionsService {

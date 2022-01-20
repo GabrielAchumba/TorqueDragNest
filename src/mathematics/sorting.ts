@@ -1,8 +1,8 @@
-import { BaseHoleSectionModel } from "src/models/baseholesection";
-import { BasePipeModel, Pipe } from "src/models/basepipe";
-import { DeviationSurveyModel } from "src/models/deviationSurvey";
-import { MudPVTModel } from "src/models/mudpvt";
-import { TorqueDragDesignWithGuid } from "src/models/torquedragdesign";
+import { BaseHoleSectionModel } from "../models/baseholesection";
+import { BasePipeModel, Pipe } from "../models/basepipe";
+import { DeviationSurveyModel } from "../models/deviationSurvey";
+import { MudPVTModel } from "../models/mudpvt";
+import { TorqueDragDesignWithGuid } from "../models/torquedragdesign";
 
 export class Sorting {
 
@@ -15,7 +15,7 @@ export class Sorting {
         //console.log('(1) sortArray: ', sortArray);
 
         sortArray.sort((a, b) => {
-            if (a.designDate > b.designDate)
+            if (a.designDate > b.designDate) //decreasing order
               return -1;
             return 0;
           });
@@ -31,7 +31,7 @@ export class Sorting {
         });
 
         sortArray.sort((a, b) => {
-            if (a.measuredDepth > b.measuredDepth)
+            if (a.measuredDepth < b.measuredDepth) //increasing order
               return -1;
             return 0;
           });
@@ -51,7 +51,7 @@ export class Sorting {
         });
 
         sortArray.sort((a, b) => {
-            if (a.bottomOfHole > b.bottomOfHole)
+            if (a.bottomOfHole < b.bottomOfHole) // Increasing Order
                 return -1;
             return 0;
             });
@@ -66,7 +66,7 @@ export class Sorting {
         });
 
         sortArray.sort((a, b) => {
-            if (a.bottomOfHole > b.bottomOfHole)
+            if (a.bottomOfHole > b.bottomOfHole) // decreasing order
               return -1;
             return 0;
           });
@@ -81,7 +81,7 @@ export class Sorting {
         });
 
         sortArray.sort((a, b) => {
-            if (a.measuredDepth > b.measuredDepth)
+            if (a.measuredDepth < b.measuredDepth) // Increasing order
               return -1;
             return 0;
           });
@@ -96,7 +96,7 @@ export class Sorting {
         });
 
         sortArray.sort((a, b) => {
-            if (a.measuredDepth > b.measuredDepth)
+            if (a.measuredDepth < b.measuredDepth) // increasing order
               return -1;
             return 0;
           });
@@ -107,13 +107,13 @@ export class Sorting {
     public static SortListofPipeReversed(pipes:BasePipeModel[]): Pipe[]
     {
         const sortArray:Pipe[] = pipes.map((row) => {
-            let newRow:Pipe = new Pipe();
+            let newRow = {} as Pipe;
             newRow = Object.assign(newRow, row);
             return newRow;
         });
 
         sortArray.sort((a, b) => {
-            if (a.measuredDepth < b.measuredDepth)
+            if (a.measuredDepth > b.measuredDepth) // decreasing order
               return -1;
             return 0;
         });
@@ -128,7 +128,7 @@ export class Sorting {
         });
 
         sortArray.sort((a, b) => {
-            if (a.pressure > b.pressure)
+            if (a.pressure < b.pressure) // increasing order
               return -1;
             return 0;
         });

@@ -1,4 +1,4 @@
-import { NonLinearEquations } from "src/mathematics/nonLinearEquations";
+import { NonLinearEquations } from "../mathematics/nonLinearEquations";
 
 export class newtonianFrictionFactor
 {

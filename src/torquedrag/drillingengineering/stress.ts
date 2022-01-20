@@ -1,4 +1,4 @@
-import { AreaType } from "src/models/enums";
+import { AreaType } from "../../models/enums";
 
 export class Stress {
 

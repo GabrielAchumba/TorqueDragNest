@@ -1,8 +1,8 @@
-import { Interpolation } from "src/mathematics/interpolation";
-import { Sorting } from "src/mathematics/sorting";
-import { Spacing } from "src/mathematics/spacing";
-import { BasePipeModel, Pipe } from "src/models/basepipe";
-import { Common } from "src/models/common";
+import { Interpolation } from "../mathematics/interpolation";
+import { Sorting } from "../mathematics/sorting";
+import { Spacing } from "../mathematics/spacing";
+import { BasePipeModel, Pipe } from "../models/basepipe";
+import { Common } from "../models/common";
 
 export class PipeUtils {
 
@@ -45,7 +45,7 @@ export class PipeUtils {
             const step:number = measuredDepth - startMeasuredDepth;
             const midMD:number = (startMeasuredDepth + measuredDepth) / 2.0;
             const pipe:BasePipeModel = PipeUtils.GetPipe2(midMD, pipes);
-            const onePipeSection:Pipe = new Pipe();
+            const onePipeSection = {} as Pipe;
             onePipeSection.typeOfSection = pipe.typeOfSection;
             onePipeSection.length = step;
             onePipeSection.startMeasuredDepth = startMeasuredDepth;
@@ -68,7 +68,7 @@ export class PipeUtils {
 
 
         const pipe0:BasePipeModel = PipeUtils.GetPipe2(0, pipes);
-        const oneSeg:Pipe = new Pipe();
+        const oneSeg = {} as Pipe;
         oneSeg.typeOfSection = pipe0.typeOfSection;
         oneSeg.length = 0;
         oneSeg.startMeasuredDepth = 0;
@@ -133,7 +133,7 @@ export class PipeUtils {
 
             if(pipe.length <= stepSize)
             {
-                const pipeSeg = new Pipe();
+                const pipeSeg = {} as Pipe;
                 pipeSeg.typeOfSection = pipe.typeOfSection;
                 pipeSeg.length = pipe.length;
                 pipeSeg.startMeasuredDepth = pipe.measuredDepth - pipe.length;
@@ -159,7 +159,7 @@ export class PipeUtils {
                     let step:number = stepSize;
                     if (i > 0)
                         step = tempPipeMDs[i] - tempPipeMDs[i + 1];
-                    const pipeSeg:Pipe = new Pipe();
+                    const pipeSeg = {} as Pipe;
                     pipeSeg.typeOfSection = pipe.typeOfSection;
                     pipeSeg.length = step;
                     pipeSeg.startMeasuredDepth = tempPipeMDs[i] - step;

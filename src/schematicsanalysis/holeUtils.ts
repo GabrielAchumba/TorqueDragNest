@@ -1,4 +1,4 @@
-import { BaseHoleSectionModel } from "src/models/baseholesection";
+import { BaseHoleSectionModel } from "../models/baseholesection";
 
 export class HoleUtils {
 

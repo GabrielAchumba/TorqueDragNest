@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Operation, OperationDocument } from 'src/models/operation';
+import { Operation, OperationDocument } from '../models/operation';
 
 @Injectable()
 export class OperationsService {
@@ -9,7 +9,7 @@ export class OperationsService {
 
     }
 
-    async create(operation: Operation): Promise<OperationDocument> {
+    async create(operation: Operation): Promise<any> {
         
         const foundOperation = await this.operationModel.findOne (
             { "userId" : operation.userId, "designId" : operation.designId });
@@ -17,9 +17,14 @@ export class OperationsService {
         if(foundOperation == null || foundOperation == undefined){
             const newOperation = new this.operationModel(operation);
             return  newOperation.save();
+        }else{
+            const updatedOperation =
+             await this.operationModel.updateOne({designId:operation.designId},
+                 operation, {new: true});
+            return  operation
         }
         
-        return  foundOperation;
+        return  operation;
     }
 
    

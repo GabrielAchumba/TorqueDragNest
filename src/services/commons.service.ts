@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { AllInputsDTO } from 'src/dtos/allInputsDTO';
-import { SchematicDTO } from 'src/dtos/schematicDTO ';
-import { SensitivityResultsDTO } from 'src/dtos/sensitivityResultsDTO';
-import { SimulationDTO } from 'src/dtos/simulationDTO';
-import { WellSchematicsUtil } from 'src/schematicsanalysis/wellSchematicsUtil';
-import { SurgeSwabSimulation } from 'src/surgeswab/surgeSwabSimulation';
-import { TorqueDragSimulation } from 'src/torquedrag/torqueDragSimulation';
+import { AllInputsDTO } from '../dtos/allInputsDTO';
+import { SchematicDTO } from '../dtos/schematicDTO ';
+import { SensitivityResultsDTO } from '../dtos/sensitivityResultsDTO';
+import { SimulationDTO } from '../dtos/simulationDTO';
+import { WellSchematicsUtil } from '../schematicsanalysis/wellSchematicsUtil';
+import { SurgeSwabSimulation } from '../surgeswab/surgeSwabSimulation';
+import { TorqueDragSimulation } from '../torquedrag/torqueDragSimulation';
 import { Common, CommonDocument } from '../models/common';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class CommonsService {
 
     }
 
-    async create(common: Common): Promise<CommonDocument> {
+    async create(common: Common): Promise<any> {
         
         const foundCommon = await this.commonModel.findOne (
             { "userId" : common.userId, "designId" : common.designId });
@@ -24,6 +24,11 @@ export class CommonsService {
         if(foundCommon == null || foundCommon == undefined){
             const newCommon = new this.commonModel(common);
             return  newCommon.save();
+        }else{
+            const updatedCommon =
+             await this.commonModel.updateOne({designId:common.designId},
+                common, {new: true});
+            return  common
         }
         
         return  foundCommon;

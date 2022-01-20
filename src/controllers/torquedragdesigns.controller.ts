@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { TorqueDragDesignDTO, WellDesignDTO } from 'src/dtos/torqueDragDesignDTO';
-import { TorqueDragDesign, TorqueDragDesignDocument } from 'src/models/torquedragdesign';
-import { TorqueDragDesignsService } from 'src/services/torquedragdesigns.service';
+import { TorqueDragDesignDTO, WellDesignDTO } from '../dtos/torqueDragDesignDTO';
+import { TorqueDragDesign, TorqueDragDesignDocument } from '../models/torquedragdesign';
+import { TorqueDragDesignsService } from '../services/torquedragdesigns.service';
 
 
 @Controller('torqueDragDesigns')

@@ -1,5 +1,5 @@
-import { Guid } from "src/models/guid";
-import { TorqueDragDesign, TorqueDragDesignDocument, TorqueDragDesignWithGuid } from "src/models/torquedragdesign";
+import { Guid } from "../models/guid";
+import { TorqueDragDesign, TorqueDragDesignDocument, TorqueDragDesignWithGuid } from "../models/torquedragdesign";
 import { CommonDTO } from "./commonDTO";
 import { ExternalCompany, IExternalCompany } from "./IExternalCompany";
 

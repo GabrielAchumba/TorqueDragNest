@@ -1,11 +1,11 @@
-import { BaseHoleSectionModel } from "src/models/baseholesection";
-import { Pipe } from "src/models/basepipe";
-import { Common } from "src/models/common";
-import { Section2D } from "src/models/enums";
-import { MudPVTModel } from "src/models/mudpvt";
-import { BaseOperationResult } from "src/models/operationResult";
-import { DoglegSeverity } from "src/schematicsanalysis/doglegSeverity";
-import { HoleUtils } from "src/schematicsanalysis/holeUtils";
+import { BaseHoleSectionModel } from "../models/baseholesection";
+import { Pipe } from "../models/basepipe";
+import { Common } from "../models/common";
+import { Section2D } from "../models/enums";
+import { MudPVTModel } from "../models/mudpvt";
+import { BaseOperationResult } from "../models/operationResult";
+import { DoglegSeverity } from "../schematicsanalysis/doglegSeverity";
+import { HoleUtils } from "../schematicsanalysis/holeUtils";
 import { Buckling } from "./drillingengineering/buckling";
 import { DrillingStrings } from "./drillingengineering/drillingStrings";
 import { Inertia_Clearance } from "./drillingengineering/inertia_Clearance";
@@ -37,7 +37,7 @@ export class TorqueDragBaseOperation {
         for (ii = 0; ii < pipesLength; ii++)
         {
             const pipe:Pipe = pipes[ii];
-            let baseOperationResult:BaseOperationResult = new BaseOperationResult();
+            let baseOperationResult = {} as BaseOperationResult;
             baseOperationResult.length = pipe.length;
             baseOperationResult.typeOfSection = pipe.typeOfSection;
             baseOperationResult.pipeOuterDiameter = pipe.outerDiameter;

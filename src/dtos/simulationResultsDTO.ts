@@ -1,4 +1,4 @@
-import { BaseOperationResult, OperationResult } from "src/models/operationResult";
+import { BaseOperationResult, OperationResult } from "../models/operationResult";
 
 export class SimulationResultsDTO
 {
@@ -6,9 +6,9 @@ export class SimulationResultsDTO
     {
         this.trippingInResults = [];
         this.trippingOutResults = [];
-        this.DrillingResults = [];
-        this.SlideDrillingResults = [];
-        this.BackReamingResults = [];
+        this.drillingResults = [];
+        this.slideDrillingResults = [];
+        this.backReamingResults = [];
         this.rotatingOffBottomResults = [];
         this.isTrippingInChecked = false;
         this.isTrippingOutChecked = false;
@@ -18,10 +18,10 @@ export class SimulationResultsDTO
     }
     trippingInResults:OperationResult[];
     trippingOutResults :OperationResult[];
-    DrillingResults :OperationResult[];
+    drillingResults :OperationResult[];
     rotatingOffBottomResults :OperationResult[];
-    SlideDrillingResults :OperationResult[];
-    BackReamingResults :OperationResult[];
+    slideDrillingResults :OperationResult[];
+    backReamingResults :OperationResult[];
     hydraulicsResults :BaseOperationResult[];
     surgeSwabResults :BaseOperationResult[];
     isTrippingInChecked :boolean
