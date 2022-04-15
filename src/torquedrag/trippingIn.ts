@@ -118,8 +118,8 @@ export class TrippingIn {
                 operationResults[ii].torqueBottom = operationResults[ii - 1].torqueTop;
             }
 
-            if (ii == 0) operationResults[ii].ChangeIntension = operationResults[ii].tensionBottomOfPipe;
-            else operationResults[ii].ChangeIntension = operationResults[ii - 1].ChangeIntension;
+            if (ii == 0) operationResults[ii].changeIntension = operationResults[ii].tensionBottomOfPipe;
+            else operationResults[ii].changeIntension = operationResults[ii - 1].changeIntension;
 
 
             operationResults[ii].normalForce = Drag.NormalForce(operationResults[ii].tensionBottomOfPipe, operationResults[ii].averageInclination,
@@ -127,7 +127,7 @@ export class TrippingIn {
             operationResults[ii].changeInInclination);
 
 
-            operationResults[ii].ChangeIntension = operationResults[ii].buoyancyWeight *
+            operationResults[ii].changeIntension = operationResults[ii].buoyancyWeight *
             Math.cos(operationResults[ii].averageInclination)
             - frictionFactor * operationResults[ii].normalForce;
             //operationResults[ii].bucklingStabilityForce;
@@ -135,7 +135,7 @@ export class TrippingIn {
 
 
 
-            operationResults[ii].tensionTopOfPipe = operationResults[ii].tensionBottomOfPipe + operationResults[ii].ChangeIntension;
+            operationResults[ii].tensionTopOfPipe = operationResults[ii].tensionBottomOfPipe + operationResults[ii].changeIntension;
 
             //-------------------Recently Added ------------------------------------//
 
@@ -150,7 +150,7 @@ export class TrippingIn {
             //else operationResults[ii].totalDrag = operationResults[ii - 1].totalDrag + dragF;
 
 
-            operationResults[ii].HookeLoadAtJoint = HKL;
+            operationResults[ii].hookeLoadAtJoint = HKL;
 
 
 
@@ -337,8 +337,8 @@ export class TrippingIn {
 
             dHKL = Math.abs(operationResults[ii].buoyancyWeight * Math.cos(operationResults[ii].averageInclination)) - dragF; // Fds[ii];
             HKL = HKL + dHKL;
-            operationResults[ii].HookeLoadAtJoint = HKL + blockWeight;
-            operationResults[ii].HookeLoadAtJointTop = operationResults[ii].HookeLoadAtJoint;
+            operationResults[ii].hookeLoadAtJoint = HKL + blockWeight;
+            operationResults[ii].hookeLoadAtJointTop = operationResults[ii].hookeLoadAtJoint;
             operationResults[ii].overPullMargin = weakeastTensileStrenth - dHKL;
 
         }

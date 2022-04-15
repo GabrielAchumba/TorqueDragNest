@@ -171,7 +171,7 @@ export class TorqueDragSimulation {
         let sensitivityResultsDTO = {} as SensitivityResultsDTO;
         let simulationResultDTOs:SimulationResultsDTO[] = [];
         let simulationResultsDTO = {} as SimulationResultsDTO;
-        const noOfSensitivities:number = this.simulationDTO.noOfSensitivities;
+        const noOfSensitivities:number = this.simulationDTO.sensitivityParameters.noOfSensitivities;
         simulationResultDTOs = [];
         let i = 0;
 

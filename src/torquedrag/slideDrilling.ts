@@ -107,18 +107,18 @@ export class SlideDrilling {
         operationResult.torqueBottom = operationResults[ii - 1].torqueTop;
         }
 
-        if (ii == 0) operationResult.ChangeIntension = operationResult.tensionBottomOfPipe;
-        else operationResult.ChangeIntension = operationResults[ii - 1].ChangeIntension;
+        if (ii == 0) operationResult.changeIntension = operationResult.tensionBottomOfPipe;
+        else operationResult.changeIntension = operationResults[ii - 1].changeIntension;
 
         operationResult.normalForce = Drag.NormalForce(operationResult.tensionBottomOfPipe, pipe.averageInclination,
         operationResult.changeInAzimuth, operationResult.buoyancyWeight, operationResult.changeInInclination);
 
-        operationResult.ChangeIntension = operationResult.buoyancyWeight *
+        operationResult.changeIntension = operationResult.buoyancyWeight *
         Math.cos(pipe.averageInclination)
         - frictionFactor
         * operationResult.normalForce;
 
-        operationResult.tensionTopOfPipe = operationResult.tensionBottomOfPipe + operationResult.ChangeIntension;
+        operationResult.tensionTopOfPipe = operationResult.tensionBottomOfPipe + operationResult.changeIntension;
 
         const dragF:number = Drag.DragForce(operationResult.normalForce,
         frictionFactor,
@@ -129,7 +129,7 @@ export class SlideDrilling {
         if (ii == 0) operationResult.totalDrag = dragF;
         else operationResult.totalDrag = operationResults[ii - 1].totalDrag + dragF;
 
-        operationResult.HookeLoadAtJoint = 0;
+        operationResult.hookeLoadAtJoint = 0;
 
 
         operationResult.torqueChange = Torque.TorqueIncrement(operationResult.normalForce,
@@ -298,8 +298,8 @@ export class SlideDrilling {
     {
     dHKL = (operationResults[ii].buoyancyWeight * Math.abs(Math.cos(operationResults[ii].averageInclination)) - Fds[ii]);
     HKL = HKL + dHKL;
-    operationResults[ii].HookeLoadAtJoint = HKL + blockWeight;
-    operationResults[ii].HookeLoadAtJointTop = operationResults[ii].HookeLoadAtJoint;
+    operationResults[ii].hookeLoadAtJoint = HKL + blockWeight;
+    operationResults[ii].hookeLoadAtJointTop = operationResults[ii].hookeLoadAtJoint;
     operationResults[ii].overPullMargin = weakeastTensileStrenth - dHKL;
 
 

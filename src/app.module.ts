@@ -15,6 +15,9 @@ import { OperationsModule } from './modules/operations.module';
 import { RigsModule } from './modules/rigs.module';
 import { TorqueDragDesignsModule } from './modules/torquedragdesigns.module';
 import { UsersModule } from './modules/users.module';
+import { SensitivityParametersModule } from './modules/sensitivityParameters.module';
+import { APIDrillPipesModule } from './modules/aPIDrillPipes.module';
+import { CatalogsModule } from './modules/catalogs.module';
 
 
 console.log("MASTER DB", `${process.env.MASTER_DB}`);
@@ -28,6 +31,7 @@ console.log("MASTER DB", `${process.env.MASTER_DB}`);
     {connectionName: 'torquedragclientdb'}),
   CompaniesModule, CommonsModule, DatumsModule, DeviationSurvesModule, DrillBitsModule,
   FluidsModule, BaseHoleSectionsModule, BasePipesModule, IdentitiesModule, MudPVTsModule,
-  OperationsModule, RigsModule, TorqueDragDesignsModule, UsersModule],
+  OperationsModule, RigsModule, TorqueDragDesignsModule, UsersModule, SensitivityParametersModule,
+  APIDrillPipesModule, CatalogsModule],
 })
 export class AppModule {}

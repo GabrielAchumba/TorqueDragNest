@@ -238,9 +238,9 @@ export interface OperationResult
      TensionIncrement :number;
      tensionTopOfPipe :number;
      tensionBottomOfPipe :number;
-     ChangeIntension :number;
-    HookeLoadAtJoint :number;
-    HookeLoadAtJointTop :number;
+     changeIntension :number;
+    hookeLoadAtJoint :number;
+    hookeLoadAtJointTop :number;
      torqueBottom :number;
      torqueTop :number;
     isSinusoidalBuckling :boolean;
@@ -410,9 +410,9 @@ export const OperationResultObj =
      TensionIncrement :0,
      tensionTopOfPipe :0,
      tensionBottomOfPipe :0,
-     ChangeIntension :0,
-    HookeLoadAtJoint :0,
-    HookeLoadAtJointTop :0,
+     changeIntension :0,
+    hookeLoadAtJoint :0,
+    hookeLoadAtJointTop :0,
      torqueBottom :0,
      torqueTop :0,
     isSinusoidalBuckling :false,
@@ -478,7 +478,7 @@ export const OperationResultObj =
         this.length = Number(this.length.toFixed(this.dp));
         this.normalForce = Number(this.normalForce.toFixed(this.dp));
         this.totalDrag = Number(this.totalDrag.toFixed(this.dp));
-        this.HookeLoadAtJoint = Number(this.HookeLoadAtJoint.toFixed(this.dp));
+        this.hookeLoadAtJoint = Number(this.hookeLoadAtJoint.toFixed(this.dp));
         this.tensionTopOfPipe = Number(this.tensionTopOfPipe.toFixed(this.dp));
         this.tensionBottomOfPipe = Number(this.tensionBottomOfPipe.toFixed(this.dp));
         this.torqueBottom = Number(this.torqueBottom.toFixed(this.dp));
