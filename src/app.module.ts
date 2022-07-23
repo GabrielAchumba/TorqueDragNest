@@ -21,13 +21,14 @@ import { CatalogsModule } from './modules/catalogs.module';
 
 
 console.log("MASTER DB", `${process.env.MASTER_DB}`);
+//mongodb://localhost:27017/torquedragmasterdb
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb://localhost:27017/torquedragmasterdb',
+    MongooseModule.forRoot('mongodb+srv://gabriel:gab*012021@cluster0.50dcf.mongodb.net/torquedragmasterdb?retryWrites=true&w=majority',
      {connectionName: 'torquedragmasterdb'}),
-    MongooseModule.forRoot('mongodb://localhost:27017/torquedragclientdb', 
+    MongooseModule.forRoot('mongodb+srv://gabriel:gab*012021@cluster0.50dcf.mongodb.net/torquedragclientdb?retryWrites=true&w=majority', 
     {connectionName: 'torquedragclientdb'}),
   CompaniesModule, CommonsModule, DatumsModule, DeviationSurvesModule, DrillBitsModule,
   FluidsModule, BaseHoleSectionsModule, BasePipesModule, IdentitiesModule, MudPVTsModule,
