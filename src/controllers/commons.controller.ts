@@ -16,7 +16,7 @@ export class CommonsController {
         return await this.commonsService.create(common);
     }
 
-    @Post('RunSimulation')
+    /* @Post('RunSimulation')
     async runSimulation(@Body() allInputsDTO: AllInputsDTO) {
         await this.commonsService.runSimulation(allInputsDTO);
     }
@@ -43,7 +43,7 @@ export class CommonsController {
         return response;
     }
 
-
+ */
     @Get('GetCommon/:designId')
     findOne(@Param('designId') designId: string): Promise<CommonDocument> {
         return this.commonsService.findOne(designId);
