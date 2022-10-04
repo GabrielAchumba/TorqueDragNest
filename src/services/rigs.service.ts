@@ -30,10 +30,9 @@ export class RigsService {
 
     async findOne(designId: string): Promise<RigDocument> {
         const rig = await this.rigModel.findOne({designId:designId});
-        console.log('rig: ', rig);
 
         if(!rig){
-            throw new NotFoundException("could not find rig.")
+            return {} as RigDocument;
         }
 
         return rig;

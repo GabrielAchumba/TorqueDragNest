@@ -37,7 +37,7 @@ export class OperationsService {
         const operation = await this.operationModel.findOne({designId:designId});
 
         if(!operation){
-            throw new NotFoundException("could not find operation.")
+            return {} as OperationDocument;
         }
 
         return operation;

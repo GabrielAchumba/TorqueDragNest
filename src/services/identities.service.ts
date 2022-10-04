@@ -14,7 +14,6 @@ export class IdentitiesService {
         const foundIdentity = await this.identityModel.findOne(
         { "userName" : identity.userName, "password" : identity.password }).exec();
         
-        console.log("foundIdentity:", foundIdentity);
         return  foundIdentity;
     }
 

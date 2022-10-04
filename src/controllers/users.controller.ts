@@ -17,6 +17,7 @@ export class UsersController {
 
     @Post('PostUser')
     async create(@Body() user: User) {
+        console.log("user: ", user);
         await this.usersService.create(user);
     }
 
@@ -34,6 +35,10 @@ export class UsersController {
     async findAll(): Promise<UserDocument[]> {
         return this.usersService.findAll();
     }
+
+    //197.211.58.183/32
+
+    //Elastic IP address 52.89.220.224
 
     @Delete('DeleteUser/:id')
     remove(@Param('id') id: string): Promise<void> {

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CompaniesModule } from './modules/companies.module';
@@ -18,21 +18,37 @@ import { UsersModule } from './modules/users.module';
 import { SensitivityParametersModule } from './modules/sensitivityParameters.module';
 import { APIDrillPipesModule } from './modules/aPIDrillPipes.module';
 import { CatalogsModule } from './modules/catalogs.module';
+import { AuthMiddleware } from './middlewares/authentication';
+import { DatumsController } from './controllers/datums.controller';
+import { DeviationSurveysController } from './controllers/deviationsurveys.controller';
+import { UsersController } from './controllers/users.controller';
 
 
 console.log("MASTER DB", `${process.env.MASTER_DB}`);
 //mongodb://localhost:27017/torquedragmasterdb
+//'mongodb+srv://gabriel:gab*012021@cluster0.50dcf.mongodb.net/torquedragmasterdb?retryWrites=true&w=majority'
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    MongooseModule.forRoot('mongodb+srv://gabriel:gab*012021@cluster0.50dcf.mongodb.net/torquedragmasterdb?retryWrites=true&w=majority',
+    MongooseModule.forRoot('mongodb://localhost:27017/torquedragmasterdb',
      {connectionName: 'torquedragmasterdb'}),
-    MongooseModule.forRoot('mongodb+srv://gabriel:gab*012021@cluster0.50dcf.mongodb.net/torquedragclientdb?retryWrites=true&w=majority', 
+    MongooseModule.forRoot('mongodb://localhost:27017/torquedragclientdb', 
     {connectionName: 'torquedragclientdb'}),
   CompaniesModule, CommonsModule, DatumsModule, DeviationSurvesModule, DrillBitsModule,
   FluidsModule, BaseHoleSectionsModule, BasePipesModule, IdentitiesModule, MudPVTsModule,
   OperationsModule, RigsModule, TorqueDragDesignsModule, UsersModule, SensitivityParametersModule,
   APIDrillPipesModule, CatalogsModule],
 })
+
+/* export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+    .apply(AuthMiddleware)
+    .exclude(...excludedRoutes)
+    .forRoutes(...[UsersController, DatumsController,
+      DeviationSurveysController]);
+  }
+} */
+
 export class AppModule {}

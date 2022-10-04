@@ -17,7 +17,6 @@ export class RigsController {
 
     @Get('GetRig/:designId')
     findOne(@Param('designId') designId: string): Promise<RigDocument> {
-        console.log("GetRig Called");
         return this.rigsService.findOne(designId);
     }
 

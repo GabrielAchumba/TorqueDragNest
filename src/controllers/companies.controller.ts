@@ -27,7 +27,6 @@ export class CompaniesController {
     @Get('GetCompanies')
     async findAll(): Promise<CompanyDocument[]> {
         const companies = await this.companiesService.findAll();
-        console.log(companies)
         return companies;
     }
 

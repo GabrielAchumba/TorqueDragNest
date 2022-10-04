@@ -36,9 +36,6 @@ export const ExternalCompany: IExternalCompany =
             }
         });
 
-       /*  numbers.forEach((number, index) => {
-            console.log('Index: ' + index + ' Value: ' + number);
-        }); */
 
         wellDesignDTO.projects.forEach((projectName:string) =>
         {

@@ -37,7 +37,7 @@ export class SensitivityParametersService {
         const item = await this.sensitivityParametersModel.findOne({designId:designId});
 
         if(!item){
-            throw new NotFoundException("could not find operation.")
+            return {} as SensitivityParametersDocument;
         }
 
         return item;

@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { BaseHoleSection, BaseHoleSectionDocument } from '../models/baseholesection';
+import { BaseHoleSection, BaseHoleSectionDocument, BaseHoleSectionModel } from '../models/baseholesection';
 
 @Injectable()
 export class BaseHoleSectionsService {
@@ -10,7 +10,6 @@ export class BaseHoleSectionsService {
     }
 
     async create(baseHoleSection: BaseHoleSection): Promise<BaseHoleSectionDocument> {
-        console.log('baseHoleSection: ', baseHoleSection);
         const foundBaseHoleSection = await this.baseHoleSectionModel.findOne (
             { "userId" : baseHoleSection.userId, "designId" : baseHoleSection.designId });
         
@@ -29,11 +28,10 @@ export class BaseHoleSectionsService {
     }
 
     async findOne(designId: string): Promise<any> {
-        console.log('designId: ', designId);
         const baseHoleSection = await this.baseHoleSectionModel.findOne({designId:designId});
 
         if(!baseHoleSection){
-            throw new NotFoundException("could not find baseHoleSection.")
+            return [] as BaseHoleSectionModel[];
         }
 
         return baseHoleSection.holeSections;

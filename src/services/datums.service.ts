@@ -12,7 +12,6 @@ export class DatumsService {
     async create(body: any): Promise<any> {
         
         const datum = body as Datum;
-        console.log('datum: ', datum);
         const foundDatum = await this.datumModel.findOne({ "datumName" : datum.datumName,
         "designId" : datum.designId, "userId" : datum.userId });
         

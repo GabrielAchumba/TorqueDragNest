@@ -10,7 +10,6 @@ export class DeviationSurveysService {
     }
 
     async create(deviationSurvey: DeviationSurvey): Promise<DeviationSurveyDocument> {
-        console.log('deviationSurvey: ', deviationSurvey);
         const foundDeviationSurvey = await this.deviationSurveyModel.findOne(
             { "userId" : deviationSurvey.userId, "designId" : deviationSurvey.designId });
         
@@ -30,9 +29,8 @@ export class DeviationSurveysService {
 
     async findOne(designId: string): Promise<any> {
         const deviationSurvey = await this.deviationSurveyModel.findOne({designId:designId});
-        //console.log('deviationSurvey: ', deviationSurvey)
         if(!deviationSurvey){
-            throw new NotFoundException("could not find deviationSurvey.")
+            return [] as DeviationSurveyModel[]
         }
 
         return deviationSurvey.deviationSurveys;

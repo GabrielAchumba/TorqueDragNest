@@ -21,7 +21,6 @@ export class CompaniesService {
         return  foundComapny;
     }
 
-   
 
     async findAll(): Promise<CompanyDocument[]> {
         return this.companyModel.find().exec();
@@ -50,4 +49,6 @@ export class CompaniesService {
     async remove(id: string): Promise<void> {
         await this.companyModel.deleteOne({id}).exec();
     }
+
+
 }

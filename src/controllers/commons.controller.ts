@@ -3,6 +3,9 @@ import { CommonsService } from '../services/commons.service';
 import { Common, CommonDocument } from '../models/common';
 import { AllInputsDTO } from '../dtos/allInputsDTO';
 import { SimulationDTO } from '../dtos/simulationDTO';
+import { TorqueDragSimulation } from '../torquedrag/torqueDragSimulation';
+import { WellSchematicsUtil } from '../schematicsanalysis/wellSchematicsUtil';
+import { SurgeSwabSimulation  } from '../surgeswab/surgeSwabSimulation';
 
 @Controller('Commons')
 export class CommonsController {
@@ -16,34 +19,37 @@ export class CommonsController {
         return await this.commonsService.create(common);
     }
 
-    /* @Post('RunSimulation')
-    async runSimulation(@Body() allInputsDTO: AllInputsDTO) {
-        await this.commonsService.runSimulation(allInputsDTO);
-    }
-
-    @Post('RunHydraulics')
-    async runHydraulics(@Body() allInputsDTO: AllInputsDTO) {
-        await this.commonsService.runHydraulics(allInputsDTO);
+    @Post('RunSensitivities')
+    async runSensitivities(@Body() simulationDTO:SimulationDTO) {
+        TorqueDragSimulation.simulationDTO = simulationDTO;
+        TorqueDragSimulation.allInputs = simulationDTO.allInputsDTO;
+        const response = await TorqueDragSimulation.Run()
+        //this.commonsService.runSensitivities(simulationDTO);
+        return response;
     }
 
     @Post('RunSurgeSwab')
     async runSurgeSwab(@Body() allInputsDTO: AllInputsDTO) {
-        await this.commonsService.runSurgeSwab(allInputsDTO);
+        SurgeSwabSimulation.allInputs = allInputsDTO;
+        const response = await SurgeSwabSimulation.RunSurgeSwab();
+        return response;
     }
 
-    @Post('RunSensitivities')
-    async runSensitivities(@Body() simulationDTO:SimulationDTO) {
-        const response = await this.commonsService.runSensitivities(simulationDTO);
+    @Post('RunHydraulics')
+    async runHydraulics(@Body() allInputsDTO: AllInputsDTO) {
+        SurgeSwabSimulation.allInputs = allInputsDTO;
+        const response = await SurgeSwabSimulation.RunHydraulics();
         return response;
     }
 
     @Post('DrawSchematic')
     async drawSchematic(@Body() allInputsDTO:AllInputsDTO) {
-        const response = await this.commonsService.drawSchematic(allInputsDTO);
+        WellSchematicsUtil.allInputs = allInputsDTO;
+        const response = await WellSchematicsUtil.DrawSchematics()
         return response;
     }
 
- */
+
     @Get('GetCommon/:designId')
     findOne(@Param('designId') designId: string): Promise<CommonDocument> {
         return this.commonsService.findOne(designId);

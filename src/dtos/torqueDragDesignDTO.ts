@@ -137,8 +137,6 @@ export const WellDesignDTO: IWellDesignDTO =
             return row;
         })
 
-        console.log('(3) this.torqueDragDesigns: ', this.torqueDragDesigns);
-
         const ntorqueDragDesigns:number = this.torqueDragDesigns.length;
 
 
@@ -164,8 +162,6 @@ export const WellDesignDTO: IWellDesignDTO =
                 }
             }
         }
-
-        console.log('(3) this.torqueDragDesigns: ', this.torqueDragDesigns);
     }
 }
 

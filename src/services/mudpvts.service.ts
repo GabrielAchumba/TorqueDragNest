@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { MudPVT, MudPVTDocument } from '../models/mudpvt';
+import { MudPVT, MudPVTDocument, MudPVTModel } from '../models/mudpvt';
 
 @Injectable()
 export class MudPVTsService {
@@ -10,7 +10,6 @@ export class MudPVTsService {
     }
 
     async create(mudPVT: MudPVT): Promise<MudPVTDocument> {
-        console.log('mudPVT: ', mudPVT);
         const foundMudPVT = await this.mudPVTModel.findOne (
             { "userId" : mudPVT.userId, "designId" : mudPVT.designId });
         
@@ -32,7 +31,7 @@ export class MudPVTsService {
         const mudPVT = await this.mudPVTModel.findOne({designId: designId});
 
         if(!mudPVT){
-            throw new NotFoundException("could not find mudPVT.")
+            return [] as MudPVTModel[];
         }
 
         return mudPVT.mudPVTs;

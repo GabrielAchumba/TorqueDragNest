@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { BasePipe, BasePipeDocument } from '../models/basepipe';
+import { BasePipe, BasePipeDocument, BasePipeModel } from '../models/basepipe';
 
 @Injectable()
 export class BasePipesService {
@@ -15,9 +15,7 @@ export class BasePipesService {
             { "userId" : basePipe.userId, "designId" : basePipe.designId });
         
         if(foundBasePipe == null || foundBasePipe == undefined){
-            console.log('basePipe: ', basePipe);
             const newBasePipe = new this.basePipeModel(basePipe);
-            console.log('newBasePipe: ', newBasePipe);
             return  newBasePipe.save();
         }
         
@@ -35,7 +33,7 @@ export class BasePipesService {
         const basePipe = await this.basePipeModel.findOne({designId:designId});
 
         if(!basePipe){
-            throw new NotFoundException("could not find basePipe.")
+            return [] as BasePipeModel[];
         }
 
         return basePipe.pipes;

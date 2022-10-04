@@ -31,7 +31,7 @@ export class CommonsService {
         const common = await this.commonModel.findById(id);
 
         if(!common){
-            throw new NotFoundException("could not find common.")
+            return  {} as CommonDocument;
         }
 
         return common;
@@ -50,4 +50,18 @@ export class CommonsService {
     async remove(id: string): Promise<void> {
         await this.commonModel.deleteOne({id}).exec();
     }
+
+    async runSimulation(common: Common): Promise<CommonDocument> {
+        
+        const foundCommon = await this.commonModel.findOne ({ "designId" : common.designId });
+        
+        if(foundCommon == null || foundCommon == undefined){
+            const newCommon = new this.commonModel(common);
+            return  newCommon.save();
+        }
+        
+        return  foundCommon;
+    }
+
+   
 }

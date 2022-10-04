@@ -33,11 +33,14 @@ export class TorqueDragDesignsService {
 
     async getWellDesignsByUserId(userId:string): Promise<IWellDesignDTO> {
         const items  = await this.torqueDragDesignModel.find({"userId":userId}).exec();
-        if(items.length == 0) return null;
+        if(items.length == 0) return {
+            Companies:[],
+            torqueDragDesigns:[],
+            torqueDragMostRecentDesigns:[],
+        } as IWellDesignDTO;
         let wellExplorer = {...WellExplorer} as IWellExplorer;
         wellExplorer.GetTorqueDragDesigns(items);
         wellExplorer.CreateWellExplorer();
-        //console.log("wellExplorer.wellDesignDTO: ", wellExplorer.wellDesignDTO);
         var sortedCases = Sorting.SortListofTorqueDragDesign(wellExplorer.wellDesignDTO.torqueDragDesigns);
         wellExplorer.wellDesignDTO.GetMostRecntWellCases(sortedCases);
         return wellExplorer.wellDesignDTO;
@@ -91,7 +94,6 @@ export class TorqueDragDesignsService {
             return torqueDragDesignDTOX;
         }
 
-        console.log('torqueDragDesign: ', torqueDragDesign);
         const newItem = new this.torqueDragDesignModel(torqueDragDesign);
         newItem.save();
         torqueDragDesignDTOX.torqueDragDesign = newItem;

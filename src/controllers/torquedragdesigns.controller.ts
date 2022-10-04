@@ -25,11 +25,11 @@ export class TorqueDragDesignsController {
 
     @Get('GetWellDesignsByUserId/:id')
     async findAllByUserId(@Param('id') id: string): Promise<any> {
-        console.log("userId: ", id);
         return this.torqueDragDesignsService.getWellDesignsByUserId(id);
     }
 
-    @Post('postTorqueDragDesign')
+
+    @Post('PostTorqueDragDesign')
     async postTorqueDragDesign(@Body() torqueDragDesignDTO: TorqueDragDesignDTO): Promise<TorqueDragDesignDTO> {
         const item = await this.torqueDragDesignsService.postTorqueDragDesign(torqueDragDesignDTO);
         return item;
