@@ -2,46 +2,49 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { TorqueDragDesignDTO, WellDesignDTO } from '../dtos/torqueDragDesignDTO';
 import { TorqueDragDesign, TorqueDragDesignDocument } from '../models/torquedragdesign';
 import { TorqueDragDesignsService } from '../services/torquedragdesigns.service';
+import { controller,  GetTorqueDragDesigns, PostSelectedWellDesign,
+    GetWellDesignsByUserId_id, PostTorqueDragDesign, PutTorqueDragDesign_id,
+    DeleteTorqueDragDesign_id } from "../routes/torquedragdesigns-routes";
 
 
-@Controller('torqueDragDesigns')
+@Controller(controller)
 export class TorqueDragDesignsController {
 
     constructor(private readonly torqueDragDesignsService: TorqueDragDesignsService) {
 
     }
 
-    @Get('GetTorqueDragDesigns')
+    @Get(GetTorqueDragDesigns)
     async findAll(): Promise<any> {
         return this.torqueDragDesignsService.getTorqueDragDesigns();
     }
 
 
-    @Post('PostSelectedWellDesign')
+    @Post(PostSelectedWellDesign)
     async postSelectedWellDesign(@Body() wellDesignDTO: any) {
         const item = await this.torqueDragDesignsService.postSelectedWellDesign(wellDesignDTO);
         return item;
     }
 
-    @Get('GetWellDesignsByUserId/:id')
+    @Get(GetWellDesignsByUserId_id)
     async findAllByUserId(@Param('id') id: string): Promise<any> {
         return this.torqueDragDesignsService.getWellDesignsByUserId(id);
     }
 
 
-    @Post('PostTorqueDragDesign')
+    @Post(PostTorqueDragDesign)
     async postTorqueDragDesign(@Body() torqueDragDesignDTO: TorqueDragDesignDTO): Promise<TorqueDragDesignDTO> {
         const item = await this.torqueDragDesignsService.postTorqueDragDesign(torqueDragDesignDTO);
         return item;
     }
 
-    @Patch('PutTorqueDragDesign/:id')
+    @Patch(PutTorqueDragDesign_id)
     putTorqueDragDesign(@Param('id') id: string, @Body() rig: TorqueDragDesign) {
       return this.torqueDragDesignsService.putTorqueDragDesign(id, rig);
     }
   
 
-    @Delete('DeleteTorqueDragDesign/:id')
+    @Delete(DeleteTorqueDragDesign_id)
     deleteTorqueDragDesign(@Param('id') id: string): Promise<TorqueDragDesignDocument> {
         return this.torqueDragDesignsService.deleteTorqueDragDesign(id);
     } 

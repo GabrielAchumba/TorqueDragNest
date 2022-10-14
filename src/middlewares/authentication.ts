@@ -3,22 +3,34 @@ import { Constants } from "../utilities/constants"
 import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 import { verify } from 'jsonwebtoken';
+import jwt_decode from 'jwt-decode';
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    const token = req.headers.authorization;
-    console.log("req.headers: ", req.headers)
-    if (!token) {
+    const authorization = req.headers.authorization;
+    //console.log("authorization: ", authorization)
+    if (!authorization) {
       return res
         .status(HttpStatus.UNAUTHORIZED)
-        .json({ message: 'login to continue' });
+        .json({ message: 'No token, login to continue' });
     }
-    const isValid = verify(token, Constants.TOKEN_KEY);
+
+    const token = authorization.split(" ")
+    if(token.length<2){
+      return res
+          .status(HttpStatus.UNAUTHORIZED)
+          .json({ message: 'Bad token format, login to continue' });
+    }
+
+    const decoded = jwt_decode(token[1]);
+    //console.log("decoded: ", decoded);
+
+    const isValid = verify(token[1], Constants.TOKEN_KEY);
     if (!isValid) {
       return res
         .status(HttpStatus.UNAUTHORIZED)
-        .json({ message: 'login to continue' });
+        .json({ message: 'Invalid credentials, login to continue' });
     }
     next();
   }
