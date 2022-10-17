@@ -24,7 +24,7 @@ import { DeviationSurveysController } from './controllers/deviationsurveys.contr
 import { UsersController } from './controllers/users.controller';
 
 
-console.log("MASTER DB", `${process.env.MASTER_DB}`);
+//console.log("MASTER DB", `${process.env.MASTER_DB}`);
 //mongodb://localhost:27017/torquedragmasterdb
 //'mongodb+srv://gabriel:gab*012021@cluster0.50dcf.mongodb.net/torquedragmasterdb?retryWrites=true&w=majority'
 
