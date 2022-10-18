@@ -64,7 +64,7 @@ export class UsersService {
 
     async create(user: User): Promise<UserDocument> {
         console.log("create started")
-        const foundUser = await this.userModel.findOne ({ "username" : user.userName });
+        const foundUser = await this.userModel.findOne ({ "userName" : user.userName });
         
         if(foundUser == null || foundUser == undefined){
 

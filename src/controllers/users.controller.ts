@@ -20,7 +20,7 @@ export class UsersController {
     @Post(PostUser)
     async create(@Body() user: User) {
         console.log("user: ", user);
-        await this.usersService.create(user);
+        return await this.usersService.create(user);
     }
 
     @Get(GetUsers_id)
