@@ -25,8 +25,6 @@ export class OperationsService {
                  operation, {new: true});
             return  operation
         }
-        
-        return  operation; 
     }
 
    

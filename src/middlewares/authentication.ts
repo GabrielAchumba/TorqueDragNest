@@ -9,7 +9,6 @@ import jwt_decode from 'jwt-decode';
 export class AuthMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
     const authorization = req.headers.authorization;
-    //console.log("authorization: ", authorization)
     if (!authorization) {
       return res
         .status(HttpStatus.UNAUTHORIZED)
@@ -23,8 +22,7 @@ export class AuthMiddleware implements NestMiddleware {
           .json({ message: 'Bad token format, login to continue' });
     }
 
-    const decoded = jwt_decode(token[1]);
-    //console.log("decoded: ", decoded);
+    //const decoded = jwt_decode(token[1]);
 
     const isValid = verify(token[1], Constants.TOKEN_KEY);
     if (!isValid) {

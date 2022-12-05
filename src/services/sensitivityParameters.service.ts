@@ -10,6 +10,7 @@ export class SensitivityParametersService {
     }
 
     async create(sensitivityParameters: SensitivityParameters): Promise<any> {
+        console.log("sensitivityParameters: ", sensitivityParameters)
         
         const foundItem = await this.sensitivityParametersModel.findOne (
             { "userId" : sensitivityParameters.userId, "designId" : sensitivityParameters.designId });
@@ -18,8 +19,9 @@ export class SensitivityParametersService {
             const newItem = new this.sensitivityParametersModel(sensitivityParameters);
             return  newItem.save();
         }else{
+            //const res = await this.aboutUsModel.findByIdAndUpdate(id, aboutUs);
             const updatedItem =
-             await this.sensitivityParametersModel.updateOne({designId:sensitivityParameters.designId},
+             await this.sensitivityParametersModel.updateOne({designId: sensitivityParameters.designId},
                 sensitivityParameters, {new: true});
             return  sensitivityParameters
         }

@@ -59,16 +59,6 @@ export const TorqueDragSimulation  = {
         this.allInputs.pipes = Sorting.SortListofPipeReversed(this.allInputs.pipes);
         console.log("seen 2")
 
-        console.log("this.allInputs.pipes: ", this.allInputs.pipes)
-        console.log("this.allInputs.common: ", this.allInputs.common)
-        console.log("DevSurveyMD: ", DevSurveyMD)
-        console.log("DevSurveyInclination: ", DevSurveyInclination)
-        console.log("DevSurveyAzimuth: ", DevSurveyAzimuth)
-        console.log("DevSurveyTVD: ", DevSurveyTVD)
-        console.log("DevSurveyVerticalDisplacement: ", DevSurveyVerticalDisplacement)
-        console.log("DevSurveyDogLegs: ", DevSurveyDogLegs)
-        console.log("LastMDHole: ", LastMDHole)
-
         const {_pipes, _isJoints} = PipeUtils.GetPipeDecrementsNew(this.allInputs.pipes, this.allInputs.common, DevSurveyMD, DevSurveyInclination, DevSurveyAzimuth,
                                         DevSurveyTVD, DevSurveyVerticalDisplacement, DevSurveyDogLegs, LastMDHole);
 
@@ -130,14 +120,14 @@ export const TorqueDragSimulation  = {
         }else {
             i = -1;
             min = Number(texts[0]);
-            max = Number(texts[2]);
+            max = Number(texts[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_Casing.push(min);
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
             min = Number(texts2[0]);
-            max = Number(texts2[2]);
+            max = Number(texts2[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_OpenHole.push(min);
             frictionFactors_OpenHole.push(mid);
@@ -157,12 +147,15 @@ export const TorqueDragSimulation  = {
                 simulationResultsDTO.trippingInResults 
                 = TrippingIn.RunTrippingInOpertion(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                weakeastTensileStrenth,
                 frictionFactors_Casing[i],
                 frictionFactors_OpenHole[i]);
                 simulationResult_TrippingIns.push({...simulationResultsDTO});
             }
         }
 
+        frictionFactors_Casing = [] as number[];
+        frictionFactors_OpenHole = [] as number[];
         texts = this.simulationDTO.sensitivityParameters.trippingOut_1.split("-");
         texts2 = this.simulationDTO.sensitivityParameters.trippingOut_2.split("-");
         if(texts.length == 1){
@@ -171,14 +164,14 @@ export const TorqueDragSimulation  = {
         }else {
             i = -1;
             min = Number(texts[0]);
-            max = Number(texts[2]);
+            max = Number(texts[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_Casing.push(min);
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
             min = Number(texts2[0]);
-            max = Number(texts2[2]);
+            max = Number(texts2[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_OpenHole.push(min);
             frictionFactors_OpenHole.push(mid);
@@ -197,12 +190,15 @@ export const TorqueDragSimulation  = {
             if (this.allInputs.operation.isTrippingOutChecked){
                 simulationResultsDTO.trippingOutResults = TrippingOut.RunTrippingOutOperation(sortedPipeIncrements, this.allInputs.operation,
                     this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                    weakeastTensileStrenth,
                     frictionFactors_Casing[i],
                     frictionFactors_OpenHole[i]);
                     simulationResult_TrippingOuts.push({...simulationResultsDTO});
             }
         }
 
+        frictionFactors_Casing = [] as number[];
+        frictionFactors_OpenHole = [] as number[];
         texts = this.simulationDTO.sensitivityParameters.drilling_1.split("-");
         texts2 = this.simulationDTO.sensitivityParameters.drilling_2.split("-");
         if(texts.length == 1){
@@ -211,14 +207,14 @@ export const TorqueDragSimulation  = {
         }else {
             i = -1;
             min = Number(texts[0]);
-            max = Number(texts[2]);
+            max = Number(texts[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_Casing.push(min);
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
             min = Number(texts2[0]);
-            max = Number(texts2[2]);
+            max = Number(texts2[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_OpenHole.push(min);
             frictionFactors_OpenHole.push(mid);
@@ -237,12 +233,16 @@ export const TorqueDragSimulation  = {
             if (this.allInputs.operation.isRotatingOnBottomChecked){
                 simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                     this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                    weakeastTensileStrenth,
                     frictionFactors_Casing[i],
                     frictionFactors_OpenHole[i]);
                     simulationResult_Drillings.push({...simulationResultsDTO});
             }
         }
 
+
+        frictionFactors_Casing = [] as number[];
+        frictionFactors_OpenHole = [] as number[];
         texts = this.simulationDTO.sensitivityParameters.rotatingOffBottom_1.split("-");
         texts2 = this.simulationDTO.sensitivityParameters.rotatingOffBottom_2.split("-");
         if(texts.length == 1){
@@ -251,14 +251,14 @@ export const TorqueDragSimulation  = {
         }else {
             i = -1;
             min = Number(texts[0]);
-            max = Number(texts[2]);
+            max = Number(texts[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_Casing.push(min);
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
             min = Number(texts2[0]);
-            max = Number(texts2[2]);
+            max = Number(texts2[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_OpenHole.push(min);
             frictionFactors_OpenHole.push(mid);
@@ -275,14 +275,17 @@ export const TorqueDragSimulation  = {
             simulationResultsDTO.isBackReamingChecked = this.allInputs.operation.isBackReamingChecked;
             simulationResultsDTO.isRotatingOffBottomChecked = this.allInputs.operation.isRotatingOffBottomChecked;
             if (this.allInputs.operation.isRotatingOffBottomChecked){
-                simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+                simulationResultsDTO.rotatingOffBottomResults = RotatingOffBottom.RunRotatingOffBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                     this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                    weakeastTensileStrenth,
                     frictionFactors_Casing[i],
                     frictionFactors_OpenHole[i]);
                     simulationResult_RotatingOffBottoms.push({...simulationResultsDTO});
             }
         }
 
+        frictionFactors_Casing = [] as number[];
+        frictionFactors_OpenHole = [] as number[];
         texts = this.simulationDTO.sensitivityParameters.slideDrilling_1.split("-");
         texts2 = this.simulationDTO.sensitivityParameters.slideDrilling_2.split("-");
         if(texts.length == 1){
@@ -291,14 +294,14 @@ export const TorqueDragSimulation  = {
         }else {
             i = -1;
             min = Number(texts[0]);
-            max = Number(texts[2]);
+            max = Number(texts[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_Casing.push(min);
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
             min = Number(texts2[0]);
-            max = Number(texts2[2]);
+            max = Number(texts2[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_OpenHole.push(min);
             frictionFactors_OpenHole.push(mid);
@@ -315,14 +318,17 @@ export const TorqueDragSimulation  = {
             simulationResultsDTO.isBackReamingChecked = this.allInputs.operation.isBackReamingChecked;
             simulationResultsDTO.isRotatingOffBottomChecked = this.allInputs.operation.isRotatingOffBottomChecked;
             if (this.allInputs.operation.isSlideDrillingChecked){
-                simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+                simulationResultsDTO.slideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
                     this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                    weakeastTensileStrenth,
                     frictionFactors_Casing[i],
                     frictionFactors_OpenHole[i]);
                     simulationResult_SlideDrillings.push({...simulationResultsDTO});
             }
         }
 
+        frictionFactors_Casing = [] as number[];
+        frictionFactors_OpenHole = [] as number[];
         texts = this.simulationDTO.sensitivityParameters.backReaming_1.split("-");
         texts2 = this.simulationDTO.sensitivityParameters.backReaming_2.split("-");
         if(texts.length == 1){
@@ -331,14 +337,14 @@ export const TorqueDragSimulation  = {
         }else {
             i = -1;
             min = Number(texts[0]);
-            max = Number(texts[2]);
+            max = Number(texts[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_Casing.push(min);
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
             min = Number(texts2[0]);
-            max = Number(texts2[2]);
+            max = Number(texts2[1]);
             mid = min +  (max - min)/2.0;
             frictionFactors_OpenHole.push(min);
             frictionFactors_OpenHole.push(mid);
@@ -355,8 +361,9 @@ export const TorqueDragSimulation  = {
             simulationResultsDTO.isBackReamingChecked = this.allInputs.operation.isBackReamingChecked;
             simulationResultsDTO.isRotatingOffBottomChecked = this.allInputs.operation.isRotatingOffBottomChecked;
             if (this.allInputs.operation.isBackReamingChecked){
-                simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+                simulationResultsDTO.backReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
                     this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                    weakeastTensileStrenth,
                     frictionFactors_Casing[i],
                     frictionFactors_OpenHole[i]);
                     simulationResult_Backreamings.push({...simulationResultsDTO});
@@ -463,6 +470,7 @@ export const TorqueDragSimulation  = {
             simulationResultsDTO.trippingInResults 
             = TrippingIn.RunTrippingInOpertion(sortedPipeIncrements, this.allInputs.operation,
             this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+            weakeastTensileStrenth,
             null,
             null);
             simulationResult_TrippingIns.push({...simulationResultsDTO});
@@ -478,6 +486,7 @@ export const TorqueDragSimulation  = {
         if (this.allInputs.operation.isTrippingOutChecked){
             simulationResultsDTO.trippingOutResults = TrippingOut.RunTrippingOutOperation(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                weakeastTensileStrenth,
                 null,
                 null);
                 simulationResult_TrippingOuts.push({...simulationResultsDTO});
@@ -493,6 +502,7 @@ export const TorqueDragSimulation  = {
         if (this.allInputs.operation.isRotatingOnBottomChecked){
             simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                weakeastTensileStrenth,
                 null,
                 null);
                 simulationResult_Drillings.push({...simulationResultsDTO});
@@ -506,8 +516,9 @@ export const TorqueDragSimulation  = {
         simulationResultsDTO.isBackReamingChecked = this.allInputs.operation.isBackReamingChecked;
         simulationResultsDTO.isRotatingOffBottomChecked = this.allInputs.operation.isRotatingOffBottomChecked;
         if (this.allInputs.operation.isRotatingOffBottomChecked){
-            simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+            simulationResultsDTO.rotatingOffBottomResults = RotatingOffBottom.RunRotatingOffBottomOperation(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                weakeastTensileStrenth,
                 null,
                 null);
                 simulationResult_RotatingOffBottoms.push({...simulationResultsDTO});
@@ -521,8 +532,9 @@ export const TorqueDragSimulation  = {
         simulationResultsDTO.isBackReamingChecked = this.allInputs.operation.isBackReamingChecked;
         simulationResultsDTO.isRotatingOffBottomChecked = this.allInputs.operation.isRotatingOffBottomChecked;
         if (this.allInputs.operation.isSlideDrillingChecked){
-            simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+            simulationResultsDTO.slideDrillingResults = SlideDrilling.RunSlideDrillingOperation(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                weakeastTensileStrenth,
                 null,
                 null);
                 simulationResult_SlideDrillings.push({...simulationResultsDTO});
@@ -536,8 +548,9 @@ export const TorqueDragSimulation  = {
         simulationResultsDTO.isBackReamingChecked = this.allInputs.operation.isBackReamingChecked;
         simulationResultsDTO.isRotatingOffBottomChecked = this.allInputs.operation.isRotatingOffBottomChecked;
         if (this.allInputs.operation.isBackReamingChecked){
-            simulationResultsDTO.drillingResults = RotatingOnBottom.RunRotatingOnBottomOperation(sortedPipeIncrements, this.allInputs.operation,
+            simulationResultsDTO.backReamingResults = BackReaming.RunBackReamingOperation(sortedPipeIncrements, this.allInputs.operation,
                 this.allInputs.mudPVTs, this.allInputs.common, baseOperationResults,
+                weakeastTensileStrenth,
                 null,
                 null);
                 simulationResult_Backreamings.push({...simulationResultsDTO});

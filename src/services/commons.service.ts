@@ -9,16 +9,19 @@ export class CommonsService {
 
     }
 
-    async create(common: Common): Promise<CommonDocument> {
+    async create(common: Common): Promise<any> {
         
         const foundCommon = await this.commonModel.findOne ({ "designId" : common.designId });
         
         if(foundCommon == null || foundCommon == undefined){
             const newCommon = new this.commonModel(common);
             return  newCommon.save();
+        }else{
+            const updatedItem =
+             await this.commonModel.updateOne({designId:common.designId},
+                common, {new: true});
+            return  common
         }
-        
-        return  foundCommon;
     }
 
    

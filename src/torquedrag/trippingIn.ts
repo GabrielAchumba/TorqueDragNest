@@ -14,6 +14,7 @@ export const TrippingIn = {
         mudPVTs:MudPVTModel[], common:Common,
     baseOperationResults:BaseOperationResult[], weakeastTensileStrenth:number,
     casingFF:number = null, openHoleFF:number = null):OperationResult[]{
+
         let operationResults:OperationResult[] = [];
         let ii:number = -1;
         let HKL:number = 0;
@@ -92,16 +93,13 @@ export const TrippingIn = {
 
 
             frictionFactor = operationResults[ii].holeSection.frictionFactor;
-
             if (operationResults[ii].holeSection.typeOfHole.toLowerCase() == "open hole")
             {
-                if (openHoleFF != null)
-                frictionFactor = openHoleFF;
+                if (openHoleFF != null) frictionFactor = openHoleFF;
             }
             else
             {
-                if (casingFF != null)
-                frictionFactor = casingFF;
+                if (casingFF != null) frictionFactor = casingFF;
             }
 
 
