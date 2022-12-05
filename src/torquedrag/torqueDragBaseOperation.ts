@@ -10,11 +10,10 @@ import { Buckling } from "./drillingengineering/buckling";
 import { DrillingStrings } from "./drillingengineering/drillingStrings";
 import { Inertia_Clearance } from "./drillingengineering/inertia_Clearance";
 
-export class TorqueDragBaseOperation {
+export const TorqueDragBaseOperation = {
 
-    public static RunBaseOperation(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
-        doglegSeverityMethod:string, mudPVTs:MudPVTModel[], common:Common):any
-    {
+    RunBaseOperation(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
+        doglegSeverityMethod:string, mudPVTs:MudPVTModel[], common:Common):any {
         const pi:number = Math.PI;
         const angle180:number = 180.0;
         const M:number = 100.0;

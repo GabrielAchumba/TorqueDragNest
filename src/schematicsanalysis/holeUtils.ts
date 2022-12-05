@@ -1,8 +1,8 @@
 import { BaseHoleSectionModel } from "../models/baseholesection";
 
-export class HoleUtils {
+export const HoleUtils = {
 
-    public static GetHoleSection(currentMD:number, holeSections:BaseHoleSectionModel[]):BaseHoleSectionModel
+    GetHoleSection(currentMD:number, holeSections:BaseHoleSectionModel[]):BaseHoleSectionModel
     {
         let holeSection:BaseHoleSectionModel = null;
         const nCount:number = holeSections.length; let i:number = 0;
@@ -19,5 +19,5 @@ export class HoleUtils {
         }
 
         return holeSection;
-    }
+    },
 }

@@ -1,7 +1,6 @@
-export class Regression {
+export const Regression = {
 
-    public static LinearRegression(Xs:number[], Ys:number[]):any
-    {
+    LinearRegression(Xs:number[], Ys:number[]):any{
         let xAvg:number = 0; let yAvg:number = 0;
         let sxx:number = 0; let sxy:number = 0;
         let slope:number = 0; let intercept:number = 0;

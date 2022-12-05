@@ -1,10 +1,8 @@
 import { DeviationSurveyModel } from "../models/deviationSurvey";
 import { DoglegSeverity } from "./doglegSeverity";
 
-export class DevSurveyUtils
-{
-    public static GetDevSurveyMDs(deviationSurveys:DeviationSurveyModel[]):number[]
-    {
+export const DevSurveyUtils = {
+    GetDevSurveyMDs(deviationSurveys:DeviationSurveyModel[]):number[]{
         let i:number = 0; const nCount:number = deviationSurveys.length;
         let MD:number[] = [];
         for (i = 0; i < nCount; i++)
@@ -13,10 +11,9 @@ export class DevSurveyUtils
         }
 
         return MD;
-    }
+    },
 
-    public static GetDevSurveyTVDs(deviationSurveys:DeviationSurveyModel[]):number[]
-    {
+    GetDevSurveyTVDs(deviationSurveys:DeviationSurveyModel[]):number[]{
         let i:number = 0; const nCount:number = deviationSurveys.length;
         let TVD:number[] = [];
         for (i = 0; i < nCount; i++)
@@ -25,10 +22,9 @@ export class DevSurveyUtils
         }
 
         return TVD;
-    }
+    },
 
-    public static GetDevSurveyVerticalSections(deviationSurveys:DeviationSurveyModel[]):number[]
-    {
+    GetDevSurveyVerticalSections(deviationSurveys:DeviationSurveyModel[]):number[]{
 
         let i:number = 0; const nCount:number = deviationSurveys.length;
         let VerticalSections:number[] = [];
@@ -38,10 +34,9 @@ export class DevSurveyUtils
         }
 
         return VerticalSections;
-    }
+    },
 
-    public static GetDevSurveyInclinations(deviationSurveys:DeviationSurveyModel[]):number[]
-    {
+    GetDevSurveyInclinations(deviationSurveys:DeviationSurveyModel[]):number[]{
 
         let i:number = 0; const nCount:number = deviationSurveys.length;
         let Inc:number[] = [];
@@ -51,10 +46,9 @@ export class DevSurveyUtils
         }
 
         return Inc;
-    }
+    },
 
-    public static GetDevSurveyAzimuths(deviationSurveys:DeviationSurveyModel[]):number[]
-    {
+    GetDevSurveyAzimuths(deviationSurveys:DeviationSurveyModel[]):number[]{
 
         let i:number = 0; const nCount:number = deviationSurveys.length;
         let az:number[] = [];
@@ -64,10 +58,9 @@ export class DevSurveyUtils
         }
 
         return az;
-    }
+    },
 
-    public static GetDevSurveyDogLeg(deviationSurveys:DeviationSurveyModel[]):number[]
-    {
+    GetDevSurveyDogLeg(deviationSurveys:DeviationSurveyModel[]):number[]{
 
         let i:number = 0; const nCount:number = deviationSurveys.length;
         let doglegSeverity:number[] = [];
@@ -77,10 +70,9 @@ export class DevSurveyUtils
         }
 
         return doglegSeverity;
-    }
+    },
 
-    public static GetDoglegSeverity(deviationSurveys:DeviationSurveyModel[], doglegSeverityMethod:string):DeviationSurveyModel[]
-    {
+    GetDoglegSeverity(deviationSurveys:DeviationSurveyModel[], doglegSeverityMethod:string):DeviationSurveyModel[]{
         let i:number = -1,  courseLength:number = 0;
         const newDeviationSurveys:DeviationSurveyModel[] = deviationSurveys.map((row:DeviationSurveyModel) => {
             let newRow:DeviationSurveyModel = new DeviationSurveyModel();

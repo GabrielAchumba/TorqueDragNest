@@ -8,13 +8,12 @@ import { Drag } from "./drillingengineering/drag";
 import { Stress } from "./drillingengineering/stress";
 import { Torque } from "./drillingengineering/torque";
 
-export class SlideDrilling {
+export const SlideDrilling = {
 
-    public static  RunSlideDrillingOperation(pipes:Pipe[], operation:Operation,
+    RunSlideDrillingOperation(pipes:Pipe[], operation:Operation,
         mudPVTs:MudPVTModel[], common:Common,
         baseOperationResults:BaseOperationResult[], weakeastTensileStrenth:number,
-        casingFF:number = null, openHoleFF:number = null):OperationResult[]
-    {
+        casingFF:number = null, openHoleFF:number = null):OperationResult[]{
         let operationResults:OperationResult[] = [];
         let ii:number = -1;
         const M:number = 1000.0;

@@ -1,7 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { hash, compare, genSaltSync } from 'bcrypt';
+import { hash, compare } from 'bcrypt'; //genSaltSync
+//import * as bcrypt from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { User, UserDocument } from '../models/user';
 import { Constants } from "../utilities/constants"
@@ -15,7 +16,7 @@ export class UsersService {
 
     async login(user: User): Promise<any> {
         
-        console.log("user: ", user)
+        //console.log("user: ", user)
 
         const foundUser= await this.userModel.findOne(
         { "userName" : user.userName }).exec();
@@ -68,7 +69,7 @@ export class UsersService {
         
         if(foundUser == null || foundUser == undefined){
 
-            var salt = genSaltSync(10);
+            //var salt = genSaltSync(10);
             const saltOrRounds = 10;
             const hashedPassword = await hash(user.password, saltOrRounds);
             user.password = hashedPassword;

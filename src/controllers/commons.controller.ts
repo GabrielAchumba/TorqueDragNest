@@ -24,25 +24,27 @@ export class CommonsController {
 
     @Post(RunSensitivities)
     async runSensitivities(@Body() simulationDTO:SimulationDTO) {
-        TorqueDragSimulation.simulationDTO = simulationDTO;
-        TorqueDragSimulation.allInputs = simulationDTO.allInputsDTO;
+        const torqueDragSimulation = {...TorqueDragSimulation}
+        torqueDragSimulation.Initialize(simulationDTO)
         console.log("runSensitivities called");
-        const response = await TorqueDragSimulation.Run()
+        const response = await torqueDragSimulation.RunSensitivities()
         //this.commonsService.runSensitivities(simulationDTO);
         return response;
     }
 
     @Post(RunSurgeSwab)
     async runSurgeSwab(@Body() allInputsDTO: AllInputsDTO) {
-        SurgeSwabSimulation.allInputs = allInputsDTO;
-        const response = await SurgeSwabSimulation.RunSurgeSwab();
+        const surgeSwabSimulation = {...SurgeSwabSimulation}
+        surgeSwabSimulation.Initialize(allInputsDTO);
+        const response = await surgeSwabSimulation.RunSurgeSwab();
         return response;
     }
 
     @Post(RunHydraulics)
     async runHydraulics(@Body() allInputsDTO: AllInputsDTO) {
-        SurgeSwabSimulation.allInputs = allInputsDTO;
-        const response = await SurgeSwabSimulation.RunHydraulics();
+        const surgeSwabSimulation = {...SurgeSwabSimulation}
+        surgeSwabSimulation.Initialize(allInputsDTO);
+        const response = await surgeSwabSimulation.RunHydraulics();
         return response;
     }
 

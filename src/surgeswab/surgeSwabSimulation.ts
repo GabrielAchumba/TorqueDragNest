@@ -33,12 +33,15 @@ import { FrictionalPressureBingham } from "./nonuniformpipes/frictionalPressureB
 import { FrictionalPressureNewton } from "./nonuniformpipes/frictionalPressureNewton";
 import { Rate } from "./nonuniformpipes/rate";
 
-export class SurgeSwabSimulation {
+export const SurgeSwabSimulation = {
 
-    static allInputs:AllInputsDTO;
+    allInputs:AllInputsDTO,
 
-    static RunHydraulics():SensitivityResultsDTO
-    {
+    Initialize( allInputs:AllInputsDTO){
+        this.allInputs = allInputs;
+    },
+
+    RunHydraulics():SensitivityResultsDTO{
 
 
         const DevSurveyMD:number[] 
@@ -72,7 +75,7 @@ export class SurgeSwabSimulation {
 
         const sortedPipeIncrements:Pipe[] = Sorting.SortListofPipeReversed(_pipes);
 
-        const sensitivityResultsDTO:SensitivityResultsDTO = new SensitivityResultsDTO();
+        const sensitivityResultsDTO = {} as SensitivityResultsDTO;
         let simulationResultDTOs:SimulationResultsDTO[] = [];
         
 
@@ -170,10 +173,9 @@ export class SurgeSwabSimulation {
 
         return sensitivityResultsDTO;
 
-    }
+    },
 
-   public static RunSurgeSwab():SensitivityResultsDTO
-    {
+    RunSurgeSwab():SensitivityResultsDTO{
 
 
         const DevSurveyMD:number[] 
@@ -202,7 +204,7 @@ export class SurgeSwabSimulation {
                                         DevSurveyTVD, DevSurveyVerticalDisplacement, DevSurveyDogLegs, LastMDHole);
         const sortedPipeIncrements:Pipe[] = Sorting.SortListofPipeReversed(_pipes);
 
-        let sensitivityResultsDTO:SensitivityResultsDTO = new SensitivityResultsDTO();
+        let sensitivityResultsDTO = {} as SensitivityResultsDTO;
         let simulationResultDTOs:SimulationResultsDTO[] = [];
 
         let rigDTO:RigDTO = new RigDTO();
@@ -320,17 +322,16 @@ export class SurgeSwabSimulation {
 
         return sensitivityResultsDTO;
 
-    }
+    },
 
-    private static  RunBaseOperation(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
+    RunBaseOperation(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
         mudPVTs:MudPVTModel[],  common:Common,
         fluid:Fluid,
         operation:Operation, drillBit:DrillBit, fa:number,
         mudPumpRate:number,
         maxAllowableSurfacePressure:number, pumpEfficiency:number,
         dischargeCoefficient:number, mudPumpRatePGM:number,
-        maxHorsePower:number): any
-    {
+        maxHorsePower:number): any{
 
     let selectedRheologyModel:RheologyModel = RheologyModel.Newtonian;
     switch (fluid.rheologyModel)
@@ -705,10 +706,9 @@ export class SurgeSwabSimulation {
         const residual:number = Math.abs(sumAnnulusPressureLoss - sumPipePressureLoss);
 
         return { residual, baseOperationResultsUpdated };
-    }
+    },
 
-    private static minimizePbPb(rate:number, sortedPipeIncrements:Pipe[]):number
-    {
+    minimizePbPb(rate:number, sortedPipeIncrements:Pipe[]):number{
             const simulationResultsDTO:SimulationResultsDTO = new SimulationResultsDTO();
             const fa0:number = 0;
 
@@ -731,17 +731,16 @@ export class SurgeSwabSimulation {
 
         return residual;
 
-    }
+    },
 
-    private static RunHydraulics2(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
+    RunHydraulics2(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
                                 mudPVTs:MudPVTModel[], common:Common,
                                 fluid:Fluid,
                                 operation:Operation, drillBit:DrillBit,
                                 mudPumpRate:number,
                                 maxAllowableSurfacePressure:number, pumpEfficiency:number,
                                 dischargeCoefficient:number, mudPumpRatePGM:number,
-                                maxHorsePower:number):any
-    {
+                                maxHorsePower:number):any{
         let fa:number = 0;
         let selectedRheologyModel:RheologyModel = RheologyModel.Newtonian;
         switch (fluid.rheologyModel)
@@ -1098,17 +1097,16 @@ export class SurgeSwabSimulation {
         const residual:number = Math.abs(sumAnnulusPressureLoss - sumPipePressureLoss);
 
         return { residual, baseOperationResultsUpdated };
-    }
+    },
 
-    private static RunSurgeSwab2(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
+    RunSurgeSwab2(pipes:Pipe[], holeSections:BaseHoleSectionModel[],
                                 mudPVTs:MudPVTModel[], common:Common,
                                 fluid:Fluid,
                                 operation:Operation, drillBit:DrillBit, fa:number,
                                 mudPumpRate:number,
                                 maxAllowableSurfacePressure:number, pumpEfficiency:number,
                                 dischargeCoefficient:number, mudPumpRatePGM:number,
-                                maxHorsePower:number):any
-    {
+                                maxHorsePower:number):any{
         
         let selectedRheologyModel:RheologyModel = RheologyModel.Newtonian;
         switch (fluid.rheologyModel)

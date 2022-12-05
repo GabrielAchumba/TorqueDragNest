@@ -1,48 +1,42 @@
 import { LargeNumberLike } from "crypto";
 
-export class AxialForces
-{
-    private static  Pip(S:number, t:number, Dbo:number):number
-    {
+export const AxialForces = {
+    Pip(S:number, t:number, Dbo:number):number{
         let pip:number = 0;
         if (Dbo > 0)
             pip = 0.875 * 2.0 * S * t / Dbo;
         return pip;
-    }
+    },
 
-    private static  Pep(E:number, t:number, Dbo:number, v:number):number
-    {
+    Pep(E:number, t:number, Dbo:number, v:number):number{
         let pep:number = 0;
         pep = (2.0 * E) / (1 - Math.pow(v, 2.0)) * (Math.pow((t / Dbo), 3.0));
         return pep;
-    }
-    public static TotalInsideActingPressure(pip:number,
+    },
+    TotalInsideActingPressure(pip:number,
         fluidDensityInsidePipe:number,
-        trueVerticalDepth:number):number
-    {
+        trueVerticalDepth:number):number{
         const rho_i:number = fluidDensityInsidePipe / 144.0;
 
         const totalInsideActingPressure:number = pip + rho_i * trueVerticalDepth;
         return totalInsideActingPressure;
-    }
+    },
 
-    public static TotalOutsideActingPressure(pep:number,
+    TotalOutsideActingPressure(pep:number,
       fluidDensityOutsidePipe:number,
-      trueVerticalDepth:number):number
-    {
+      trueVerticalDepth:number):number{
         const rho_o:number = fluidDensityOutsidePipe / 144.0;
 
         const totalOutsideActingPressure:number = pep + rho_o * trueVerticalDepth;
         return totalOutsideActingPressure;
-    }
+    },
 
 
 
-    public static EffectiveAxialForce(compressiveForce:number,
+    EffectiveAxialForce(compressiveForce:number,
                     totalInsideActingPressure:number,
                     totalOutsideActingPressure:number,
-                    outsideArea:number, insideArea:number):number
-    {
+                    outsideArea:number, insideArea:number):number{
         //compressiveForce is in lbf (i.e pounds)
         //outsideArea is in sqInches, insideArea is in sqInches 
         //totalInsideActingPressure is in psi

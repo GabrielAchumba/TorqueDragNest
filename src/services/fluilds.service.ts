@@ -28,6 +28,7 @@ export class FluidsService {
     }
 
     async findOne(designId: string): Promise<FluidDocument> {
+        console.log("designId: ", designId)
         const drillFluid = await this.fluidModel.findOne({designId: designId});
 
         if(!drillFluid){

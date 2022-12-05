@@ -1,28 +1,24 @@
-export class NewtonianPressureLoss
-{
-    public static PipeLaminarFlow(newtonianViscosity:number,
+export const NewtonianPressureLoss = {
+    PipeLaminarFlow(newtonianViscosity:number,
                             newtonianVelocity:number, pipeLength:number,
-                            pipeInnerDiameter:number):number
-    {
+                            pipeInnerDiameter:number):number{
         const deltaPp:number = (newtonianViscosity * newtonianVelocity * pipeLength)
             / (1500 * Math.pow(pipeInnerDiameter, 2));
         return deltaPp;
-    }
+    },
 
-    public static AnnularLaminarFlow(newtonianViscosity:number,
+    AnnularLaminarFlow(newtonianViscosity:number,
                             newtonianVelocity:number, pipeLength:number,
-                            pipeOuterDiameter:number, holeInnerDiameter:number):number
-    {
+                            pipeOuterDiameter:number, holeInnerDiameter:number):number{
         const deltaPp:number = (newtonianViscosity * newtonianVelocity * pipeLength)
             / (1000 * Math.pow((holeInnerDiameter - pipeOuterDiameter), 2));
         return deltaPp;
-    }
+    },
 
-    public static pipeTurbulentFlow(frictionFactor:number, fluidDensity:number,
+    pipeTurbulentFlow(frictionFactor:number, fluidDensity:number,
                             newtonianViscosity:number, newtonianVelocity:number,
                             pipeLength:number,
-                            pipeInnerDiameter:number, absoluteRoughness:number = 0):number
-    {
+                            pipeInnerDiameter:number, absoluteRoughness:number = 0):number{
         let deltaPp:number = 0;
         if (absoluteRoughness == 0)
         {
@@ -38,9 +34,9 @@ export class NewtonianPressureLoss
         return deltaPp;
 
 
-    }
+    },
 
-    public static annularTurbulentFlow(frictionFactor:number, fluidDensity:number,
+    annularTurbulentFlow(frictionFactor:number, fluidDensity:number,
                             newtonianViscosity:number, newtonianVelocity:number, pipeLength:number,
                             pipeOuterDiameter:number, holeInnerDiameter:number,
                             absoluteRoughness:number = 0):number

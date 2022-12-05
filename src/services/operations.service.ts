@@ -13,6 +13,8 @@ export class OperationsService {
         
         const foundOperation = await this.operationModel.findOne (
             { "userId" : operation.userId, "designId" : operation.designId });
+
+        console.log("operation: ", operation)
         
         if(foundOperation == null || foundOperation == undefined){
             const newOperation = new this.operationModel(operation);
@@ -24,7 +26,7 @@ export class OperationsService {
             return  operation
         }
         
-        return  operation;
+        return  operation; 
     }
 
    
@@ -34,7 +36,9 @@ export class OperationsService {
     }
 
     async findOne(designId: string): Promise<OperationDocument> {
+        console.log("designId: ", designId)
         const operation = await this.operationModel.findOne({designId:designId});
+        console.log("operation: ", operation)
 
         if(!operation){
             return {} as OperationDocument;

@@ -1,7 +1,6 @@
-export class Interpolation {
+export const Interpolation = {
 
-    public static LinearInterpolation(Xs:number[], Ys:number[], X:number):number
-    {
+    LinearInterpolation(Xs:number[], Ys:number[], X:number):number {
         let curr:number = 1;
         let check:boolean = false;
         let Y:number = Ys[0];

@@ -1,16 +1,14 @@
 import { AreaType } from "../../models/enums";
 
-export class Stress {
+export const Stress = {
 
-    public static ShearStress(initialShearStress:number, plasticViscosity:number,
-         shearRateInAnnulus:number):number
-    {
+    ShearStress(initialShearStress:number, plasticViscosity:number,
+         shearRateInAnnulus:number):number{
         const stress:number = initialShearStress + plasticViscosity * shearRateInAnnulus / 479;
         return stress;
-    }
-    public static RadialStress(innerPressure:number, outerPressure:number,
-         areaType:AreaType):number
-    {
+    },
+    RadialStress(innerPressure:number, outerPressure:number,
+         areaType:AreaType):number{
         let stress:number = 0;
         switch (areaType)
         {
@@ -23,11 +21,10 @@ export class Stress {
         }
 
         return stress;
-    }
+    },
 
-    public static HoopStress(innerPressure:number, outerPressure:number,
-        innerArea:number, outerArea:number, areaType:AreaType):number
-    {
+    HoopStress(innerPressure:number, outerPressure:number,
+        innerArea:number, outerArea:number, areaType:AreaType):number{
         let stress:number = 0;
         const denominator:number = outerArea - innerArea;
         if (denominator == 0) return stress;
@@ -42,12 +39,11 @@ export class Stress {
         }
 
         return stress;
-    }
+    },
 
-    public static VonMises(innerAxialStress:number, innerHoopStress:number, innerRadialStress:number,
+    VonMises(innerAxialStress:number, innerHoopStress:number, innerRadialStress:number,
         outerAxialStress:number, outerHoopStress:number, outerRadialStress:number,
-        areaType:AreaType)
-    {
+        areaType:AreaType){
         let stress:number = 0;
 
         switch (areaType)
@@ -62,33 +58,29 @@ export class Stress {
                 break;
         }
         return stress;
-    }
+    },
 
-    public static TorsionalStress(torque:number, polarMomentOfInertia:number, radius:number):number
-    {
+    TorsionalStress(torque:number, polarMomentOfInertia:number, radius:number):number{
         let stress:number = 0;
         if (polarMomentOfInertia == 0) return stress;
                 stress = 12.0 * torque * radius / polarMomentOfInertia;
 
         return stress;
-    }
+    },
 
-    public static AxialStress(tensileForce:number, area:number, bendingStress:number,
-         bucklingStress:number):number
-    {
+    AxialStress(tensileForce:number, area:number, bendingStress:number,
+         bucklingStress:number):number{
         const stress:number = (tensileForce/area) + bendingStress + bucklingStress;
         return stress;
-    }
+    },
 
-    public static BendingStress(youngsModulus:number, pipeDiameter:number, dogLegSeverity:number):number
-    {
+    BendingStress(youngsModulus:number, pipeDiameter:number, dogLegSeverity:number):number{
         const stress:number = youngsModulus * (pipeDiameter / 2.0) * dogLegSeverity / 68755.0;
         return stress;
-    }
+    },
 
-    public static BucklingStress(pipeDiameter:number, radialClearance:number, tensionTopOfPipe:number,
-                                        momentOfInertia:number):number
-    {
+    BucklingStress(pipeDiameter:number, radialClearance:number, tensionTopOfPipe:number,
+                                        momentOfInertia:number):number{
         const stress:number = (pipeDiameter / 2.0) * radialClearance
                         * tensionTopOfPipe / (2 * momentOfInertia);
         return stress;

@@ -8,13 +8,12 @@ import { Drag } from "./drillingengineering/drag";
 import { Stress } from "./drillingengineering/stress";
 import { Torque } from "./drillingengineering/torque";
 
-export class TrippingOut {
+export const TrippingOut = {
 
-    public static RunTrippingOutOperation(pipes:Pipe[], operation:Operation,
+    RunTrippingOutOperation(pipes:Pipe[], operation:Operation,
         mudPVTs:MudPVTModel[], common:Common,
     baseOperationResults:BaseOperationResult[], weakeastTensileStrenth:number,
-    casingFF:number = null, openHoleFF:number = null):OperationResult[]
-    {
+    casingFF:number = null, openHoleFF:number = null):OperationResult[]{
         let operationResults:OperationResult[] = [];
         let ii:number = -1;
 

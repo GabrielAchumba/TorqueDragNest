@@ -4,10 +4,9 @@ import { DeviationSurveyModel } from "../models/deviationSurvey";
 import { MudPVTModel } from "../models/mudpvt";
 import { TorqueDragDesignWithGuid } from "../models/torquedragdesign";
 
-export class Sorting {
+export const Sorting = {
 
-    public static SortListofTorqueDragDesign(torqueDragDesigns:TorqueDragDesignWithGuid[])
-    {
+    SortListofTorqueDragDesign(torqueDragDesigns:TorqueDragDesignWithGuid[]){
         const sortArray:TorqueDragDesignWithGuid[] = torqueDragDesigns.map((row) => {
             return row;
         });
@@ -19,10 +18,9 @@ export class Sorting {
           });
 
         return sortArray;
-    }
+    },
 
-    public static SortListofDeviationSurvey(deviationSurveys:DeviationSurveyModel[]): DeviationSurveyModel[]
-    {
+    SortListofDeviationSurvey(deviationSurveys:DeviationSurveyModel[]): DeviationSurveyModel[]{
         const sortArray:DeviationSurveyModel[] = deviationSurveys.map((row) => {
             return row;
         });
@@ -35,9 +33,9 @@ export class Sorting {
 
 
         return sortArray;
-    }
+    },
 
-    public static SortListofHoleSection(holeSections:BaseHoleSectionModel[]): BaseHoleSectionModel[]
+    SortListofHoleSection(holeSections:BaseHoleSectionModel[]): BaseHoleSectionModel[]
     {
         const sortArray:BaseHoleSectionModel[] = holeSections.map((row:BaseHoleSectionModel) => {
 
@@ -54,9 +52,9 @@ export class Sorting {
             });
 
         return sortArray;
-    }
+    },
 
-    public static ReverseSortListofHoleSection(holeSections: BaseHoleSectionModel[]):BaseHoleSectionModel[]
+    ReverseSortListofHoleSection(holeSections: BaseHoleSectionModel[]):BaseHoleSectionModel[]
     {
         const sortArray:BaseHoleSectionModel[] = holeSections.map((row) => {
             return row;
@@ -69,9 +67,9 @@ export class Sorting {
           });
 
         return sortArray;
-    }
+    },
 
-    public static SortListofPipe(pipes: Pipe[]): Pipe[]
+    SortListofPipe(pipes: Pipe[]): Pipe[]
     {
         const sortArray:Pipe[] = pipes.map((row) => {
             return row;
@@ -84,9 +82,9 @@ export class Sorting {
           });
 
         return sortArray;
-    }
+    },
 
-    public static SortListofPipe2(pipes: BasePipeModel[]): BasePipeModel[]
+    SortListofPipe2(pipes: BasePipeModel[]): BasePipeModel[]
     {
         const sortArray:BasePipeModel[] = pipes.map((row) => {
             return row;
@@ -99,9 +97,9 @@ export class Sorting {
           });
 
         return sortArray;
-    }
+    },
 
-    public static SortListofPipeReversed(pipes:BasePipeModel[]): Pipe[]
+    SortListofPipeReversed(pipes:BasePipeModel[]): Pipe[]
     {
         const sortArray:Pipe[] = pipes.map((row) => {
             let newRow = {} as Pipe;
@@ -116,9 +114,9 @@ export class Sorting {
         });
 
         return sortArray;
-    }
+    },
 
-    public static SortListofMudPVT(mudPVTs:MudPVTModel[]):MudPVTModel[]
+    SortListofMudPVT(mudPVTs:MudPVTModel[]):MudPVTModel[]
     {
         const sortArray:MudPVTModel[] = mudPVTs.map((row) => {
             return row;

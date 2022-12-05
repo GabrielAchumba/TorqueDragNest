@@ -1,9 +1,7 @@
-export class Drag
-{
-    public static NormalForce(effectiveAxialForce:number, inclination:number,
+export const Drag = {
+    NormalForce(effectiveAxialForce:number, inclination:number,
                     deltaAzimuth:number, buoyancyWeightOfDrillStringElement:number, 
-                    deltaInclination:number):number
-    {
+                    deltaInclination:number):number{
 
         let normalForce:number = 0, term1:number = 0, term2:number = 0;
         term1 = Math.pow(effectiveAxialForce * deltaAzimuth * Math.sin(inclination), 2.0);
@@ -12,13 +10,12 @@ export class Drag
         normalForce = Math.sqrt(term1 + term2);
         return normalForce;
 
-    }
+    },
 
-    public static DragForce(normalForce:number,
+    DragForce(normalForce:number,
                           wellCoefficientOfFriction:number,
                     trippingSpeed:number, rPM:number, pipeOuterDiameter:number, 
-                    ratio:number = 1.0):number
-    {
+                    ratio:number = 1.0):number{
         let dragForce:number = 0;
         let v_alpha:number = trippingSpeed * 12.0 / 60.0; //in/sec
         let omega:number = 0, vr:number = 0;
@@ -30,10 +27,9 @@ export class Drag
         dragForce = wellCoefficientOfFriction * normalForce * ratio;
         return dragForce;
 
-    }
+    },
 
-    public static TotalDrag(fns:number[]):number
-    {
+    TotalDrag(fns:number[]):number{
         let totalDrag:number = 0;
         let i:number = 0; const n:number = fns.length;
         for (i = 0; i < n; i++)
@@ -42,28 +38,25 @@ export class Drag
         }
 
         return totalDrag;
-    }
+    },
 
-    public static TrippingInTensionIncrement(weightOfDrillStringElement:number, inclination:number,
-                    wellCoefficientOfFriction:number, normalForce:number):number
-    {
+    TrippingInTensionIncrement(weightOfDrillStringElement:number, inclination:number,
+                    wellCoefficientOfFriction:number, normalForce:number):number{
         const trippingInTensionIncrement:number 
         = weightOfDrillStringElement * Math.cos(inclination) - wellCoefficientOfFriction 
         * normalForce;
         return trippingInTensionIncrement;
-    }
+    },
 
-    public static TrippingOutTensionIncrement(weightOfDrillStringElement:number, inclination:number,
-                    wellCoefficientOfFriction:number, normalForce:number):number
-    {
+    TrippingOutTensionIncrement(weightOfDrillStringElement:number, inclination:number,
+                    wellCoefficientOfFriction:number, normalForce:number):number{
         const trippingOutTensionIncrement:number 
         = weightOfDrillStringElement * Math.cos(inclination) + wellCoefficientOfFriction 
         * normalForce;
         return trippingOutTensionIncrement;
-    }
+    },
 
-    public static TensionTopOfPipe(n:number, tensionIncrements:number[]):number
-    {
+    TensionTopOfPipe(n:number, tensionIncrements:number[]):number{
         let i:number = 0, tensionTopOfPipe:number = 0;
         for (i = 0; i < n; i++)
         {
@@ -71,27 +64,24 @@ export class Drag
         }
 
         return tensionTopOfPipe;
-    }
+    },
 
-    public static TrippingInHookeLoadAtJoint(weightOfDrillStringElement:number, inclination:number,
-                    dragForece:number):number
-    {
+    TrippingInHookeLoadAtJoint(weightOfDrillStringElement:number, inclination:number,
+                    dragForece:number):number{
         const trippinInHookeLoadAtJoint:number 
         = weightOfDrillStringElement * Math.cos(inclination) - dragForece;
         return trippinInHookeLoadAtJoint;
-    }
+    },
 
 
-    public static TrippingOutHookeLoadAtJoint(weightOfDrillStringElement:number, inclination:number,
-                   dragForece:number):number
-    {
+    TrippingOutHookeLoadAtJoint(weightOfDrillStringElement:number, inclination:number,
+                   dragForece:number):number{
         const trippinOutHookeLoadAtJoint:number 
         = weightOfDrillStringElement * Math.cos(inclination) + dragForece;
         return trippinOutHookeLoadAtJoint;
-    }
+    },
 
-    public static HookeLoadBitToSurface(nJoints:number, hookeLoads:number[]):number
-    {
+    HookeLoadBitToSurface(nJoints:number, hookeLoads:number[]):number{
         let i:number = 0, hookeLoadBitToSurface:number = 0;
         for (i = 0; i < nJoints; i++)
         {

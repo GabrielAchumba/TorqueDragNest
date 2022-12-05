@@ -1,35 +1,30 @@
-export class BinghamPressureLoss
-{
-    public static shearStress(yeildPoint:number, plasticViscosity:number, shearRate:number):number
-    {
+export const BinghamPressureLoss = {
+    shearStress(yeildPoint:number, plasticViscosity:number, shearRate:number):number{
         //Note lb.Sec/ft2 = 47900cp
         const tau:number = yeildPoint + plasticViscosity * shearRate;
         return tau;
-    }
-    public static PipeLaminarFlow(fluidViscosity:number,
+    },
+    PipeLaminarFlow(fluidViscosity:number,
                             fluidVelocity:number, pipeLength:number,
-                            pipeInnerDiameter:number, yeildStress:number):number
-    {
+                            pipeInnerDiameter:number, yeildStress:number):number{
         const deltaPp:number = ((fluidViscosity * fluidVelocity / (1500 * Math.pow(pipeInnerDiameter, 2)))
             + (yeildStress / (225 * pipeInnerDiameter))) * pipeLength;
         return deltaPp;
-    }
+    },
 
-    public static AnnularLaminarFlow(fluidViscosity:number,
+    AnnularLaminarFlow(fluidViscosity:number,
                             fluidVelocity:number, pipeLength:number,
                             pipeOuterDiameter:number, holeInnerDiameter:number,
-                            yeildStress:number):number
-    {
+                            yeildStress:number):number{
         const annularSpace:number = holeInnerDiameter - pipeOuterDiameter;
         const deltaPp:number = ((fluidViscosity * fluidVelocity / (1000 * Math.pow(annularSpace, 2)))
                 + (yeildStress / (200 * annularSpace))) * pipeLength;
         return deltaPp;
-    }
+    },
 
-    public static PipeTurbulentFlow(frictionFactor:number, fluidDensity:number,
+    PipeTurbulentFlow(frictionFactor:number, fluidDensity:number,
                             fluidViscosity:number, fluidVelocity:number, pipeLength:number,
-                            pipeInnerDiameter:number, absoluteRoughness:number = 0):number
-    {
+                            pipeInnerDiameter:number, absoluteRoughness:number = 0):number{
         let deltaPp:number = 0;
         if (absoluteRoughness == 0)
         {
@@ -45,9 +40,9 @@ export class BinghamPressureLoss
         return deltaPp;
 
 
-    }
+    },
 
-    public static annularTurbulentFlow(frictionFactor:number, fluidDensity:number,
+    annularTurbulentFlow(frictionFactor:number, fluidDensity:number,
                             fluidViscosity:number, fluidVelocity:number, pipeLength:number,
                             pipeOuterDiameter:number, holeInnerDiameter:number, 
                             absoluteRoughness:number = 0):number

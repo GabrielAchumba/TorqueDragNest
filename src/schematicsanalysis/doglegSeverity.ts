@@ -1,8 +1,6 @@
-export class DoglegSeverity
-{
-    private static LubrinskiMethod(surveyDriftAngle1:number, surveyDriftAngle2:number, 
-        directionChange:number, courseLength:number, dogleg:number = null):number
-    {
+export const DoglegSeverity = {
+    LubrinskiMethod(surveyDriftAngle1:number, surveyDriftAngle2:number, 
+        directionChange:number, courseLength:number, dogleg:number = null):number{
         let dLS:number = 0;
         //surveyDriftAngle1 is in radians, surveyDriftAngle2 is in radians
         //directionChange in radians,DLS is in degrees/100ft
@@ -20,11 +18,10 @@ export class DoglegSeverity
         
         return dLS;
 
-    }
+    },
 
-    private static CurvatureMethod(courseLength:number, upperInclination:number, lowerInclination:number,
-                                            upperAzimuth:number, lowerAzimuth:number, dogleg:number = null):number
-    {
+    CurvatureMethod(courseLength:number, upperInclination:number, lowerInclination:number,
+                                            upperAzimuth:number, lowerAzimuth:number, dogleg:number = null):number{
         let term1:number = 0, term2:number = 0, term3:number = 0, dLS:number = 0;
         let _dogleg:number = 0;
         _dogleg = dogleg;
@@ -39,11 +36,10 @@ export class DoglegSeverity
 
         dLS = _dogleg * 100.0 / courseLength;
         return dLS;
-    }
+    },
 
-    private static TangentialMethod(courseLength:number, upperInclination:number, lowerInclination:number,
-                                upperAzimuth:number, lowerAzimuth:number, dogleg:number = null):number
-    {
+    TangentialMethod(courseLength:number, upperInclination:number, lowerInclination:number,
+                                upperAzimuth:number, lowerAzimuth:number, dogleg:number = null):number{
         let _dogleg:number = 0;
         let term1:number = 0, term2:number = 0, term3:number = 0, term4:number = 0, dLS:number = 0;
         _dogleg = dogleg;
@@ -58,11 +54,10 @@ export class DoglegSeverity
 
         dLS = 1 / (courseLength * _dogleg);
         return dLS;
-    }
+    },
 
-    public static DogLegSeverity(courseLength:number, upperInclination:number, lowerInclination:number,
-                                upperAzimuth:number, lowerAzimuth:number, Method:string, dogleg:number = null)
-    {
+    DogLegSeverity(courseLength:number, upperInclination:number, lowerInclination:number,
+                                upperAzimuth:number, lowerAzimuth:number, Method:string, dogleg:number = null){
         let dLS:number = 0;
 
         switch (Method)

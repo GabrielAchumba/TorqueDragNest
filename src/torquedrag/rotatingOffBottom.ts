@@ -8,13 +8,12 @@ import { Drag } from "./drillingengineering/drag";
 import { Stress } from "./drillingengineering/stress";
 import { Torque } from "./drillingengineering/torque";
 
-export class RotatingOffBottom {
+export const RotatingOffBottom = {
 
-    public static RunRotatingOffBottomOperation(pipes:Pipe[], operation:Operation,
+    RunRotatingOffBottomOperation(pipes:Pipe[], operation:Operation,
         mudPVTs:MudPVTModel[], common:Common,
         baseOperationResults:BaseOperationResult[], weakeastTensileStrenth:number,
-        casingFF:number = null, openHoleFF:number = null):OperationResult[]
-    {
+        casingFF:number = null, openHoleFF:number = null):OperationResult[]{
     let operationResults:OperationResult[] = [];
     let Fds:number[] = [];
     const M:number = 1000.0;

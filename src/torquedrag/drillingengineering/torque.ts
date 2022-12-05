@@ -1,8 +1,6 @@
-export class Torque
-{
-    public static TorqueIncrement(normalForce:number, frictionFactor:number, outerRadius:number,
-                    trippingSpeed:number, rPM:number, ratio:number, isBackReaming:boolean = false):number
-    {
+export const Torque = {
+    TorqueIncrement(normalForce:number, frictionFactor:number, outerRadius:number,
+                    trippingSpeed:number, rPM:number, ratio:number, isBackReaming:boolean = false):number{
         let torqueIncrement:number = 0;
         const v_alpha:number = trippingSpeed * 12.0 / 60.0; //in/sec
         let omega:number = 0, vr:number = 0;
@@ -21,10 +19,9 @@ export class Torque
         //}
 
         return torqueIncrement;
-    }
+    },
 
-    public static TotalTorque(torqueIncrements:number[]):number
-    {
+    TotalTorque(torqueIncrements:number[]):number{
         const torqueIncrementsCount:number = torqueIncrements.length;
         let i:number = 0, totalTorque:number = 0;
 

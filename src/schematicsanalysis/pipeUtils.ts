@@ -4,14 +4,13 @@ import { Spacing } from "../mathematics/spacing";
 import { BasePipeModel, Pipe } from "../models/basepipe";
 import { Common } from "../models/common";
 
-export class PipeUtils {
+export const PipeUtils = {
 
-    static GetPipeDecrementsNew(pipes:BasePipeModel[], common:Common,
+    GetPipeDecrementsNew(pipes:BasePipeModel[], common:Common,
         DevSurveyMDs:number[], DevSurveyInclinations:number[], DevSurveyAzimuths:number[],
         DevSurveyTVDs:number[], DevSurveyVerticalSections:number[], DevSurveyDogLegs:number[],
         LastMDHole:number,
-        isDrawing:boolean = false):any
-    {
+        isDrawing:boolean = false):any {
 
         let _pipes:Pipe[] = [];
         let _isJoints:boolean[] = [];
@@ -92,14 +91,13 @@ export class PipeUtils {
                                 DevSurveyTVDs, DevSurveyVerticalSections, DevSurveyDogLegs);
 
         return {_pipes, _isJoints};
-    }
+    },
 
-    static GetPipeDecrements(pipes:BasePipeModel[], common:Common,
+    GetPipeDecrements(pipes:BasePipeModel[], common:Common,
         DevSurveyMDs:number[], DevSurveyInclinations:number[], DevSurveyAzimuths:number[],
         DevSurveyTVDs:number[], DevSurveyVerticalSections:number[], DevSurveyDogLegs:number[],
         LastMDHole:number,
-        isDrawing:boolean = false):any
-    {
+        isDrawing:boolean = false):any{
 
         let _pipes:Pipe[] = [];
         let _isJoints:boolean[] = [];
@@ -188,11 +186,10 @@ export class PipeUtils {
                                 DevSurveyTVDs, DevSurveyVerticalSections, DevSurveyDogLegs);
 
         return { _pipes, _isJoints };
-    }
+    },
 
 
-    private static GetPipe2(currentMD:number, pipes:BasePipeModel[]):BasePipeModel
-    {
+    GetPipe2(currentMD:number, pipes:BasePipeModel[]):BasePipeModel{
         let pipe:BasePipeModel = null;
         const nCount = pipes.length; let i: number = 0;
 
@@ -210,16 +207,15 @@ export class PipeUtils {
 
 
         return pipe;
-    }
+    },
 
 
-    public static RecalculatePipeLength(pipes:Pipe[], DevSurveyMDs:number[],
+    RecalculatePipeLength(pipes:Pipe[], DevSurveyMDs:number[],
         DevSurveyInclinations:number[], DevSurveyAzimuths:number[],
         DevSurveyTVDs:number[], DevSurveyVerticalSections:number[],
         DevSurveyDogLegs:number[],
         pipeIndex:number = 0, bottomTVDPreviousPipe:number = 0,
-        bottomDisplacementPreviousPipe:number = 0, bottomOD:number = 0):Pipe[]
-    {
+        bottomDisplacementPreviousPipe:number = 0, bottomOD:number = 0):Pipe[]{
         let i = 0; const nCount = pipes.length;
         let _pipes = pipes.map(( row:Pipe ) => {
             return row;

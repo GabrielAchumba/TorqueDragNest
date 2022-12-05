@@ -1,7 +1,6 @@
-export class Spacing {
+export const Spacing = {
 
-    public static LineSpace(start:number, end:number, interval:number):number[]
-    {
+    LineSpace(start:number, end:number, interval:number):number[]{
         let ans:number[] = [];
         let x:number = start;
         ans.push(start);
@@ -18,9 +17,9 @@ export class Spacing {
             ans[i] = end;
 
         return ans;
-    }
+    },
 
-    public static LineSpace2(start:number, end:number, nth:number): number[]
+    LineSpace2(start:number, end:number, nth:number): number[]
     {
         let ans:number[] = [];
         const interval:number = (end - start)/(nth - 1);
@@ -31,10 +30,9 @@ export class Spacing {
         }
 
         return ans;
-    }
+    },
 
-    public static  LineSpaceReverse(start:number, end:number, interval:number): number[]
-    {
+    LineSpaceReverse(start:number, end:number, interval:number): number[]{
         let ans:number[] = [];
         let x:number = end;
         ans.push(end);

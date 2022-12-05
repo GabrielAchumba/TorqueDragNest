@@ -1,10 +1,9 @@
 import { Differentiation } from "./differentiation";
 
-export class NonLinearEquations {
+export const NonLinearEquations = {
 
-    public static NewtonRaphson(fun:any, x0:number,
-        Tol:number = 10E-6, MaxtIter:number = 100):number
-    {
+    NewtonRaphson(fun:any, x0:number,
+        Tol:number = 10E-6, MaxtIter:number = 100):number{
 
         let diff:number = 0; const fx:number = 0;
         let x1:number = x0; let StepSize:number = 0;
