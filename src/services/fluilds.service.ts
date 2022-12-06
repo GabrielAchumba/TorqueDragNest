@@ -9,16 +9,19 @@ export class FluidsService {
 
     }
 
-    async create(fluid: Fluid): Promise<FluidDocument> {
+    async create(fluid: Fluid): Promise<any> {
         const foundFluid = await this.fluidModel.findOne(
             { "userId" : fluid.userId, "designId" : fluid.designId });
         
         if(foundFluid == null || foundFluid == undefined){
             const newFluid = new this.fluidModel(fluid);
             return  newFluid.save();
+        }else{
+            const updatedItem =
+             await this.fluidModel.updateOne({designId:fluid.designId},
+                fluid, {new: true});
+            return  fluid
         }
-        
-        return  foundFluid;
     }
 
    

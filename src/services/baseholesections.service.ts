@@ -9,16 +9,19 @@ export class BaseHoleSectionsService {
 
     }
 
-    async create(baseHoleSection: BaseHoleSection): Promise<BaseHoleSectionDocument> {
+    async create(baseHoleSection: BaseHoleSection): Promise<any> {
         const foundBaseHoleSection = await this.baseHoleSectionModel.findOne (
             { "userId" : baseHoleSection.userId, "designId" : baseHoleSection.designId });
         
         if(foundBaseHoleSection == null || foundBaseHoleSection == undefined){
             const newBaseHoleSection = new this.baseHoleSectionModel(baseHoleSection);
             return  newBaseHoleSection.save();
+        }else{
+            const updatedItem =
+             await this.baseHoleSectionModel.updateOne({designId:baseHoleSection.designId},
+                baseHoleSection, {new: true});
+            return  baseHoleSection
         }
-        
-        return  foundBaseHoleSection;
     }
 
    

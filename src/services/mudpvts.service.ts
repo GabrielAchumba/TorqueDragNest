@@ -9,16 +9,19 @@ export class MudPVTsService {
 
     }
 
-    async create(mudPVT: MudPVT): Promise<MudPVTDocument> {
+    async create(mudPVT: MudPVT): Promise<any> {
         const foundMudPVT = await this.mudPVTModel.findOne (
             { "userId" : mudPVT.userId, "designId" : mudPVT.designId });
         
         if(foundMudPVT == null || foundMudPVT == undefined){
             const newMudPVT = new this.mudPVTModel(mudPVT);
             return  newMudPVT.save();
+        }else{
+            const updatedItem =
+             await this.mudPVTModel.updateOne({designId:mudPVT.designId},
+                mudPVT, {new: true});
+            return  mudPVT
         }
-        
-        return  foundMudPVT;
     }
 
    

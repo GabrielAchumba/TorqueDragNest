@@ -18,6 +18,11 @@ export class DatumsService {
         if(foundDatum == null || foundDatum == undefined){
             const newDatum = new this.datumModel(datum);
             return  newDatum.save();
+        }else{
+            const updatedItem =
+             await this.datumModel.updateOne({designId:datum.designId},
+                datum, {new: true});
+            return  datum
         }
         
         return  foundDatum;

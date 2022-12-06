@@ -9,16 +9,20 @@ export class DeviationSurveysService {
 
     }
 
-    async create(deviationSurvey: DeviationSurvey): Promise<DeviationSurveyDocument> {
+    async create(deviationSurvey: DeviationSurvey): Promise<any> {
         const foundDeviationSurvey = await this.deviationSurveyModel.findOne(
             { "userId" : deviationSurvey.userId, "designId" : deviationSurvey.designId });
         
         if(foundDeviationSurvey == null || foundDeviationSurvey == undefined){
             const newDeviationSurvey = new this.deviationSurveyModel(deviationSurvey);
             return  newDeviationSurvey.save();
+        }else{
+            const updatedItem =
+             await this.deviationSurveyModel.updateOne({designId:deviationSurvey.designId},
+                deviationSurvey, {new: true});
+            return  deviationSurvey
         }
         
-        return  foundDeviationSurvey;
     }
 
    

@@ -9,7 +9,7 @@ export class RigsService {
 
     }
 
-    async create(rig: Rig): Promise<RigDocument> {
+    async create(rig: Rig): Promise<any> {
         
         const foundRig = await this.rigModel.findOne (
             { "userId" : rig.userId, "designId" : rig.designId });
@@ -17,9 +17,12 @@ export class RigsService {
         if(foundRig == null || foundRig == undefined){
             const newRig = new this.rigModel(rig);
             return  newRig.save();
+        }else{
+            const updatedItem =
+             await this.rigModel.updateOne({designId:rig.designId},
+                rig, {new: true});
+            return  rig
         }
-        
-        return  foundRig;
     }
 
    

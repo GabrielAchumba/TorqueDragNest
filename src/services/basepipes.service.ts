@@ -9,7 +9,7 @@ export class BasePipesService {
 
     }
 
-    async create(basePipe: BasePipe): Promise<BasePipeDocument> {
+    async create(basePipe: BasePipe): Promise<any> {
 
         const foundBasePipe = await this.basePipeModel.findOne (
             { "userId" : basePipe.userId, "designId" : basePipe.designId });
@@ -17,10 +17,12 @@ export class BasePipesService {
         if(foundBasePipe == null || foundBasePipe == undefined){
             const newBasePipe = new this.basePipeModel(basePipe);
             return  newBasePipe.save();
+        }else{
+            const updatedItem =
+             await this.basePipeModel.updateOne({designId:basePipe.designId},
+                basePipe, {new: true});
+            return  basePipe
         }
-        
-        
-        return  foundBasePipe;
     }
 
    

@@ -26,16 +26,19 @@ export class IdentitiesService {
         return  foundIdentity;
     }
 
-    async create(identity: Identity): Promise<IdentityDocument> {
+    async create(identity: Identity): Promise<any> {
         
         const foundIdentity = await this.identityModel.findOne ({ "userName" : identity.userName });
         
         if(foundIdentity == null || foundIdentity == undefined){
             const newIdentity = new this.identityModel(identity);
             return  newIdentity.save();
+        }else{
+            const updatedItem =
+             await this.identityModel.updateOne({userName:identity.userName},
+                identity, {new: true});
+            return  identity
         }
-        
-        return  foundIdentity;
     }
 
    

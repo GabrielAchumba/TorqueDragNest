@@ -63,7 +63,7 @@ export class UsersService {
  */
     }
 
-    async create(user: User): Promise<UserDocument> {
+    async create(user: User): Promise<any> {
         console.log("create started")
         const foundUser = await this.userModel.findOne ({ "userName" : user.userName });
         
@@ -77,9 +77,12 @@ export class UsersService {
             const createduser =  newUser.save();
             return createduser;
             
+        }else{
+            const updatedItem =
+             await this.userModel.updateOne({userName:user.userName},
+                user, {new: true});
+            return  user
         }
-        
-        return  foundUser;
     }
 
     async findAll(): Promise<UserDocument[]> {

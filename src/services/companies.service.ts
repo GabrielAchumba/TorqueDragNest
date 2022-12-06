@@ -9,13 +9,18 @@ export class CompaniesService {
 
     }
 
-    async create(company: Company): Promise<CompanyDocument> {
+    async create(company: Company): Promise<any> {
         
         const foundComapny = await this.companyModel.findOne ({ "companyName" : company.companyName });
         
         if(foundComapny == null || foundComapny == undefined){
             const newCompany = new this.companyModel(company);
             return  newCompany.save();
+        }else{
+            const updatedItem =
+             await this.companyModel.updateOne({companyName:company.companyName},
+                company, {new: true});
+            return  company
         }
         
         return  foundComapny;

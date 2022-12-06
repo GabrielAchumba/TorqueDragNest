@@ -9,7 +9,7 @@ export class DrillBitsService {
 
     }
 
-    async create(drillBit: DrillBit): Promise<DrillBitDocument> {
+    async create(drillBit: DrillBit): Promise<any> {
         
         const foundDrillBit = await this.drillBitModel.findOne(
             { "userId" : drillBit.userId, "designId" : drillBit.designId });
@@ -17,9 +17,12 @@ export class DrillBitsService {
         if(foundDrillBit == null || foundDrillBit == undefined){
             const newDrillBit = new this.drillBitModel(drillBit);
             return  newDrillBit.save();
+        }else{
+            const updatedItem =
+             await this.drillBitModel.updateOne({designId:drillBit.designId},
+                drillBit, {new: true});
+            return  drillBit
         }
-        
-        return  foundDrillBit;
     }
 
    
