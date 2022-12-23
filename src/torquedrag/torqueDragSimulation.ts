@@ -107,16 +107,27 @@ export const TorqueDragSimulation  = {
         let min = 0;
         let max = 0;
         let mid = 0;
+        let min_op = 0;
+        let max_op = 0;
+        let mid_op = 0;
         let frictionFactors_Casing = [] as number[];
         let frictionFactors_OpenHole = [] as number[];
         let texts = [] as string[];
         let texts2 = [] as string[];
+        sensitivityResultsDTO.frictionnFactors_TrippingIns = [];
+        sensitivityResultsDTO.frictionnFactors_TrippingOuts = [];
+        sensitivityResultsDTO.frictionnFactors_Drillings = [];
+        sensitivityResultsDTO.frictionnFactors_RotatingOffBottoms = [];
+        sensitivityResultsDTO.frictionnFactors_SlideDrillings = [];
+        sensitivityResultsDTO.frictionnFactors_Backreamings = [];
 
         texts = this.simulationDTO.sensitivityParameters.trippingIn_1.split("-");
         texts2 = this.simulationDTO.sensitivityParameters.trippingIn_2.split("-");
+        console.log("texts2: ", texts2)
         if(texts.length == 1){
             frictionFactors_Casing.push(Number(texts[0]));
             frictionFactors_OpenHole.push(Number(texts2[0]));
+            sensitivityResultsDTO.frictionnFactors_TrippingIns.push(`CHFF = ${Number(texts[0])}, OHFF = ${Number(texts2[0])}`)
         }else {
             i = -1;
             min = Number(texts[0]);
@@ -126,12 +137,16 @@ export const TorqueDragSimulation  = {
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
-            min = Number(texts2[0]);
-            max = Number(texts2[1]);
-            mid = min +  (max - min)/2.0;
-            frictionFactors_OpenHole.push(min);
-            frictionFactors_OpenHole.push(mid);
-            frictionFactors_OpenHole.push(max);
+            min_op = Number(texts2[0]);
+            max_op = Number(texts2[1]);
+            mid_op = min_op +  (max_op - min_op)/2.0;
+            frictionFactors_OpenHole.push(min_op);
+            frictionFactors_OpenHole.push(mid_op);
+            frictionFactors_OpenHole.push(max_op);
+
+            sensitivityResultsDTO.frictionnFactors_TrippingIns.push(`CHFF = ${min}, OHFF = ${min_op}`)
+            sensitivityResultsDTO.frictionnFactors_TrippingIns.push(`CHFF = ${mid}, OHFF = ${mid_op}`)
+            sensitivityResultsDTO.frictionnFactors_TrippingIns.push(`CHFF = ${max}, OHFF = ${max_op}`)
         }
 
         for (i = 0; i < frictionFactors_Casing.length; i++)
@@ -161,6 +176,7 @@ export const TorqueDragSimulation  = {
         if(texts.length == 1){
             frictionFactors_Casing.push(Number(texts[0]));
             frictionFactors_OpenHole.push(Number(texts2[0]));
+            sensitivityResultsDTO.frictionnFactors_TrippingOuts.push(`CHFF = ${Number(texts[0])}, OHFF = ${Number(texts2[0])}`)
         }else {
             i = -1;
             min = Number(texts[0]);
@@ -170,12 +186,16 @@ export const TorqueDragSimulation  = {
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
-            min = Number(texts2[0]);
-            max = Number(texts2[1]);
-            mid = min +  (max - min)/2.0;
-            frictionFactors_OpenHole.push(min);
-            frictionFactors_OpenHole.push(mid);
-            frictionFactors_OpenHole.push(max);
+            min_op = Number(texts2[0]);
+            max_op = Number(texts2[1]);
+            mid_op = min_op +  (max_op - min_op)/2.0;
+            frictionFactors_OpenHole.push(min_op);
+            frictionFactors_OpenHole.push(mid_op);
+            frictionFactors_OpenHole.push(max_op);
+
+            sensitivityResultsDTO.frictionnFactors_TrippingOuts.push(`CHFF = ${min}, OHFF = ${min_op}`)
+            sensitivityResultsDTO.frictionnFactors_TrippingOuts.push(`CHFF = ${mid}, OHFF = ${mid_op}`)
+            sensitivityResultsDTO.frictionnFactors_TrippingOuts.push(`CHFF = ${max}, OHFF = ${max_op}`)
         }
 
         for (i = 0; i < frictionFactors_Casing.length; i++)
@@ -204,6 +224,7 @@ export const TorqueDragSimulation  = {
         if(texts.length == 1){
             frictionFactors_Casing.push(Number(texts[0]));
             frictionFactors_OpenHole.push(Number(texts2[0]));
+            sensitivityResultsDTO.frictionnFactors_Drillings.push(`CHFF = ${Number(texts[0])}, OHFF = ${Number(texts2[0])}`)
         }else {
             i = -1;
             min = Number(texts[0]);
@@ -213,12 +234,16 @@ export const TorqueDragSimulation  = {
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
-            min = Number(texts2[0]);
-            max = Number(texts2[1]);
-            mid = min +  (max - min)/2.0;
-            frictionFactors_OpenHole.push(min);
-            frictionFactors_OpenHole.push(mid);
-            frictionFactors_OpenHole.push(max);
+            min_op = Number(texts2[0]);
+            max_op = Number(texts2[1]);
+            mid_op = min_op +  (max_op - min_op)/2.0;
+            frictionFactors_OpenHole.push(min_op);
+            frictionFactors_OpenHole.push(mid_op);
+            frictionFactors_OpenHole.push(max_op);
+
+            sensitivityResultsDTO.frictionnFactors_Drillings.push(`CHFF = ${min}, OHFF = ${min_op}`)
+            sensitivityResultsDTO.frictionnFactors_Drillings.push(`CHFF = ${mid}, OHFF = ${mid_op}`)
+            sensitivityResultsDTO.frictionnFactors_Drillings.push(`CHFF = ${max}, OHFF = ${max_op}`)
         }
 
         for (i = 0; i < frictionFactors_Casing.length; i++)
@@ -248,6 +273,7 @@ export const TorqueDragSimulation  = {
         if(texts.length == 1){
             frictionFactors_Casing.push(Number(texts[0]));
             frictionFactors_OpenHole.push(Number(texts2[0]));
+            sensitivityResultsDTO.frictionnFactors_RotatingOffBottoms.push(`CHFF = ${Number(texts[0])}, OHFF = ${Number(texts2[0])}`)
         }else {
             i = -1;
             min = Number(texts[0]);
@@ -257,12 +283,16 @@ export const TorqueDragSimulation  = {
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
-            min = Number(texts2[0]);
-            max = Number(texts2[1]);
-            mid = min +  (max - min)/2.0;
-            frictionFactors_OpenHole.push(min);
-            frictionFactors_OpenHole.push(mid);
-            frictionFactors_OpenHole.push(max);
+            min_op = Number(texts2[0]);
+            max_op = Number(texts2[1]);
+            mid_op = min_op +  (max_op - min_op)/2.0;
+            frictionFactors_OpenHole.push(min_op);
+            frictionFactors_OpenHole.push(mid_op);
+            frictionFactors_OpenHole.push(max_op);
+
+            sensitivityResultsDTO.frictionnFactors_RotatingOffBottoms.push(`CHFF = ${min}, OHFF = ${min_op}`)
+            sensitivityResultsDTO.frictionnFactors_RotatingOffBottoms.push(`CHFF = ${mid}, OHFF = ${mid_op}`)
+            sensitivityResultsDTO.frictionnFactors_RotatingOffBottoms.push(`CHFF = ${max}, OHFF = ${max_op}`)
         }
 
         for (i = 0; i < frictionFactors_Casing.length; i++)
@@ -291,6 +321,7 @@ export const TorqueDragSimulation  = {
         if(texts.length == 1){
             frictionFactors_Casing.push(Number(texts[0]));
             frictionFactors_OpenHole.push(Number(texts2[0]));
+            sensitivityResultsDTO.frictionnFactors_SlideDrillings.push(`CHFF = ${Number(texts[0])}, OHFF = ${Number(texts2[0])}`)
         }else {
             i = -1;
             min = Number(texts[0]);
@@ -300,12 +331,16 @@ export const TorqueDragSimulation  = {
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
-            min = Number(texts2[0]);
-            max = Number(texts2[1]);
-            mid = min +  (max - min)/2.0;
-            frictionFactors_OpenHole.push(min);
-            frictionFactors_OpenHole.push(mid);
-            frictionFactors_OpenHole.push(max);
+            min_op = Number(texts2[0]);
+            max_op = Number(texts2[1]);
+            mid_op = min_op +  (max_op - min_op)/2.0;
+            frictionFactors_OpenHole.push(min_op);
+            frictionFactors_OpenHole.push(mid_op);
+            frictionFactors_OpenHole.push(max_op);
+
+            sensitivityResultsDTO.frictionnFactors_SlideDrillings.push(`CHFF = ${min}, OHFF = ${min_op}`)
+            sensitivityResultsDTO.frictionnFactors_SlideDrillings.push(`CHFF = ${mid}, OHFF = ${mid_op}`)
+            sensitivityResultsDTO.frictionnFactors_SlideDrillings.push(`CHFF = ${max}, OHFF = ${max_op}`)
         }
 
         for (i = 0; i < frictionFactors_Casing.length; i++)
@@ -334,6 +369,7 @@ export const TorqueDragSimulation  = {
         if(texts.length == 1){
             frictionFactors_Casing.push(Number(texts[0]));
             frictionFactors_OpenHole.push(Number(texts2[0]));
+            sensitivityResultsDTO.frictionnFactors_Backreamings.push(`CHFF = ${Number(texts[0])}, OHFF = ${Number(texts2[0])}`)
         }else {
             i = -1;
             min = Number(texts[0]);
@@ -343,12 +379,16 @@ export const TorqueDragSimulation  = {
             frictionFactors_Casing.push(mid);
             frictionFactors_Casing.push(max);
 
-            min = Number(texts2[0]);
-            max = Number(texts2[1]);
-            mid = min +  (max - min)/2.0;
-            frictionFactors_OpenHole.push(min);
-            frictionFactors_OpenHole.push(mid);
-            frictionFactors_OpenHole.push(max);
+            min_op = Number(texts2[0]);
+            max_op = Number(texts2[1]);
+            mid_op = min_op +  (max_op - min_op)/2.0;
+            frictionFactors_OpenHole.push(min_op);
+            frictionFactors_OpenHole.push(mid_op);
+            frictionFactors_OpenHole.push(max_op);
+
+            sensitivityResultsDTO.frictionnFactors_Backreamings.push(`CHFF = ${min}, OHFF = ${min_op}`)
+            sensitivityResultsDTO.frictionnFactors_Backreamings.push(`CHFF = ${mid}, OHFF = ${mid_op}`)
+            sensitivityResultsDTO.frictionnFactors_Backreamings.push(`CHFF = ${max}, OHFF = ${max_op}`)
         }
 
         for (i = 0; i < frictionFactors_Casing.length; i++)

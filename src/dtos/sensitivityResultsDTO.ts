@@ -10,4 +10,11 @@ export interface SensitivityResultsDTO {
     simulationResult_SlideDrillings:SimulationResultsDTO[];
     simulationResult_Backreamings:SimulationResultsDTO[];
     simulationResultsDTOs:SimulationResultsDTO[];
+
+    frictionnFactors_TrippingIns:string[];
+    frictionnFactors_TrippingOuts:string[];
+    frictionnFactors_Drillings:string[];
+    frictionnFactors_RotatingOffBottoms:string[];
+    frictionnFactors_SlideDrillings:string[];
+    frictionnFactors_Backreamings:string[];
 }

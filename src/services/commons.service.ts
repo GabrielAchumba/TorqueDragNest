@@ -14,9 +14,11 @@ export class CommonsService {
         const foundCommon = await this.commonModel.findOne ({ "designId" : common.designId });
         
         if(foundCommon == null || foundCommon == undefined){
+            console.log("new item saved")
             const newCommon = new this.commonModel(common);
             return  newCommon.save();
         }else{
+            console.log("item updated")
             const updatedItem =
              await this.commonModel.updateOne({designId:common.designId},
                 common, {new: true});

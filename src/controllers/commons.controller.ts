@@ -19,6 +19,7 @@ export class CommonsController {
 
     @Post(PostCommon)
     async create(@Body() common: Common) {
+        console.log("common: ", common)
         return await this.commonsService.create(common);
     }
 
